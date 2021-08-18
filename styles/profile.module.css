@@ -1,0 +1,65 @@
+.profileContainer{
+    width: 96%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profileImageSection{
+    width: 40%;
+}
+
+.profileImage{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.profileImage img{
+    height: 100%;
+    width: 100%;
+}
+
+.profileInfoSection{
+    width: 58%;
+}
+
+.eyeIcons{
+    position: absolute;
+    top: 63%;
+    right: 9%;
+}
+
+
+.extraSpace{
+    height: 14vh;
+}
+
+@media only screen and (max-width: 950px){
+    .profileContainer{
+        flex-direction: column;
+    }
+    .profileImageSection , .profileInfoSection{
+        width: 100%;
+    }
+}
+
+.inputCustomStyle{
+    width: 100%;
+    padding: 3%;
+    background-color: #e8e8e8;
+    border: none;
+    border-bottom: 2px solid #959585;
+}
+.inputCustomStyle::focus{
+    border: none !important;
+    border-bottom: 2px solid darkblue;
+}
+.resetPasswordContainer{
+    width: 96%;
+    margin: auto;
+}
+.resetPasswordContainer h1{
+    color: darkblue;
+    font-size: 24px;
+}

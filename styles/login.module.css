@@ -1,0 +1,61 @@
+  .left_side{
+    height:   100vh;
+    background-color: rgb(13 35 97 / 94%);;
+    color: white;
+    text-align: center;
+  }
+  .right_side{
+    height:   100vh;
+    background-color: rgba(42, 28, 170, 0.513);
+  }
+  #form{
+    width: 80%;
+    margin: auto;
+    margin-top: 268px;
+  }
+  #form label{
+    color:white;
+  }
+  #form :placeholder-shown{
+    color:white;
+  }
+  .right_slide img{
+    width: 100%;
+    height: 100vh;
+  }
+  .MuiGrid-item {
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media only screen and (max-width: 844px) {
+    .right_slide img{
+      width: 100%;
+      height: 100%;
+    }
+    .right_slide {
+      height: 75vh;
+      background-color: rgba(42, 28, 170, 0.513);
+    }
+    #form{
+      margin-top: 70px;
+    }
+    .left-side{
+      height: 52vh;
+    }
+  }
+  @media only screen and (max-width: 655px) {
+    .right_slide img{
+      width: 100%;
+      height: 100%;
+    }
+    .right_slide {
+      height: 48vh;
+      background-color: rgba(42, 28, 170, 0.513);
+    }
+  }
+
+  .forgotPasswordLink {
+    text-align: start;
+    cursor: pointer;
+  }

@@ -1,0 +1,30 @@
+.statsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.stats{
+    width: 30%;
+    height: 31vh;
+    border-radius: 13%;
+    text-align: center;
+}
+.stats svg{
+    font-size: 80px;
+}
+.stats p {
+    font-family: auto;
+    font-weight: 600;
+}
+.stats h2 {
+    color: darkcyan
+}
+
+@media only screen and (max-width: 630px) {
+  .statsContainer{
+      flex-direction: column;
+  }
+  .stats{
+      width: 100%;
+  }
+}

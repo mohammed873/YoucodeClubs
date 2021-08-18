@@ -1,0 +1,133 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+::-webkit-scrollbar{
+  overflow: hidden;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.blankDiv{
+  height: 15vh;
+}
+
+
+
+
+/*********************************************** Super admin style section ************************************************/
+.navContainer{
+  display: flex;
+}
+.superAdminSlideSection{
+  width: 20%;
+  height: 100vh;
+  background-color: #06066f;
+  position: fixed;
+}
+.superAdminSlideSectionResponsive{
+    width: 99%;
+    z-index: 12;
+    background-color: #06066f;
+    position: fixed;
+    height: 100vh;
+    transition:  1s; 
+}
+.superAdminContentSection{
+  width: 80%;
+  position: relative;
+  left:20%;
+}
+.superAdminMainContainer{
+ background-color: white;
+  -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
+  box-shadow: 0px 3px 9px #5d3d3d61;
+  width: 90%;
+  margin: auto;
+  margin-top: -72px;
+  padding: 1%;
+}
+
+@media only screen and (max-width: 999px) {
+  .superAdminSlideSection{
+    width: 0%;
+    height: 100vh;
+    background-color: #06066f;
+    position: fixed;
+  }
+  .superAdminContentSection{
+    width: 100%;
+    left: 0%;
+  }
+  .icon {
+    visibility: visible !important;
+  }
+}
+.superAdminMiniDashbordContainer{
+  width: 97%;
+  margin: auto;
+  background-color: #06066f;
+  color: white;
+  height: 159px;
+  border-radius: 0px 0px 50px 50px;
+}
+.iconsContainer{
+  display: flex;
+  color: white;
+  height: 11vh;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  margin: auto;
+}
+.iconsContainer span{
+  cursor: pointer;
+}
+.icon {
+  visibility: hidden;
+}
+.iconsContainer svg{
+  font-size: 33px;
+}
+.NavRouteContainer{
+  color: white;
+    cursor: pointer;
+    padding: 3%;
+    display: -moz-box;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    margin-top: 12px;
+}
+.NavRouteContainer:hover{
+  color: #2f2b2b;
+  background-color: white;
+  cursor: pointer;
+  padding: 3%;
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+.NavIcons svg{
+  font-size: 37px;
+  margin-left: 5px;
+}
+.NavRoutesTitle{
+ font-family: auto;
+ margin-left: 13px;
+ font-size: 20px;
+  font-weight: 600;
+}
+
+
+
+
