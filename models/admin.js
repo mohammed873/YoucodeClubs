@@ -33,6 +33,12 @@ const AdminSchema = new mongoose.Schema({
     ref: "club",
     required : true
   },
+  passwordResetToken : {
+    type: String,
+  },
+  passwordResetExpiresIn: {
+    type: Date
+  }
 });
 
 module.exports = mongoose.models.admin || mongoose.model('admin', AdminSchema);

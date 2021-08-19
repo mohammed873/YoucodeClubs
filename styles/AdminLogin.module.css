@@ -1,0 +1,62 @@
+
+.mainLoginContainer{
+    height: 100vh;
+    display: flex;
+    background-color:darkgrey;
+}
+.loginContainer{
+    display: flex;
+    width: 100%;
+}
+.loginFormContainer{
+    width: 28%;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.loginFormContainer h1{
+    text-align: center;
+    color: darkblue;
+    font-family: emoji;
+}
+.loginFormContainer p{
+    color: white;
+}
+.line{
+    background-color: black;
+    width: 99%;
+    border: 2px solid;
+    margin-top: -13px;
+}
+.loginImageContainer{
+    width: 72%;
+    padding: 2%;
+}
+.loginImageContainer img{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1040px) {
+    .mainLoginContainer{
+        height: auto;
+    }
+    .loginContainer{
+        flex-direction: column;
+    }
+    .loginImageContainer , .loginFormContainer{
+        width: 100%;
+    }
+    .loginFormContainer{
+        order: 1;
+        padding: 1%;
+    }
+}
+
+.customInput {
+    background-color: whitesmoke !important;
+}
+.forgotPasswordLink{
+    cursor: pointer;
+}

@@ -46,7 +46,8 @@ export default function Admin_login() {
                 <h1 style={{color:'white'}}>Super Admin Zone </h1>
                 <hr/>
                 <form id={styles.form}>
-                    <TextField  
+                 <TextField  
+                    className={styles.customInput}
                     xl={7}
                     fullWidth
                     id="email"

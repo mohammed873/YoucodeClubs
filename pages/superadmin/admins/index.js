@@ -69,7 +69,7 @@ const emptyInputs = () => {
 }
 
 //adding new admin
-const addAdmmin = async () => {
+const addAdmin = async () => {
     const picture =  await pictureUpload()
 
     await axios.post('http://localhost:3000/api/superAdmin/admins',{
@@ -78,15 +78,15 @@ const addAdmmin = async () => {
      club_id ,
      picture 
    }).then(res =>{
-    //close modal
-        handleClose()  
+    //fire up success notifications
+       toast.configure()
+       toast.success(res.data.message)  
     //fetch all admin
-        getalladmins()
+        getAllAdmins()
     //empty inputs
         emptyInputs()
-    //fire up success notifications
-        toast.configure()
-        toast.success(res.data.message)  
+    //close modal
+         handleClose()  
 
    }).catch(err =>{
     toast.configure()
@@ -96,7 +96,7 @@ const addAdmmin = async () => {
 }
 
 //get all clubs 
-const getallclubs = async () => {
+const getAllClubs = async () => {
     await axios.get("http://localhost:3000/api/superAdmin/clubs")
     .then( res => {
         setClubs(res.data.clubs)
@@ -106,7 +106,7 @@ const getallclubs = async () => {
 }
 
 //get all admins
-const getalladmins = async () => {
+const getAllAdmins = async () => {
     await axios.get("http://localhost:3000/api/superAdmin/admins")
     .then( res => {
         setAdmins(res.data.admins)
@@ -166,7 +166,7 @@ const updateAdminInfo = async (id) => {
     emptyInputs()   
 
     //recal the get all admins function
-    getalladmins()
+    getAllAdmins()
 
     //close the update modal
     handleCloseUpdate()
@@ -185,7 +185,7 @@ const updateAdminInfo = async (id) => {
 const deleteAdmin = async (id) => {
     await axios.delete('http://localhost:3000/api/superAdmin/admins/'+id)
     .then(res => {
-        getalladmins()
+        getAllAdmins()
         toast.configure()
         toast.success(res.data.message)
     }).catch(err => {
@@ -211,9 +211,9 @@ const pictureUpload = async () => {
 }
 
 useEffect(() => {
-    getallclubs()
-    getalladmins()
-}, [getalladmins])
+    getAllClubs()
+    getAllAdmins()
+}, [])
   return (
     <>
        <Head>
@@ -326,7 +326,7 @@ useEffect(() => {
                     color="primary"
                     size="large"
                     startIcon={<SaveIcon />}
-                    onClick={()=> addAdmmin()}
+                    onClick={()=> addAdmin()}
                 >
                     Save
                 </Button>

@@ -5,6 +5,7 @@ module.exports = {
     TOKEN_SuperAdmin : "secret_key_super_admin",
     ADMIN_EMAIL :"projectmailtestyc@gmail.com",
     ADMIN_PASSWORD : "youcode2020",
-    TOKEN_SUPER_ADMIN : "AZFSDHGFBWUY12"
+    TOKEN_SUPER_ADMIN : "AZFSDHGFBWUY12",
+    TOKEN_ADMINS : "LKGT6DHGFBWGGDFD566"
   }
 }
