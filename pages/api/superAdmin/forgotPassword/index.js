@@ -47,7 +47,7 @@ export default async (req, res) => {
         const html = `
                 <h3> hello you requested to reset your password! </h3>
                 <P> click the following link to reset your password <a href="http://localhost:3000/superadmin/forgotPassword/${resetToken}">RESET MY PASSWORD</a> </P>
-                <h4>Note: his link will expire in 10 min</h4>
+                <h4>Note: This link will expire in 10 min</h4>
             `
         //send an email with the reset link 
         await sendMail(to ,subject, html)

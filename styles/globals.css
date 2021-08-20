@@ -127,5 +127,28 @@ a {
 }
 
 
+/************************************** admin css section ********************************/
 
+.AdminMainBody{
+  display: flex;
+  justify-content: space-between;
+  background-color: ghostwhite;
+}
+
+.admincontentContainer{
+  width: 83%;
+  height: 100vh;
+  margin-left: 17%;
+}
+
+.adminNavBarContainer{
+  height: 90vh;
+  position: absolute;
+  width: 16%;
+  -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
+  box-shadow: 0px 3px 9px #5d3d3d61;
+  border-radius: 0px 50px 50px 0px;
+  background-color: darkgrey;
+  margin-top: 35px;
+}
 
