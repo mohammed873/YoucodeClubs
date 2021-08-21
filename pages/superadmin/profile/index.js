@@ -25,7 +25,7 @@ const [newPassword , setNewPassword] = useState()
 
 
 //get superadmin 
-  const getSuperAdminInfo = async() =>{
+  const getSuperAdminInfo = async () =>{
     const token = localStorage.getItem('token')
     const id = jwt(token)._id
     await axios.get('http://localhost:3000/api/superAdmin/'+ id)

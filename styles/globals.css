@@ -150,5 +150,118 @@ a {
   border-radius: 0px 50px 50px 0px;
   background-color: darkgrey;
   margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  transition:  1s; 
 }
 
+.adminPersonelDetails{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 98%;
+}
+
+.adminPersonelDetails span {
+  font-weight: bold;
+  margin-left: 12px;
+}
+.adminImageContainer{
+  height: 75px;
+  width: 75px;
+}
+.adminImageContainer img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.space{
+  width: 2%;
+}
+
+.adminNavRouteContainer{
+    background-color: aliceblue;
+    color: darkblue;
+    border-left: 7px solid darkblue;
+    cursor: pointer;
+    padding: 3%;
+    display: -moz-box;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    margin-top: 12px;
+}
+.adminNavRouteContainer:hover{
+    background-color: darkblue;
+    border-left: 7px solid white;
+    cursor: pointer;
+    color: white;
+    padding: 3%;
+    display: -moz-box;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    margin-top: 12px;
+}
+.adminLogoContainer{
+  width: 160px;
+  position: relative;
+  top: -218px;
+}
+.adminLogoContainer img{
+  width: 100%;
+  height: 100%;
+}
+.openAdminNavBar{
+  visibility: hidden;
+  position: absolute;
+  left: 2%;
+  cursor: pointer;
+}
+
+.openAdminNavBar svg , .closeAdminNavBar svg{
+  font-size: 35px;
+}
+.closeAdminNavBar{
+  position: relative;
+  top: -42%;
+  left: 86%;
+  visibility: hidden;
+  cursor: pointer;
+  color: white;
+}
+
+
+@media  only screen and (max-width: 920px){
+  .adminNavBarContainer{
+    width: 0% ;
+  }
+
+  .admincontentContainer{
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .openAdminNavBar , .closeAdminNavBar{
+    visibility: visible;
+  }
+}
+
+.adminResponsiveNavBar{
+  width: 364px;
+  margin-top: 0;
+  z-index: 34;
+  height: 100vh;
+  position: absolute;
+  -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
+  box-shadow: 0px 3px 9px #5d3d3d61;
+  border-radius: 0px 50px 50px 0px;
+  background-color: darkgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  transition:  1s; 
+}
