@@ -51,7 +51,8 @@ export default async (req, res) => {
                  _id: fetched_admin._id , 
                  role: fetched_admin.role ,
                  isLoggedIn : fetched_admin.isLoggedIn,
-                 isRessted : fetched_admin.isRessted
+                 isRessted : fetched_admin.isRessted,
+                 club_id : fetched_admin.club_id
             }, process.env.TOKEN_ADMINS);
                 
             res.status(200).json({

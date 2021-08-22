@@ -31,6 +31,7 @@ a {
   height: 100vh;
   background-color: #06066f;
   position: fixed;
+
 }
 .superAdminSlideSectionResponsive{
     width: 99%;
@@ -132,7 +133,6 @@ a {
 .AdminMainBody{
   display: flex;
   justify-content: space-between;
-  background-color: ghostwhite;
 }
 
 .admincontentContainer{
@@ -143,7 +143,7 @@ a {
 
 .adminNavBarContainer{
   height: 90vh;
-  position: absolute;
+  position: fixed;
   width: 16%;
   -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
   box-shadow: 0px 3px 9px #5d3d3d61;
@@ -154,23 +154,39 @@ a {
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  transition:  1s; 
 }
 
 .adminPersonelDetails{
   display: flex;
+  -moz-box-align: center;
   align-items: center;
+  -moz-box-pack: end;
   justify-content: flex-end;
-  width: 98%;
+  width: 82%;
+  position: fixed;
+  z-index: 12;
+  background-color:white;
+
+}
+.adminPersonelDetailsInshrinkMode{
+  display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    -moz-box-pack: end;
+    justify-content: flex-end;
+    width: 92%;
+    position: fixed;
+    z-index: 12;
 }
 
-.adminPersonelDetails span {
+.adminPersonelDetails span , .adminPersonelDetailsInshrinkMode span {
   font-weight: bold;
   margin-left: 12px;
 }
 .adminImageContainer{
   height: 75px;
   width: 75px;
+  padding: 2px;
 }
 .adminImageContainer img{
   width: 100%;
@@ -180,9 +196,45 @@ a {
 .space{
   width: 2%;
 }
+.admincontentContainerInshrinkMode{
+  width: 93%;
+  height: 100vh;
+  margin-left: 7%;
 
+}
+.shrinkMode{
+   height: 90vh;
+    position: fixed;
+    width: 56px;
+    -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    border-radius: 0px 20px 20px 0px;
+    background-color: darkgrey;
+    margin-top: 35px;
+    display: -moz-box;
+    display: flex;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    flex-direction: column;
+    -moz-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.shrinkModeIcons{
+  color: darkblue;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    left: -3%;
+    transform: rotate(50deg);
+}
+.shrinkModeIcons svg{
+  font-size: 30px;
+}
+.adminLogoContainerInShrinMode{
+  display: none;
+}
 .adminNavRouteContainer{
-    background-color: aliceblue;
     color: darkblue;
     border-left: 7px solid darkblue;
     cursor: pointer;
@@ -205,14 +257,20 @@ a {
     align-items: center;
     margin-top: 12px;
 }
+
+.adminNavRoutesTitle{
+  font-weight: 700;
+  margin-left: 8px;
+  color: azure;
+}
 .adminLogoContainer{
-  width: 160px;
-  position: relative;
-  top: -218px;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  background-color:black;
 }
 .adminLogoContainer img{
-  width: 100%;
-  height: 100%;
+  width: 85%;
 }
 .openAdminNavBar{
   visibility: hidden;
@@ -225,16 +283,48 @@ a {
   font-size: 35px;
 }
 .closeAdminNavBar{
-  position: relative;
-  top: -42%;
-  left: 86%;
+  position: absolute;
+  top: 16px;
+  left: 90%;
   visibility: hidden;
   cursor: pointer;
   color: white;
 }
 
+.adminLogOut{
+  position: relative;
+  top: 36%;
+  background-color: black;
+  color: white;
+  padding: 3%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.adminLogOutInShrinkMode {
+  position: relative;
+  top: 37%;
+  background-color: black;
+  color: white;
+  padding: 3%;
+  display: -moz-box;
+  display: flex;
+  -moz-box-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.adminlogOutTitle{
+  color: white;
+  font-weight: 600;
+  margin-left: 12px;
+}
 
 @media  only screen and (max-width: 920px){
+  .adminPersonelDetails{
+    width: 100%;
+  }
   .adminNavBarContainer{
     width: 0% ;
   }
@@ -247,21 +337,33 @@ a {
   .openAdminNavBar , .closeAdminNavBar{
     visibility: visible;
   }
+
+  .shrinkModeIcons{
+    display: none;
+  }
+  .shrinkMode{
+    display: none;
+  }
 }
 
 .adminResponsiveNavBar{
-  width: 364px;
-  margin-top: 0;
-  z-index: 34;
-  height: 100vh;
-  position: absolute;
-  -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
-  box-shadow: 0px 3px 9px #5d3d3d61;
-  border-radius: 0px 50px 50px 0px;
-  background-color: darkgrey;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  transition:  1s; 
+  width: 98%;
+    margin-top: 0;
+    z-index: 34;
+    height: 100vh;
+    position: fixed;
+    -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: darkgrey;
+    display: -moz-box;
+    display: flex;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    flex-direction: column;
+    -moz-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
 }

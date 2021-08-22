@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </SuperAdminLayout>
       )
-    }else if(asPath === '/admin/dashboard'){
+    }else if(asPath === '/admin/dashboard' || asPath === '/admin/club'){
       return(
         <AdminLayout>
           <Component {...pageProps} />

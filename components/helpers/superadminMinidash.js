@@ -54,7 +54,7 @@ export default function SimpleMenu() {
 
 
 
-  //logging out the user admin
+  //logging out the super admin
   const logOut = async() => {
     const token = localStorage.getItem('token')
     const id = jwt(token)._id

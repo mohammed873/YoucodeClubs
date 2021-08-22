@@ -1,0 +1,50 @@
+.clubContainer{
+    display: flex;
+    width: 94%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.clubDetailsContainer{
+    width: 40%;
+}
+.clubImageContainer{
+    width: 60%;
+    margin: auto;
+    height: 86vh;
+    text-align: center;
+}
+.clubImageContainer img {
+    height: 100%;
+    width: 100%;
+}
+
+.editClubBtn{
+    background-color: green !important;
+    color: white !important;
+}
+
+.edditedPictureContainer{
+    float: right;
+    margin-top: -72px;
+    border: 1px solid;
+    height: 70px;
+    width: 70px;
+}
+
+.edditedPictureContainer img {
+    width: 100%;
+    height: 100%;
+}
+
+@media  only screen and (max-width: 760px){
+    .clubContainer{
+         flex-direction: column;
+    }
+    .clubDetailsContainer , .clubImageContainer{
+        width: 100%;
+    }
+    .clubDetailsContainer{
+        order: 1;
+    }
+}

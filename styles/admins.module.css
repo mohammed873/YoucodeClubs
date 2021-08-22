@@ -27,8 +27,11 @@
     float: right;
     margin-top: -72px;
     border: 1px solid;
-}
-.edditedPictureContainer img{
     height: 70px;
     width: 70px;
+}
+
+.edditedPictureContainer img {
+    width: 100%;
+    height: 100%;
 }

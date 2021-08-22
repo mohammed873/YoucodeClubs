@@ -6,9 +6,14 @@ import axios from 'axios'
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
+import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
+import CategoryIcon from '@material-ui/icons/Category';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export default function navBar({children}) {
   const [responsive , setResponsive] = useState(false)
+  const [shrink , setShrink] = useState(false)
   const [admin , setAdmin] = useState()
   const router = useRouter()
 
@@ -49,6 +54,18 @@ export default function navBar({children}) {
      })
   }
 
+   //logging out the  admin
+   const logOut = async() => {
+    const token = localStorage.getItem('adminToken')
+    const id = jwt(token)._id
+    console.log(id)
+    await axios.post('http://localhost:3000/api/admin/logout/' + id)
+    .then(res => {
+      localStorage.removeItem('adminToken')
+      router.push('/admin/login')
+    })
+    .catch(err => console.log(err))
+  }
  
  
   
@@ -61,9 +78,9 @@ export default function navBar({children}) {
     <>
     <main>
        <div className="AdminMainBody">
-         <div className={responsive ? 'adminResponsiveNavBar' : 'adminNavBarContainer'}>
+         <div className={responsive ? 'adminResponsiveNavBar' : shrink ? 'shrinkMode' : 'adminNavBarContainer'}>
             <Link href="/admin/dashboard">
-              <div className="adminLogoContainer">
+              <div className={shrink ? 'adminLogoContainerInShrinMode' : 'adminLogoContainer'}>
                 <img src="/logo.png" alt="logo" />
               </div>
             </Link>
@@ -80,18 +97,46 @@ export default function navBar({children}) {
                 </span>
               </div>
             </Link>
+            <Link href="/admin/club">
+              <div className='adminNavRouteContainer'>
+                <span className='NavIcons'>
+                  <CategoryIcon/>
+                </span>
+                <span className='adminNavRoutesTitle'>
+                  Club Info    
+                </span>
+              </div>
+            </Link>
+              <div className={shrink ? "adminLogOutInShrinkMode" : "adminLogOut"} onClick={logOut}>
+                <span className='NavIcons'>
+                  <ExitToAppIcon/>
+                </span>
+                <span className='adminlogOutTitle'>
+                  Log Out    
+                </span>
+              </div>
          </div>
-         <div  className="admincontentContainer">
-           <div className="adminPersonelDetails">
+         <div  className={shrink ? 'admincontentContainerInshrinkMode' : 'admincontentContainer'}>
+           <div className={shrink ? 'adminPersonelDetailsInshrinkMode' : 'adminPersonelDetails'}>
              <span className='openAdminNavBar'  onClick={()=> setResponsive(true)}>
                 <MenuIcon/>
              </span>
+             {shrink ? 
+                 <span className='shrinkModeIcons' onClick={()=> setShrink(false)}>
+                  <UnfoldLessIcon/>
+                </span>    
+             :
+                <span className='shrinkModeIcons' onClick={()=> setShrink(true)}>
+                   <UnfoldMoreIcon/>
+                </span>
+              }
              <span>{admin && admin[0].full_name}</span>
              <div className="space"></div>
              <div className="adminImageContainer">
                <img src={admin && admin[0].picture} alt="admin pictre" />
              </div>
            </div>
+           <div className="blankDiv"></div>
             {children}
          </div>
        </div>
