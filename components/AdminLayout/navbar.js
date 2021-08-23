@@ -132,9 +132,11 @@ export default function navBar({children}) {
               }
              <span>{admin && admin[0].full_name}</span>
              <div className="space"></div>
-             <div className="adminImageContainer">
-               <img src={admin && admin[0].picture} alt="admin pictre" />
-             </div>
+              <Link href="/admin/profile">
+                <div className="adminImageContainer">
+                  <img src={admin && admin[0].picture} alt="admin pictre" />
+                </div>
+               </Link>
            </div>
            <div className="blankDiv"></div>
             {children}

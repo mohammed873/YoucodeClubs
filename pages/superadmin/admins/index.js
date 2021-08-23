@@ -148,10 +148,6 @@ const handleClickOpenUpdate = async (id) => {
 
 //update admins info 
 const updateAdminInfo = async (id) => {
-    // console.log(full_name  ) 
-    // console.log( email  ) 
-    // // console.log( picture ) 
-    // console.log( club_id ) 
 
    const picture =  await pictureUpload()
 
@@ -162,6 +158,7 @@ const updateAdminInfo = async (id) => {
     picture
    })
    .then( res => {
+    
     //empty qll inputs field   
     emptyInputs()   
 

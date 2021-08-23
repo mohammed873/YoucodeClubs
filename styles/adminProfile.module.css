@@ -1,0 +1,75 @@
+.profileContainer{
+    width: 60%;
+    margin: auto;
+}
+.profileImageContainer{
+    width: 100%;
+}
+.profileImageContainer img{
+    width: 100%;
+}
+.adminInfo{
+    width: 90%;
+    margin: auto;
+    position: relative;
+    color: black;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: white;
+    top: -105px;
+    padding: 4%;
+}
+.adminInfo span{
+    color: black;
+} 
+.adminInfo h3{
+    color: darkblue;
+    font-size: 20px;
+}
+.editProfileIcon{
+    background: green;
+    color: white;
+    padding: 4px;
+    float: right;
+    cursor: pointer;
+}
+.editProfileIcon svg{
+    color: white;
+}
+.adminResetPasswordContainer{
+    width: 90%;
+    margin: auto;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: white;
+    padding: 1%;
+    position: relative;
+    top: -93px;
+
+}
+
+.adminResetPasswordContainer h3{
+    text-align: center;
+    background-color: green;
+    color: white;
+    padding: 2%;
+}
+.resetAdminPasswordBtn{
+    background: green !important;
+    color: white !important;
+}
+
+.edditedPictureContainer{
+    float: right;
+    margin-top: -72px;
+    border: 1px solid;
+}
+.edditedPictureContainer img{
+    height: 70px;
+    width: 70px;
+}
+
+@media  only screen and (max-width: 600px){
+    .profileContainer{
+        width: 90%;
+        max-width: auto ;
+    }
+}

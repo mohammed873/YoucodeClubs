@@ -177,6 +177,7 @@ a {
     width: 92%;
     position: fixed;
     z-index: 12;
+    background-color: white;
 }
 
 .adminPersonelDetails span , .adminPersonelDetailsInshrinkMode span {
@@ -187,6 +188,7 @@ a {
   height: 75px;
   width: 75px;
   padding: 2px;
+  cursor: pointer;
 }
 .adminImageContainer img{
   width: 100%;
@@ -268,6 +270,7 @@ a {
   position: absolute;
   top: 0px;
   background-color:black;
+  cursor: pointer;
 }
 .adminLogoContainer img{
   width: 85%;

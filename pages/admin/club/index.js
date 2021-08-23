@@ -16,6 +16,10 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Club() {
     
     const [club , setClub ] = useState([])
+    const [name , setName ] = useState('')
+    const [description , setDescription ] = useState('')
+    const [picture , setPicture] = useState('')
+
 
     //related to material ui dailog (update)
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -23,10 +27,14 @@ export default function Club() {
     //open update dialog
     const handleClickOpenUpdate = () => {
         setOpenUpdate(true);
+        setName(club.name);
+        setDescription(club.description);
+        setPicture(club.picture);
     }
+
     //close update dialog
     const handleCloseUpdate = () => {
-    setOpenUpdate(false);
+        setOpenUpdate(false);
     }; 
 
     //get the admin club 
@@ -42,6 +50,46 @@ export default function Club() {
         })
     }
 
+    //update a single club by id
+    const editClub = async (id ) => {
+ 
+        const picture =  await pictureUpload()
+
+        await axios.put('http://localhost:3000/api/superAdmin/clubs/' + id,{
+        name ,
+        description ,
+        picture ,
+        })
+        .then((res) =>{
+
+        toast.configure()
+        toast.success(res.data.message)
+    
+        handleCloseUpdate()
+        getClubInfo()
+        }).catch((err) =>{
+        toast.configure()
+        toast.error(err.response.data.message)
+        })
+    }
+  
+    //uploading image using cloudinary
+    const pictureUpload = async () => {
+
+        const data = new FormData()
+        data.append("file", picture)
+        data.append("upload_preset", "youcodeClubs")
+        data.append("cloud_name", "dtq13h9rg" )
+    
+    
+        const res = await fetch("	https://api.cloudinary.com/v1_1/dtq13h9rg/image/upload",{
+        method : "POST",
+        body : data
+        })
+        const res2 = await res.json() 
+        
+        return res2.url
+    }
 
     useEffect(() => {
         getClubInfo()
@@ -61,6 +109,7 @@ export default function Club() {
            <div className={styles.clubContainer}>
                 <div className={styles.clubDetailsContainer}>
                     <h1>{club.name}</h1>
+                    <br/>
                     <p>{club.description}</p>
                     <br/> 
                     <Button
@@ -76,6 +125,7 @@ export default function Club() {
                     <img src={club.picture} alt="club pic" />
                 </div>
            </div>
+           <br/>
 
            <Dialog open={openUpdate} onClose={handleCloseUpdate} aria-labelledby="form-dialog-title" fullWidth>
              <DialogTitle id="form-dialog-title" style={{backgroundColor: 'green', color: 'white' , textAlign: 'center'}}>update Club details</DialogTitle>
