@@ -9,7 +9,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
 import CategoryIcon from '@material-ui/icons/Category';
+import BurstModeIcon from '@material-ui/icons/BurstMode';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ChatIcon from '@material-ui/icons/Chat';
 
 export default function navBar({children}) {
   const [responsive , setResponsive] = useState(false)
@@ -104,6 +106,26 @@ export default function navBar({children}) {
                 </span>
                 <span className='adminNavRoutesTitle'>
                   Club Info    
+                </span>
+              </div>
+            </Link>
+            <Link href="/admin/activity">
+              <div className='adminNavRouteContainer'>
+                <span className='NavIcons'>
+                  <BurstModeIcon/>
+                </span>
+                <span className='adminNavRoutesTitle'>
+                  Club Activity    
+                </span>
+              </div>
+            </Link>
+            <Link href="/admin/activity">
+              <div className='adminNavRouteContainer'>
+                <span className='NavIcons'>
+                  <ChatIcon/>
+                </span>
+                <span className='adminNavRoutesTitle'>
+                  Groub Chat    
                 </span>
               </div>
             </Link>

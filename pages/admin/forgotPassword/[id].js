@@ -20,9 +20,7 @@ const [password , setPassword] = useState()
 //update password
 const updatePassword = async () => {
   const resetToken = id
-  console.log(router.query)
 
-  console.log(resetToken)
   await axios.put('http://localhost:3000/api/admin/forgotPassword/' + resetToken,{
     password
   }).then(res =>{

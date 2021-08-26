@@ -296,7 +296,7 @@ a {
 
 .adminLogOut{
   position: relative;
-  top: 36%;
+  top: 26%;
   background-color: black;
   color: white;
   padding: 3%;
@@ -307,7 +307,7 @@ a {
 
 .adminLogOutInShrinkMode {
   position: relative;
-  top: 37%;
+  top: 27%;
   background-color: black;
   color: white;
   padding: 3%;
@@ -332,6 +332,12 @@ a {
     width: 0% ;
   }
 
+  .adminLogoContainer{
+    background-color: transparent;
+  }
+  .adminLogoContainer img {
+    width: 40%;
+  }
   .admincontentContainer{
     width: 100%;
     margin-left: 0;

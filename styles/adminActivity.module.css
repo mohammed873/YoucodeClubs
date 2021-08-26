@@ -1,0 +1,103 @@
+.activityContainer{
+    width: 96%;
+    margin:auto ;
+    display: flex;
+    justify-content: space-between;
+}
+.singleActivtyDetails{
+    width: 69%;
+}
+
+.activityList{
+    width: 30%;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: aliceblue;
+    height: 84vh;
+    overflow-y: scroll;
+}
+
+.activityImageContainer{
+    width: 100%;
+
+}
+.activityImageContainer img{
+    width: 100%;
+    height: 100%;
+}
+.activityDetailsContainer{
+    padding: 1%;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: aliceblue;
+    position: relative;
+    top: -15%;
+    width: 94%;
+    margin: auto;
+}
+ .commentFormContainer{
+    padding: 1%;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: aliceblue;
+    position: relative;
+    top: -13%;
+    width: 94%;
+    margin: auto;
+ }
+ .ActivityCommentsContainer{
+    padding: 1%;
+    box-shadow: 0px 3px 9px #5d3d3d61;
+    background-color: aliceblue;
+    position: relative;
+    top: -14%;
+    width: 94%;
+    margin: auto;
+    height: 42vh;
+    overflow-y: scroll;
+}
+.commentUsersContainer{
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    padding: 1%;
+    background-color: darkblue;
+    color: white;
+}
+.commentUsersContainer img{
+     width: 8%;
+     border-radius: 50%;
+}
+.commentUsersContainer span{
+    margin-left: 5px;
+}
+.ActivityCommetSection{
+    border: 1px solid;
+    padding: 1%;
+    width: 92%;
+    margin: auto;
+}
+.activityBtn{
+    margin-top:6px !important;
+    margin-left: 6px !important;
+}
+.listSingleActivityContainer{
+    width: 90%;
+    margin: auto;
+    cursor: pointer;
+}
+.listSingleActivityContainer img{
+    width: 100%;
+    height: 100%;
+}
+.listSingleActivityContainer p {
+    background-color: #000000a3;
+    color: white;
+    text-align: center;
+    padding: 3%;
+}
+.listDeleteActivityBtn{
+    float: right;
+    cursor: pointer;
+}
+.listEditActivityBtn{
+    float: right;
+    cursor: pointer;
+}

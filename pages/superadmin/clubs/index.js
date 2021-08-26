@@ -64,9 +64,8 @@ const handleClickOpenUpdate = async (id) => {
 
 //update a single club by id
 const editClub = async (id ) => {
- 
   const picture =  await pictureUpload()
-  console.log(name , description ,picture)
+  
   await axios.put('http://localhost:3000/api/superAdmin/clubs/' + id,{
     name ,
     description ,
