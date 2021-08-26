@@ -101,3 +101,45 @@
     float: right;
     cursor: pointer;
 }
+.edditedPictureContainer{
+    float: right;
+    margin-top: -72px;
+    border: 1px solid;
+    height: 70px;
+    width: 70px;
+}
+
+.edditedPictureContainer img {
+    width: 100%;
+    height: 100%;
+}
+
+@media  only screen and (max-width: 850px){
+    .activityContainer{
+        flex-direction: column;
+    }
+    .singleActivtyDetails{
+       width: 100%;
+       order: 1;
+    }
+    .activityList{
+        width: 100%;
+        order: 0;
+        height: 90vh;
+        overflow-y: scroll;
+        background-color: darkgray;
+    }
+    .listSingleActivityContainer{
+        width: 100%;
+        margin-left: 12px;
+    }
+}
+
+@media  only screen and (max-width: 500px){
+    .activityList{
+        width: 100%;
+        order: 0;
+        height: 63vh;
+        overflow-y: scroll;
+    }
+}

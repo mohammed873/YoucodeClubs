@@ -13,15 +13,25 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from '../../../styles/adminActivity.module.css';
 import jwt from 'jwt-decode'
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 export default function Activity() {
     const [name, setName] = useState('')
     const [description , setDescription] = useState('')
-    const [date , setDate] = useState('')
+    const [date, setDate] = React.useState(new Date());
     const [picture , setPicture] = useState('')
 
+    const handleDateChange = (date) => {
+        setDate(date);
+    };
+
     //create a new state to store all club activities
-    const [activities , setActivities] = useState([])
+    const [activities , setActivities] = useState(null)
 
     //create a new state to store random fetched club activity
     const [randomActivity , setRandomActivity] = useState(null)
@@ -40,10 +50,25 @@ export default function Activity() {
     };
     
     const handleClose = () => {
-    setOpen(false);
+        setOpen(false);
     };
 
-   
+    //related to material ui dailog (post)
+    const [openUpdate, setOpenUpdate] = useState(false);
+
+    const handleClickOpenUpdate = () => {
+        setOpenUpdate(true);
+
+        setName(singleActivity.name)
+        setDescription(singleActivity.description)
+        setDate(singleActivity.date)
+        setPicture(singleActivity.picture)
+    };
+     
+    const handleCloseUpdate = () => {
+        setOpenUpdate(false);
+    };
+
     //get a random club activity
     const getRandomActivity = async () => {
 
@@ -79,7 +104,7 @@ export default function Activity() {
         await axios.post('http://localhost:3000/api/admin/clubActivity',{
             name,
             description,
-            date,
+            date ,
             picture,
             club_id
         })
@@ -99,6 +124,38 @@ export default function Activity() {
         }).catch(err => {
             toast.configure()
             toast.error(err.response.data.message)
+        })
+    }
+
+    //update a single club activity by _id
+    const updateClubActivity = async (id) => {
+        const picture =  await pictureUpload()
+
+        const adminToken = localStorage.getItem('adminToken')
+        const club_id = jwt(adminToken).club_id
+
+        await axios.put('http://localhost:3000/api/admin/clubActivity/' + id , {
+            name,
+            club_id,
+            description,
+            date , 
+            picture
+        }).then(res =>{
+            //empty all fields inputs after updating
+            emptyInputs()
+
+            //close update dialog
+            handleCloseUpdate()
+
+            //get new updated data
+            getSingleActivity(id)
+            getAllClubActivities()
+
+            //fire up success notifications
+            toast.configure()
+            toast.success(res.data.message)
+        }).catch(err =>{
+            console.log(err)
         })
     }
 
@@ -165,6 +222,7 @@ export default function Activity() {
      useEffect(() => {
         getAllClubActivities()
         getRandomActivity()
+       
      },[])
   return (
     <>
@@ -184,12 +242,12 @@ export default function Activity() {
                       <img src={random ? randomActivity && randomActivity[0].picture : singleActivity && singleActivity.picture} alt="activity image" />
                   </div>
                   <div className={styles.activityDetailsContainer}>
-                       <span className={styles.listDeleteActivityBtn} onClick={() => deletedClubActivity(singleActivity._id)}>
+                        {random ? "" :   <span className={styles.listDeleteActivityBtn} onClick={() => deletedClubActivity(singleActivity._id)}>
                               <DeleteIcon/>
-                        </span>
-                        <span className={styles.listEditActivityBtn}>
+                        </span>}
+                        {random ? "" : <span className={styles.listEditActivityBtn} onClick={() => handleClickOpenUpdate()}>
                               <EditIcon/>
-                        </span>
+                        </span>}
                       <h1>{random ? randomActivity && randomActivity[0].name : singleActivity && singleActivity.name}</h1>
                       <p>{random ? randomActivity && randomActivity[0].description : singleActivity && singleActivity.description}</p>
                       <br/>
@@ -262,9 +320,8 @@ export default function Activity() {
                 </Button>
                 <br/>
                 <br/>
-
                 {activities && activities.map(activity =>{
-
+                    
                     return <>
                        <div key={activity._id} className={styles.listSingleActivityContainer} onClick={() => getSingleActivity(activity._id)}>
                             <img src={activity.picture} alt="activity picture" />
@@ -275,6 +332,7 @@ export default function Activity() {
                 })}
                
               </div>
+              <br/>
           </div>
           <br/>
        </main>
@@ -305,15 +363,21 @@ export default function Activity() {
                    onChange={(e)=>{setDescription(e.target.value)}}
                 />
                 <br/> <br/>
-                <TextField
-                    id='date'
-                    defaultValue="2021-05-24"
-                    label="Activity Date"
-                    type="date"
-                    variant="filled"
-                    fullWidth
-                    onChange={(e)=>{setDate(e.target.value)}}
-                />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                        margin="normal"
+                        id="date"
+                        label="Date"
+                        format="MM/dd/yyyy"
+                        value={date}
+                        onChange={handleDateChange}
+                        minDate={new Date()}
+                        fullWidth
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </MuiPickersUtilsProvider>
                 <br/> <br/>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Choose an Image</label>
@@ -326,6 +390,75 @@ export default function Activity() {
                     size="large"
                     startIcon={<SaveIcon />}
                     onClick={addNewActivity}
+                >
+                    Save
+                </Button>
+            </DialogContent>   
+        </Dialog>
+
+        {/* update activity dialog */}
+        <Dialog open={openUpdate} onClose={handleCloseUpdate} aria-labelledby="form-dialog-title" fullWidth>
+            <DialogTitle style={{backgroundColor: 'green', color: 'white' , textAlign: 'center'}} id="form-dialog-title">Update new Activity</DialogTitle>
+            <br/>
+            <DialogContent>
+                <TextField
+                    id='name'
+                    defaultValue={name}
+                    autoFocus
+                    label="Activity Name"
+                    type="text"
+                    variant="filled"
+                    fullWidth
+                    onChange={(e)=>{setName(e.target.value)}}
+                />
+                <br/> <br/>
+                <TextField 
+                   id='description'
+                   defaultValue={description}
+                   label="description" 
+                   type="text"
+                   variant="filled"
+                   fullWidth
+                   multiline
+                   rows={4}
+                   onChange={(e)=>{setDescription(e.target.value)}}
+                />
+                <br/> <br/>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                        margin="normal"
+                        defaultValue={date}
+                        id="date"
+                        label="Date"
+                        format="MM/dd/yyyy"
+                        value={date}
+                        onChange={handleDateChange}
+                        minDate={new Date()}
+                        fullWidth
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </MuiPickersUtilsProvider>
+                <br/> <br/>
+                <div class="mb-3">
+                    <label htmlFor="formFile" class="form-label">Choose an Image</label>
+                    <input 
+                        style={{width: '85%'}} 
+                        class="form-control" type="file" id="formFile"  
+                        onChange={(e)=>setPicture(e.target.files[0])}
+                    />
+                    <div className={styles.edditedPictureContainer}>
+                        <img src={picture} alt="club pic" />
+                    </div>
+                </div>
+                <Button
+                    className={styles.saveBtn}
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    startIcon={<SaveIcon />}
+                    onClick={() => updateClubActivity(singleActivity._id)}
                 >
                     Save
                 </Button>
