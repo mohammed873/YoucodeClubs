@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import jwt from 'jwt-decode'
+import Flip from 'react-reveal/Flip';
 
 export default function AdminLogin() {
     const router = useRouter()
@@ -44,7 +45,10 @@ export default function AdminLogin() {
          <div className={styles.mainLoginContainer}>
              <div className={styles.loginContainer}>
                  <div className={styles.loginFormContainer}>
-                 <h1>Admins Zone </h1>
+                   <Flip>
+                     <h1>Admins Zone </h1>
+                   </Flip>
+                
                 <hr className={styles.line}/>
                 <br/>
                     <TextField  

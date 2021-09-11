@@ -142,14 +142,13 @@ a {
 }
 
 .adminNavBarContainer{
-  height: 90vh;
+  height: 100vh;
   position: fixed;
   width: 16%;
   -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
   box-shadow: 0px 3px 9px #5d3d3d61;
-  border-radius: 0px 50px 50px 0px;
+  border-radius: 2px;
   background-color: darkgrey;
-  margin-top: 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -182,7 +181,7 @@ a {
 
 .adminPersonelDetails span , .adminPersonelDetailsInshrinkMode span {
   font-weight: bold;
-  margin-left: 12px;
+  margin-left: 27px;
 }
 .adminImageContainer{
   height: 75px;
@@ -205,30 +204,31 @@ a {
 
 }
 .shrinkMode{
-   height: 90vh;
-    position: fixed;
-    width: 56px;
-    -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
-    box-shadow: 0px 3px 9px #5d3d3d61;
-    border-radius: 0px 20px 20px 0px;
-    background-color: darkgrey;
-    margin-top: 35px;
-    display: -moz-box;
-    display: flex;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    flex-direction: column;
-    -moz-box-pack: center;
-    justify-content: center;
-    overflow: hidden;
+  height: 63vh;
+  position: fixed;
+  width: 56px;
+  -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
+  box-shadow: 0px 3px 9px #5d3d3d61;
+  border-radius: 2px;
+  background-color: darkgrey;
+  display: -moz-box;
+  display: flex;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  -moz-box-pack: center;
+  justify-content: center;
+  overflow: hidden;
+  top: 19%;
 }
+
 .shrinkModeIcons{
   color: darkblue;
     text-align: center;
     cursor: pointer;
     position: absolute;
     left: -3%;
-    transform: rotate(50deg);
+    transform: rotate(89deg);
 }
 .shrinkModeIcons svg{
   font-size: 30px;
@@ -295,19 +295,18 @@ a {
 }
 
 .adminLogOut{
-  position: relative;
-  top: 26%;
-  background-color: black;
-  color: white;
-  padding: 3%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  text-align: center !important;
+  background-color: transparent !important;
+  width: 3%;
 }
+.adminLogOut svg{
+  font-size: 39px;
+}
+
 
 .adminLogOutInShrinkMode {
   position: relative;
-  top: 27%;
+  top: 29%;
   background-color: black;
   color: white;
   padding: 3%;

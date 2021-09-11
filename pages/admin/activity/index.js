@@ -3,12 +3,14 @@ import Head from 'next/head'
 import axios from 'axios'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import SaveIcon from '@material-ui/icons/Save';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from '../../../styles/adminActivity.module.css';
@@ -310,14 +312,11 @@ export default function Activity() {
                   </div>
               </div>
               <div className={styles.activityList}>
-                <Button
-                    className={styles.activityBtn}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleClickOpen}
-                >
-                    Add new activity
-                </Button>
+                <Tooltip title="Add new activiy" >
+                  <IconButton aria-label="Add new activiy"  className={styles.activityBtn} onClick={handleClickOpen} >
+                    <AddCircleIcon/>
+                  </IconButton>
+                </Tooltip> 
                 <br/>
                 <br/>
                 {activities && activities.map(activity =>{

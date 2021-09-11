@@ -78,6 +78,9 @@
     margin-top:6px !important;
     margin-left: 6px !important;
 }
+.activityBtn svg {
+    font-size: 39px;
+}
 .listSingleActivityContainer{
     width: 90%;
     margin: auto;

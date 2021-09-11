@@ -223,7 +223,7 @@ useEffect(() => {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
       </Head>
-      <main>
+      <main style={{ marginTop: "-85px"}}>
          <div className={styles.headerContainer}>
              <h1>ALL CLUB ADMINS</h1>
              <Button variant="contained" onClick={handleClickOpen}>Add new admin</Button>

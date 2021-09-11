@@ -6,18 +6,35 @@ import axios from 'axios'
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
-import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import CategoryIcon from '@material-ui/icons/Category';
 import BurstModeIcon from '@material-ui/icons/BurstMode';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChatIcon from '@material-ui/icons/Chat';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
+
 
 export default function navBar({children}) {
   const [responsive , setResponsive] = useState(false)
   const [shrink , setShrink] = useState(false)
   const [admin , setAdmin] = useState()
   const router = useRouter()
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   //chekking if admin is logged in
   const checkLogging = () => {
@@ -65,6 +82,7 @@ export default function navBar({children}) {
     .then(res => {
       localStorage.removeItem('adminToken')
       router.push('/admin/login')
+      handleClose()
     })
     .catch(err => console.log(err))
   }
@@ -129,14 +147,6 @@ export default function navBar({children}) {
                 </span>
               </div>
             </Link>
-              <div className={shrink ? "adminLogOutInShrinkMode" : "adminLogOut"} onClick={logOut}>
-                <span className='NavIcons'>
-                  <ExitToAppIcon/>
-                </span>
-                <span className='adminlogOutTitle'>
-                  Log Out    
-                </span>
-              </div>
          </div>
          <div  className={shrink ? 'admincontentContainerInshrinkMode' : 'admincontentContainer'}>
            <div className={shrink ? 'adminPersonelDetailsInshrinkMode' : 'adminPersonelDetails'}>
@@ -145,20 +155,33 @@ export default function navBar({children}) {
              </span>
              {shrink ? 
                  <span className='shrinkModeIcons' onClick={()=> setShrink(false)}>
-                  <UnfoldLessIcon/>
+                  <FullscreenIcon/>
                 </span>    
              :
                 <span className='shrinkModeIcons' onClick={()=> setShrink(true)}>
-                   <UnfoldMoreIcon/>
+                   <FullscreenExitIcon/>
                 </span>
               }
              <span>{admin && admin[0].full_name}</span>
              <div className="space"></div>
-              <Link href="/admin/profile">
-                <div className="adminImageContainer">
+           
+                <div className="adminImageContainer"  onClick={handleClick}>
                   <img src={admin && admin[0].picture} alt="admin pictre" />
                 </div>
-               </Link>
+    
+               <Menu
+                  id="fade-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}
+                >
+                  <Link href="/admin/profile">
+                     <MenuItem>My account</MenuItem>
+                  </Link>
+                  <MenuItem onClick={logOut}>Logout</MenuItem>
+                </Menu>
            </div>
            <div className="blankDiv"></div>
             {children}

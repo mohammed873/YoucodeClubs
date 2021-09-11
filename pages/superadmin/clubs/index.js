@@ -10,10 +10,17 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import SaveIcon from '@material-ui/icons/Save';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import ExploreIcon from '@material-ui/icons/Explore';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import { useRouter } from 'next/router'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Clubs() {
+
+const router = useRouter()
+
 //input states for post
 const [name , setName] = useState('')
 const [description , setDescription] = useState('')
@@ -35,6 +42,11 @@ const handleClickOpen = () => {
 const handleClose = () => {
   setOpen(false);
 }; 
+
+//redirecting to the club activity page
+const redirectToClubActivityPage = (id) => {
+    router.push('/superadmin/clubActivities/' + id)
+};
 
 //related to material ui dailog (update)
 const [openupdate, setOpenUpdate] = useState(false);
@@ -185,7 +197,7 @@ useEffect(() => {
               href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
       </Head>
-      <main>
+      <main className={styles.superAdminClubMainContainer}>
          <div className={styles.headerContainer}>
              <h1>ALL CLUBS</h1>
              <Button variant="contained" onClick={handleClickOpen}>Add new club</Button>
@@ -194,12 +206,30 @@ useEffect(() => {
           <ul className={styles.cards}>
             {clubs.map(club => {
               return (
-                <li>
+                <li >
                  <div className={styles.card}>
                    <img src={club.picture} className={styles.card__image} alt="club image" />
                    <div className={styles.card__overlay}>
                      <div className={styles.card__header}>
-                       <svg className={styles.card__arc} xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
+                       <svg className={styles.card__arc} xmlns="http://www.w3.org/2000/svg"><path /></svg> 
+                       <div  className={styles.moreDetails}>
+                        <Tooltip title="Explore Activities" >
+                          <IconButton aria-label="Explore Activities" onClick={()=> redirectToClubActivityPage(club._id)}>
+                            <ExploreIcon />   
+                          </IconButton>
+                        </Tooltip> 
+                        <Tooltip title="Edit Activity" >
+                          <IconButton aria-label="Explore Activities" className={styles.clubIcons}  onClick={ () => handleClickOpenUpdate(club._id)}>
+                             <EditIcon />  
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Delete Activity" >
+                          <IconButton aria-label="Explore Activities" className={styles.clubIcons} onClick={() => deleteClub(club._id)}>
+                             <DeleteIcon /> 
+                          </IconButton>
+                        </Tooltip> 
+                       </div>
+                                       
                        <div className={styles.card__title}>
                          <h3>{club.name}</h3>            
                        </div>
@@ -208,22 +238,16 @@ useEffect(() => {
                         {club.description}
                      </div>
                      <div className={styles.iconsContainer}>
-                       <Button
-                          variant="contained"
-                          color="default"
-                          size="small"
-                          onClick={ () => handleClickOpenUpdate(club._id)}
-                        >
-                          <EditIcon />
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="default"
-                          size="small"
-                          onClick={() => deleteClub(club._id)}
-                        >
-                          <DeleteIcon />
-                        </Button>
+                        {/* <Tooltip title="Explore Activities" >
+                          <IconButton aria-label="Explore Activities"   onClick={ () => handleClickOpenUpdate(club._id)}>
+                             <EditIcon />  
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Explore Activities" >
+                          <IconButton aria-label="Explore Activities"  onClick={() => deleteClub(club._id)}>
+                             <DeleteIcon /> 
+                          </IconButton>
+                        </Tooltip>  */}
                      </div>
                      <br/>
                    </div>

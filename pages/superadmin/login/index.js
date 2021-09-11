@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
+import Flip from 'react-reveal/Flip';
 
 
 
@@ -43,7 +44,9 @@ export default function Admin_login() {
                 <img src='/YouCode.gif' alt="Logo" />
                 </Grid>
                 <Grid item md={5} sm={12} className={styles.left_side}>
-                <h1 style={{color:'white'}}>Super Admin Zone </h1>
+                 <Flip>
+                    <h1 style={{color:'white'}}>Super Admin Zone </h1>
+                 </Flip>
                 <hr/>
                 <form id={styles.form}>
                  <TextField  
