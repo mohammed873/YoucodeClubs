@@ -33,6 +33,10 @@
     "react-toastify": "^7.0.4",
     "yup": "^0.32.9"
   },
+  "optionalDependencies": {
+    "os":"darwin",
+    "arch":"any"
+  },
   "devDependencies": {
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1"
