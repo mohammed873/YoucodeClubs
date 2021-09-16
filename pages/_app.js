@@ -10,7 +10,6 @@ function MyApp({ Component, pageProps }) {
   const { asPath  } = useRouter()
  
   const Layout = () => {
-    /* eslint-disable */
     if (asPath === '/superadmin/dashboard' || asPath === '/superadmin/profile' || asPath === '/superadmin/admins' || asPath === '/superadmin/clubs'){
       return (
         <SuperAdminLayout>
@@ -18,14 +17,12 @@ function MyApp({ Component, pageProps }) {
         </SuperAdminLayout>
       )
     }else if(asPath === '/admin/dashboard' || asPath === '/admin/club' || asPath === '/admin/profile' || asPath === '/admin/activity'){
-      /* eslint-disable */
       return(
         <AdminLayout>
           <Component {...pageProps} />
         </AdminLayout>
       )
     }else{
-      /* eslint-disable */
       return(
         <Component {...pageProps} />
       )
