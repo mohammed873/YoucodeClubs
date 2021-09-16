@@ -34,7 +34,7 @@
     "yup": "^0.32.9"
   },
   "optionalDependencies": 
-    {"os":"darwin","arch":"any"}
+    {"os":"linux","arch":"x64"}
   ,
 
   "devDependencies": {
