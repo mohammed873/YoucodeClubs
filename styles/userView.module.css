@@ -1,7 +1,8 @@
 .sliderContainer{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 100vh;
+    width: 100%;
 }
 
 .sliderImageContainer{
@@ -32,6 +33,8 @@
     padding: 1%;
     position: absolute;
     width: 406px;
+    overflow-x: scroll;
+    height: 27vh;
     box-shadow: 1px 1px 9px #d1c8b7;
 }
 
@@ -39,14 +42,28 @@
     display: flex;
     position: relative;
     z-index: 2;
-    top: 160%;
+    top: 194%;
 }
 .paginationDiv div {
     width: 40px;
     height: 40px;
     margin-left: 5px;
     cursor: pointer;
-    box-shadow: 1px 1px 12px #c1bfba;
+    box-shadow: 0px 0px 3px;
+    border: 2px solid darkblue;
+    transform: translateY(0px);
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%{
+      transform: translateY(0px);
+    }
+    50%{
+      transform: translateY(-10px);
+    }
+    100%{
+      transform: translateY(0px);
+    }
 }
 .paginationDiv div img {
     width: 100%;
@@ -59,6 +76,16 @@
 
 .exploreBtn{
     position: absolute;
-    top: 284px;
-    left: 821px;
+    left: -4%;
+    top: -13%;
+    background-color: darkblue !important ;
+    color: white !important;
+}
+
+.loginBtn{
+    position: absolute !important;
+    top: 3%;
+    background: darkblue !important;
+    color: white !important;
+    right: 1%;
 }

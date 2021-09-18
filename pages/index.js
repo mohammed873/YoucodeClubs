@@ -56,6 +56,7 @@ useEffect (() => {
               }
           </div>
           <div className={styles.detailsContainer}>
+          <Button className={styles.loginBtn}>Log in</Button>
             <div className={styles.outerContainer}>
               <div className={styles.innerContainer}>
                 {dataReady ?
@@ -71,18 +72,21 @@ useEffect (() => {
                  :
                  <>
                       <h2>Youcode clubs</h2>
-                      <p>welcome dear youcoders , youcode is not just about coding , it also about improving other skills , and there is no better way then joining a one of it's clubs , there plenty of clubs , just select aclub from the list down and join what represent your interests , </p>
+                      <p>welcome dear youcoders , youcode is not just about coding , it also about improving other skills , and there is no better way then joining a one of it's clubs , there plenty of clubs , just select a club from the list down and join what represent your interests , or if you are already in ,  just simply log in </p>
                   </> 
                 }
               </div>
-              <Tooltip title="Explore Activities" >
-                <IconButton aria-label="Explore Activities"
-                   className={styles.exploreBtn}
-                  //  onClick={()=> getSingleClub(club._id)}
-                >
-                    <ExploreIcon />   
-                </IconButton>
-               </Tooltip> 
+              {dataReady ? 
+                  <Tooltip title="Explore moreDetails " >
+                  <IconButton aria-label="Explore moreDetails"
+                    className={styles.exploreBtn}
+                  >
+                      <ExploreIcon />   
+                  </IconButton>
+                </Tooltip>
+               :
+                null
+              } 
               <div className={styles.paginationDiv}>
                 {clubs.map(club =>{
                   return (
