@@ -1,0 +1,41 @@
+.navbar{
+    background-color: darkblue;
+    padding: 1%;
+    width: 94%;
+    margin: auto;
+
+}
+.navbar img{
+    width: 121px;
+    cursor: pointer;
+}
+
+.navbar Button{
+    float: right !important;
+    background-color: aliceblue;
+}
+.navbar Button:hover{
+    background-color: aliceblue !important;
+}
+
+.tabline span {
+   color: darkblue !important ;
+   font-weight: bolder;
+}
+
+.loading{
+    text-align: center;
+}
+
+.loading h3  { 
+    margin-top: -71PX;
+    color: darkblue;
+    font-family: 'FontAwesome';
+}
+
+@media  only screen and (max-width: 740px) {
+
+    .loading img{
+        width: 100%;
+    }
+}

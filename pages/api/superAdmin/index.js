@@ -10,7 +10,7 @@ export default async (req, res) => {
     switch (method) {
 
 
-        //getting all users
+        //getting all super admins
         case 'GET':
             try {
                 const superAdmins = await SuperAdmin.find();

@@ -23,7 +23,7 @@ const router = useRouter()
 
 //get all club activity by club id
 const getAllClubActivities = async () => {
-    //get theclub _id  from the url parameters
+    //get the club _id  from the url parameters
     const {id} = router.query
     await axios.get('http://localhost:3000/api/admin/clubActivity/' + id)
     .then( res =>{

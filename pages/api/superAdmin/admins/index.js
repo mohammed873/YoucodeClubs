@@ -61,6 +61,7 @@ export default async (req, res) => {
                message: "Email adress already exists",
             });
 
+            //hash password before saving
             const salt = await bcrypt.genSalt(10);
             const hashpassword = await bcrypt.hash(req.body.password, salt);
 

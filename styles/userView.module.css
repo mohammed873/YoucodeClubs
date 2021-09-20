@@ -89,3 +89,31 @@
     color: white !important;
     right: 1%;
 }
+
+@media  only screen and (max-width: 950px){
+    .sliderContainer{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .detailsContainer , .sliderImageContainer {
+        width: 100%;
+    }
+}
+
+@media  only screen and (max-width: 544px){
+    .outerContainer{      
+        height: 16vh;
+        width: 93%;
+    }
+    .innerContainer {
+        width: 91%;
+    }
+    .exploreBtn {
+        left: -3%;
+        top: -13%;
+    }
+    .innerContainer h2 {
+        margin-top: 32px;
+    }
+}

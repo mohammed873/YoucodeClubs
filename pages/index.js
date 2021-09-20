@@ -6,7 +6,16 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { useRouter } from 'next/router'
+import Link from 'next/Link'
 
+
+const useStyles = makeStyles((theme) => ({
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 export default function Home() {
 
 // club states  
@@ -14,6 +23,17 @@ const [clubs , setClubs] = useState([])
 const [dataReady , setDataReady] = useState(false)
 const [club , setClub] = useState([])
 
+const router = useRouter()
+
+//redirecting to the join club page
+const redirectToJoinClubPage = (id) => {
+  router.push('/user/joinClub/' + id)
+};
+
+//redirecting to club activities in guest mode
+const redirectToClubActivityPage = (id) => {
+  router.push('/user/discoverMore/' + id)
+};
 
 //get all clubs 
 const getAllClubs = async () => {
@@ -55,13 +75,19 @@ useEffect (() => {
                 <img src="/YouCode.gif" alt="club picture" />
               }
           </div>
+          <br/>
           <div className={styles.detailsContainer}>
-          <Button className={styles.loginBtn}>Log in</Button>
+
+            <Link href="/user/login">
+              <Button className={styles.loginBtn} >Log in</Button>
+            </Link>
+        
             <div className={styles.outerContainer}>
               <div className={styles.innerContainer}>
                 {dataReady ?
                   <>
                     <Button 
+                      onClick={() => redirectToJoinClubPage(club._id)}
                       className={styles.joinBtn}
                     >
                         Join now
@@ -80,6 +106,7 @@ useEffect (() => {
                   <Tooltip title="Explore moreDetails " >
                   <IconButton aria-label="Explore moreDetails"
                     className={styles.exploreBtn}
+                    onClick={()=> redirectToClubActivityPage(club._id)}
                   >
                       <ExploreIcon />   
                   </IconButton>
