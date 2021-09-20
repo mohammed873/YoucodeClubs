@@ -55,6 +55,9 @@ export default function discoverClubActivities() {
            </Link>
            <Button onClick={redirectToJoinClubPage}>Join now</Button>
        </div>
+       <div className={styles.intro}>
+           This is all the events that was hold and created by This club , if you are interested and you want to learn more , make sure to join now , and enjoy free chat rooms with all members , so that you can spread your ideas freely
+       </div>
        {
            dataFound ? 
            <Timeline className={styles.tabline}>

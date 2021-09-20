@@ -39,3 +39,10 @@
         width: 100%;
     }
 }
+.intro{
+    width: 96%;
+    margin: auto;
+    padding: 1%;
+    font-size: 19px;
+    font-family: 'FontAwesome';
+}
