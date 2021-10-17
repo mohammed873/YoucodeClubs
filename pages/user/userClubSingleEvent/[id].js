@@ -42,7 +42,7 @@ export default function singleEventDetails() {
     //current userid , for setting a specific style while displaying the comments
     const currentUserId = user && user._id;
 
-    //related to material ui dailog
+    //related to material ui dailog updating comment
     const [open, setOpen] = useState(false);
     const classes = useStyles();
 
@@ -142,7 +142,7 @@ export default function singleEventDetails() {
         }
     }
 
-     //update document by id from the comments collection
+    //update document by id from the comments collection
      const updateComment = async () => {
         if(updatedComment == null || updatedComment === ""){
             toast.configure()
@@ -214,7 +214,7 @@ export default function singleEventDetails() {
                                                 <div>
                                                     <p>{comment.comment}</p>
                                                 </div>
-                                                <div className={styles.commentActionsContainer}>
+                                                <div className={ comment.userID == currentUserId ? styles.commentActionsContainer : styles.commentActionsContainerHide}>
                                                     <span onClick={() => handleClickOpen(comment.id , comment.comment)}>
                                                         <EditIcon/>
                                                     </span>
@@ -256,7 +256,7 @@ export default function singleEventDetails() {
               <br />
           </main>
 
-           {/* update comment dialog */}
+        {/* update comment dialog */}
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth>
             <DialogTitle style={{backgroundColor: 'darkblue', color: 'white' , textAlign: 'center'}} id="form-dialog-title">Update Comment</DialogTitle>
             <br/>

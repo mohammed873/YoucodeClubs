@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from 'react';
+import React , {useState , useEffect , useRef} from 'react';
 import Head from 'next/head'
 import axios from 'axios'
 import EditIcon from '@material-ui/icons/Edit';
@@ -21,16 +21,19 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { db } from '../../../firebase/firebaseConfig';
+import {collection, onSnapshot , addDoc , where , orderBy , query , deleteDoc , doc  , setDoc,getDoc } from 'firebase/firestore';
 
 export default function Activity() {
     const [name, setName] = useState('')
     const [description , setDescription] = useState('')
     const [date, setDate] = React.useState(new Date());
     const [picture , setPicture] = useState('')
-
-    const handleDateChange = (date) => {
-        setDate(date);
-    };
+    const [comments , setComments] = useState(null);
+    const [comment , setComment] = useState(null)
+    const [admin ,setAdmin] = useState(null)
+    const [updatedComment , setUpdatedComment] = useState(null)
+    const [selectedCommentId , setSelectedCommentId] = useState(null)
 
     //create a new state to store all club activities
     const [activities , setActivities] = useState(null)
@@ -38,7 +41,7 @@ export default function Activity() {
     //create a new state to store random fetched club activity
     const [randomActivity , setRandomActivity] = useState(null)
 
-     //create a new state to store random fetched club activity
+    //create a new state to store random fetched club activity
      const [singleActivity , setSingleActivity] = useState(null)
 
     //random state first time page load
@@ -46,6 +49,19 @@ export default function Activity() {
 
     //related to material ui dailog (post)
     const [open, setOpen] = useState(false);
+
+    //create a ref for comment collection to use in post method
+    const commentsRef = collection(db , 'comments');
+
+    //current userid , for setting a specific style while displaying the comments
+    const [currentUserId , setCurrentUserId] = useState(null) 
+
+    //intialize useRef for scrolling down into a specific section after sending a comment
+    const commentDownSection = useRef();
+
+    const handleDateChange = (date) => {
+        setDate(date);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -71,13 +87,28 @@ export default function Activity() {
         setOpenUpdate(false);
     };
 
+    //related to material ui dailog(update comment)
+     const [openUpdateComment, setOpenUpdateComment] = useState(false);
+ 
+     const handleClickOpenUpdateComment = (id , comment) => {
+         setSelectedCommentId(id)
+         setUpdatedComment(comment);
+         setOpenUpdateComment(true);
+     };
+     
+     const handleCloseUpdateComment = () => {
+        setOpenUpdateComment(false);
+     }; 
+
     //get a random club activity
     const getRandomActivity = async () => {
 
         await axios.get('http://localhost:3000/api/admin/getRandomActivity')
         .then( res =>{
             setRandomActivity(res.data.randomClubActivty)
-            console.log(res.data.randomClubActivty)
+            getComments(res.data.randomClubActivty[0]._id)
+            console.log(res.data.randomClubActivty[0]._id)
+
         }).catch( err => {
             console.log(err);
         })
@@ -166,6 +197,8 @@ export default function Activity() {
        await axios.get(' http://localhost:3000/api/admin/getSingleActivity/' + id)
        .then(res =>{
         setSingleActivity(res.data.singleActivity)
+        console.log(res.data.singleActivity._id);
+        getComments(res.data.singleActivity._id)
         setRandom(false)
        }).catch(err => {
            console.log(err)
@@ -212,7 +245,6 @@ export default function Activity() {
 
             //get data after deleting activity
             getAllClubActivities()
-
             //set random to true 
             setRandom(true)
             getRandomActivity()
@@ -221,10 +253,185 @@ export default function Activity() {
         })
     }
 
+    //get all comment on real time
+    const getComments = async (id) => {
+
+        try {
+            const q = query(collection(db, "comments"), where("eventId", "==", id), orderBy("createdAt", "asc"));
+            onSnapshot(q, (querySnapshot) => {
+            const data = querySnapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id
+              }))
+            setComments(data)
+           
+        });
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    //get admin personel info
+    const getAdminInfo = async () => {
+        const admin_token = localStorage.getItem('adminToken')
+        const id = jwt(admin_token)._id
+        console.log(id , "admin id");
+
+        await axios.get('http://localhost:3000/api/admin/profile/' + id)
+        .then(res => {
+            setAdmin(res.data.admin)
+            setCurrentUserId(res.data.admin[0]._id)
+        }).catch(err => {
+           console.log(err);
+        })
+    }
+
+    //create comment
+    const createComment = async () => {
+        const date = new Date();
+
+        if(random){
+            const payload = {
+                userID : admin[0] && admin[0]._id ,
+                eventId: randomActivity[0]._id ,
+                comment: comment,
+                picture : admin[0] && admin[0].picture,
+                userName : admin[0] && admin[0].full_name,
+                role : admin[0] && admin[0].role,
+                createdAt: date,
+                updatedAt: date
+            }
+
+            console.log(payload);
+
+            if(comment === null || comment === "" ){
+                toast.configure()
+                toast.error("comment must not be empty")
+            }else{
+                await addDoc(commentsRef , payload)
+                document.querySelector('#comment').value= ''
+                setComment(null)
+                toast.configure()
+                toast.success("comment sent successfully")
+     
+                //smooth scrool 
+                commentDownSection.current.scrollIntoView({ behavior: 'smooth' })
+            }
+    
+        }else{
+            const payload = {
+                userID : admin[0] && admin[0]._id ,
+                eventId: singleActivity._id ,
+                comment: comment,
+                picture : admin[0] && admin[0].picture,
+                userName : admin[0] && admin[0].full_name,
+                role : admin[0] && admin[0].role,
+                createdAt: date,
+                updatedAt: date
+            }
+
+            console.log(payload);
+
+            if(comment === null || comment === "" ){
+                toast.configure()
+                toast.error("comment must not be empty")
+            }else{
+                await addDoc(commentsRef , payload)
+                document.querySelector('#comment').value= ''
+                setComment(null)
+                toast.configure()
+                toast.success("comment sent successfully")
+     
+                //smooth scrool 
+                commentDownSection.current.scrollIntoView({ behavior: 'smooth' })
+            }
+        }
+   }
+
+   //delete document by id from the comments collection
+   const deleteComment = async (docId) => {
+    try {
+        const docRef = doc(db , "comments" , docId);
+        await deleteDoc(docRef);
+        toast.configure()
+        toast.success("comment deleted successfully")
+    } catch (error) {
+        toast.configure()
+        toast.error("something went wrong , try again later")
+    }
+    }
+
+    //update document by id from the comments collection
+    const updateComment = async () => {
+        const date = new Date();
+        const docRef = doc(db , "comments" , selectedCommentId);
+        if(random){
+            const docSnap =   (await getDoc(docRef)).data();
+            const payload = {
+                userID : admin[0] && admin[0]._id ,
+                eventId: randomActivity[0]._id ,
+                comment: updatedComment,
+                picture : admin[0] && admin[0].picture,
+                userName : admin[0] && admin[0].full_name,
+                role : admin[0] && admin[0].role,
+                createdAt: docSnap.createdAt,
+                updatedAt: date
+            }
+
+            console.log(payload);
+
+            if(updatedComment === null || updatedComment === "" ){
+                toast.configure()
+                toast.error("comment must not be empty")
+            }else{
+                await setDoc(docRef , payload)
+                document.querySelector('#comment').value= ''
+                setComment(null)
+                toast.configure()
+                toast.success("comment sent successfully")
+     
+                handleCloseUpdateComment()
+                setUpdatedComment(null)
+            }
+    
+        }else{
+            const docSnap =   (await getDoc(docRef)).data();
+            const payload = {
+                userID : admin[0] && admin[0]._id ,
+                eventId: singleActivity._id ,
+                comment: updatedComment,
+                picture : admin[0] && admin[0].picture,
+                userName : admin[0] && admin[0].full_name,
+                role : admin[0] && admin[0].role,
+                createdAt: docSnap.createdAt,
+                updatedAt: date
+            }
+
+            console.log(payload);
+
+            if(updatedComment === null || updatedComment === "" ){
+                toast.configure()
+                toast.error("comment must not be empty")
+            }else{
+                await setDoc(docRef , payload)
+                document.querySelector('#comment').value= ''
+                setComment(null)
+                toast.configure()
+                toast.success("comment sent successfully")
+     
+                handleCloseUpdateComment()
+                setUpdatedComment(null)
+            }
+        }
+    }
+
+
+
      useEffect(() => {
         getAllClubActivities()
-        getRandomActivity()
-       
+        getRandomActivity()  
+        getAdminInfo()     
      },[])
   return (
     <>
@@ -256,43 +463,32 @@ export default function Activity() {
                       <span>{random ? randomActivity && randomActivity[0].date : singleActivity && singleActivity.date}</span>
                   </div>
                   <div className={styles.ActivityCommentsContainer}>
-
-                      <div className={styles.ActivityCommetSection}>
-                          <div className={styles.commentUsersContainer}>
-                              <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
-                              <span>user name</span>
-                          </div>
-                          <div>
-                              <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
-                          </div>
-                      </div>
-
-                      <br/>
-                      
-                      <div className={styles.ActivityCommetSection}>
-                          <div className={styles.commentUsersContainer}>
-                              <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
-                              <span>user name</span>
-                          </div>
-                          <div>
-                              <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
-                          </div>
-                      </div>
-
-                      <br/>
-
-                      <div className={styles.ActivityCommetSection}>
-                          <div className={styles.commentUsersContainer}>
-                              <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
-                              <span>user name</span>
-                          </div>
-                          <div>
-                              <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
-                          </div>
-                      </div>
-
-                      <br/>
-
+                      {comments && comments.map(comment =>{
+                          return(
+                              <>
+                                <div className={ comment.userID == currentUserId ? styles.ActivityCommetSectionForCurrentUser : styles.ActivityCommetSection} key={comment.id}>
+                                    <div className={styles.commentUsersContainer}>
+                                        <img src={comment.picture} alt="user pic" />
+                                        <span>{comment.userName}</span>
+                                    </div>
+                                    <div>
+                                        <p>{comment.comment}</p>
+                                    </div>
+                                    <div className={ comment.userID == currentUserId ? styles.commentActionsContainer : styles.commentActionsContainerHide}>
+                                        <span onClick={() => handleClickOpenUpdateComment(comment.id , comment.comment)}>
+                                            <EditIcon/>
+                                        </span>
+                                        <span onClick={()=> deleteComment(comment.id)}>
+                                            <DeleteIcon/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <br/>
+                                
+                              </>
+                          )
+                      })}
+                      <div ref={commentDownSection} style={{height:"12vh" , float: "right"}}></div>
                   </div>
                   <div className={styles.commentFormContainer}>
                     <TextField
@@ -301,11 +497,13 @@ export default function Activity() {
                         label="cemment"
                         type="text"
                         fullWidth
+                        onChange={(e)=> setComment(e.target.value)}
                     />
                     <br/>  <br/>
                     <Button
                         variant="contained"
                         color="primary"
+                        onClick={createComment}
                     >
                       send
                     </Button>
@@ -460,6 +658,35 @@ export default function Activity() {
                     onClick={() => updateClubActivity(singleActivity._id)}
                 >
                     Save
+                </Button>
+            </DialogContent>   
+        </Dialog>
+
+         {/* update comment dialog */}
+         <Dialog open={openUpdateComment} onClose={handleCloseUpdateComment} aria-labelledby="form-dialog-title" fullWidth>
+            <DialogTitle style={{backgroundColor: 'darkblue', color: 'white' , textAlign: 'center'}} id="form-dialog-title">Update Comment</DialogTitle>
+            <br/>
+            <DialogContent>
+                <TextField
+                    id='updatedComment'
+                    defaultValue={updatedComment}
+                    autoFocus
+                    label="comment"
+                    type="text"
+                    variant="filled"
+                    required
+                    fullWidth
+                    onChange={(e)=>{setUpdatedComment(e.target.value)}}
+                />
+                <br/> <br/>
+                <Button
+                    className={styles.editBtn}
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={updateComment}
+                >
+                    Update 
                 </Button>
             </DialogContent>   
         </Dialog>

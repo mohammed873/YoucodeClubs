@@ -2,6 +2,7 @@ import dbConnect from '../../../../utils/dbConnect';
 import Admin from '../../../../models/admin';   
 const bcrypt = require("bcryptjs");
 import  { adminValidations } from '../../../../utils/validation/validations';
+import mongoose from 'mongoose';
 
 dbConnect();
 
@@ -24,7 +25,13 @@ export default async (req, res) => {
                         foreignField: "_id",
                         as: "club"
                     }
-                }]);
+                },
+                {
+                    $match: {
+                        '_id': mongoose.Types.ObjectId(id)
+                    }
+                },
+                ]);
 
                 if (!admin) {
                     return res.status(400).json({

@@ -21,7 +21,7 @@ async function sendMail(to , subject , html) {
     
       let mailOptions = {
         from: process.env.ADMIN_EMAIL, // TODO: email sender
-        to: to, // TODO: email receiver
+        to: "melhachimi514@gmail.com", // TODO: email receiver
         subject: subject,
         html: html,
       };

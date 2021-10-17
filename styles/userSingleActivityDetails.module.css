@@ -45,8 +45,9 @@
     color: white;
 }
 .commentUsersContainer img{
-    width: 12%;
+    width:  10%;
     border-radius: 50%;
+    height: 5vh;
 }
 .commentUsersContainer span{
     margin-left: 5px;
@@ -68,6 +69,9 @@
     background-color: green !important;
 }
 
+.commentActionsContainerHide{
+    display: none;
+}
 
 @media only screen and (max-width: 920px) {
     .singleActivitycontainer{

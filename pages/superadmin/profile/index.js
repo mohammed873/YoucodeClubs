@@ -36,14 +36,12 @@ const [newPassword , setNewPassword] = useState()
       setFullName(res.data.super_admin.full_name)
       setEmail(res.data.super_admin.email)  
       setPicture(res.data.super_admin.picture)  
-
-      console.log(res.data.super_admin.password)
     } 
 
     }).catch(err => {
       console.log(err)
     })
-  }
+}
 
 //update superadmin information
 const updateSuperAdmin = async () => {

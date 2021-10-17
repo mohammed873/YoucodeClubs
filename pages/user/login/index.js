@@ -78,7 +78,7 @@ export default function login() {
                   <p  className={styles.goBackLink}>&larr; Back</p>
                 </Link>
                 <Link href="/user/forgetPassword">
-                <p className={styles.forgetPasswordLink}>Forgot password</p>
+                   <p className={styles.forgetPasswordLink}>Forgot password</p>
                 </Link>
                
                 

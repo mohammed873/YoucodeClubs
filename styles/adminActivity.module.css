@@ -64,6 +64,9 @@
 .commentUsersContainer img{
      width: 8%;
      border-radius: 50%;
+     width: 8%;
+     border-radius: 50%;
+     height: 5vh;
 }
 .commentUsersContainer span{
     margin-left: 5px;
@@ -71,8 +74,9 @@
 .ActivityCommetSection{
     border: 1px solid;
     padding: 1%;
-    width: 92%;
-    margin: auto;
+    width: 78%;
+    margin-top: 8px;
+    float: left;
 }
 .activityBtn{
     margin-top:6px !important;
@@ -145,4 +149,21 @@
         height: 63vh;
         overflow-y: scroll;
     }
+}
+.ActivityCommetSectionForCurrentUser{
+    border: 1px solid;
+    padding: 1%;
+    width: 78%;
+    margin-top: 8px;
+    float: right;
+}
+.commentActionsContainer{
+    float: right;
+}
+.commentActionsContainer span{
+    margin-right: 12px;
+    cursor: pointer;
+}
+.commentActionsContainerHide{
+    display: none;
 }
