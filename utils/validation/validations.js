@@ -145,6 +145,30 @@ const SuperAdminValidationsForUpdate = (data) => {
   return SuperAdminValidation.validate(data);
 };
 
+//validating super admin fields for updating
+const userValidationsForUpdate = (data) => {
+  const userValidation = Joi.object({
+    full_name: Joi.string().min(4).required().messages({
+      "string.base" : `full name should be a type of text`,
+      "string.min": `full name should be at least 4 characters`,
+      "string.empty": `full name cannot be an empty field`,
+      "any.required": `full name is required.`,
+    }),
+    email: Joi.string().email().required().messages({
+      "string.base" : `email should be a type of text`,
+      "string.empty": `email cannot be an empty field`,
+      "string.email": `invalid email adress`,
+      "any.required": `email is required.`,
+    }),
+    picture: Joi.string().required().messages({
+      "string.base" : `picture should be a type of text`,
+      "string.empty": `picture cannot be an empty field`,
+      "any.required": `picture is required.`,
+    })
+  });
+  return userValidation.validate(data);
+};
+
 
 // validating clubs fields
 const ClubValidations = (data) => {
@@ -211,6 +235,7 @@ const ClubActivityValidations = (data) => {
 
 exports.adminValidations = adminValidations;
 exports.userValidations = userValidations;
+exports.userValidationsForUpdate = userValidationsForUpdate;
 exports.LoginValidations = LoginValidations;
 exports.SuperAdminValidations = SuperAdminValidations;
 exports.SuperAdminValidationsForUpdate = SuperAdminValidationsForUpdate;

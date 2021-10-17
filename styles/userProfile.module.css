@@ -1,0 +1,311 @@
+.userProfileContainer {
+    width: 80%;
+    padding: 2%;
+    border-top: 5px solid darkblue;
+    margin: auto;
+    background: #dde1e7;
+    margin-top: 66px;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
+}
+.userProfileClubImgContainer{
+    text-align: center;
+    height: 60vh;
+    box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf, -8px -5px 8px #ffffff;
+}
+.userProfileClubImgContainer img{
+    height: 100%;
+}
+.userProfileClubImgContainer span{
+    float: right;
+    margin-top: 10px;
+    font-weight: 700;
+    margin-right: 7px;
+    background-color: darkblue;
+    padding: 1%;
+    color: white;
+    border-radius: 7px;
+}
+.userProfileImgContainer img{
+    height: 122px;
+    width: 114px;
+    border-radius: 20%;
+    padding: 4px;
+    background-color: #edeeef;
+    float: left;
+    margin-left: 14px;
+    margin-top: -65px;
+}
+.userProfileInfoContainer{
+    position: relative;
+    top: 13px;
+
+}
+.field{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    position: relative;
+  }
+.field button{
+    border: none;
+    margin-left: -36px;
+    margin-top: 12px;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    background: #dde1e7;
+    outline: none;
+    cursor: pointer;
+    color: darkblue;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+}
+  
+  .normalStyle{
+    height: 100%;
+    width: 93%;
+    padding-left: 6px;
+    margin: auto;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    color: #595959;
+    background: #dde1e7;
+  }
+  .normalStyle:focus{
+    box-shadow: inset 2px 2px 5px #babecc,
+                inset -5px -5px 10px #ffffff73;
+  }
+  
+  .editStyle{
+    height: 100%;
+    width: 93%;
+    margin: auto;
+    padding-left: 6px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    color: #595959;
+    background: #dde1e7;
+    box-shadow: inset 2px 2px 5px #babecc,
+                inset -5px -5px 10px #ffffff73;
+  }
+  .field label:focus{
+    box-shadow: inset 2px 2px 5px #2f3031,
+                inset -1px -1px 2px #ffffff73;
+  }
+  
+  .upload_btn_wrapper {
+    position: relative;
+    float: left;
+    margin-top: -58px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .btn {
+    color: #2a4b94;
+    background-color: #dde1e7;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    border: navajowhite;
+    cursor: pointer;
+  }
+  
+  .upload_btn_wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  
+  .field span{
+    position: absolute;
+    width: 50px;
+    line-height: 50px;
+    color: #595959;
+  }
+  
+  .field label{
+    position: absolute;
+    top: 50%;
+    left: 45px;
+    pointer-events: none;
+    color: #666666;
+    transform: translateY(-50%);
+  }
+  
+  
+  .field input:focus ~ label{
+    opacity: 0;
+  }
+
+  @media only screen and (max-width: 1070px) {
+      .field span{
+          display: none;
+      }
+  }
+
+  @media only screen and (max-width: 660px) {
+    .userProfileContainer , .resetPasswordContainer , .userMoreAction{
+          width: 100%;
+    }
+    .resetPasswordBtn{
+      margin-left: 6px;
+    }
+  }
+  @media only screen and (max-width: 460px) {
+    .userProfileContainer , .resetPasswordContainer , .userMoreAction{
+        width: 100%;
+    }
+    .field button{
+        margin-left: -20px;
+    }
+    .field span{
+        display: block;
+    }
+    
+}
+
+@media only screen and (max-width: 439px) {
+    .userProfileContainer , .resetPasswordContainerr , .userMoreAction{
+        width: 100%;
+    }
+}
+
+.editProfileBtn{
+   margin-left: 21px;
+    width: 200px;
+    height: 50px;
+    color: rgb(49, 131, 224);
+    font-size: 18px;
+    font-weight: 600;
+    background: #dde1e7;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+  }
+  
+  .editProfileBtn:focus{
+    color: #0540c0;
+    box-shadow: inset 2px 2px 5px #667dce,
+                inset -5px -5px 10px #ffffff73;
+  }
+
+  .deleteProfileBtn{
+    margin-left: 21px;
+    width: 200px;
+    height: 50px;
+    color: rgb(231, 84, 84);
+    font-size: 18px;
+    font-weight: 600;
+    background: #dde1e7;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+  }
+  
+  .deleteProfileBtn:focus{
+    color: #a50e1a;
+    box-shadow: inset 2px 2px 5px #c7224c,
+                inset -5px -5px 10px #ffffff73;
+  }
+
+  .userMoreAction{
+    display: flex;
+    justify-content: space-between;
+    width: 82%;
+    padding: 1%;
+    margin: auto;
+    border-top: 5px solid darkblue;
+    margin-top: 66px;
+    background: #dde1e7;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
+
+  }
+  .resetPasswordContainer p {
+    margin-left: 11px;
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+   .resetPasswordContainer{
+    width: 44%;
+    padding: 2%;
+    margin: auto;
+    background: #dde1e7;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
+}
+
+.ClubChangeNote{
+  margin-left: 11px;
+  font-size: 16px !important;
+  
+}
+.ClubChangeNote span {
+  color: indianred;
+  font-weight: initial !important;
+}
+  .resetPasswordBtn {
+    width: 200px;
+    height: 50px;
+    color: rgb(49, 199, 129);
+    font-size: 18px;
+    font-weight: 600;
+    background: #dde1e7;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 2px 5px #30d3b8, -5px -5px 10px #ffffff73;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+  }
+
+  .resetPasswordBtn:focus{
+    color: #148563;
+    box-shadow: inset 2px 2px 5px #0fa75b,
+                inset -5px -5px 10px #ffffff73;
+  }
+
+  .customSelectStyle{
+    height: 100%;
+    width: 100%;
+    margin: auto !important;
+    padding-left: 6px;
+    padding: 12px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    color: #595959;
+    background: #dde1e7;
+    -webkit-box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+  }
+
+  @media only screen and (max-width: 998px){
+    .userMoreAction{
+      flex-direction: column;
+      width: 100%;
+    }
+    .resetPasswordContainer{
+      width: 94%;
+    }
+  } 
+
+  .cancelBtn{
+    float: right !important;
+    background-color: grey!important;
+  }

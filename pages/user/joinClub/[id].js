@@ -4,9 +4,15 @@ import styles from '../../../styles/userJoinClub.module.css'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios from 'axios'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function joinClub() {
   const [club , setClub ] = useState([])
+
+  const [full_name , setFullName] = useState('')
+  const [email , setEmail] = useState('')
+  const [password , setPassword] = useState('')
 
   // initial use router  
   const router = useRouter()
@@ -23,11 +29,25 @@ export default function joinClub() {
         })
   }
 
-  //join a club
-  const joinClub = async () => {
-     router.push('/user/verifyAcount')
-  }
 
+  //join club 
+  const joinClub = async () => {
+    const {id} = await router.query
+    await axios.post('http://localhost:3000/api/user/joinClub',{
+      club_id : id,
+      full_name ,
+      email,
+      password,
+      picture : "https://res.cloudinary.com/dtq13h9rg/image/upload/v1632073207/download_kkdbqt.png",
+    }).then(res =>{
+       toast.configure()
+       toast.success(res.data.message)
+       router.push('/user/login')
+    }).catch(err =>{
+       toast.configure()
+        toast.error(err.response.data.message)
+    })
+  }
 useEffect(() => {
     getClubInfo()
 },[])
@@ -46,17 +66,26 @@ useEffect(() => {
         <div className={styles.text}>Join <span>{club.name}</span> now</div>
                <div className={styles.field}>
                     <span className="fa fa-user"></span>
-                    <input type="text" required placeholder="full name" />
+                    <input 
+                        type="text" required placeholder="full name" 
+                        onChange={(e) => setFullName(e.target.value)} 
+                    />
                 </div>
                 <br/>
                <div className={styles.field}>
                     <span className="fa fa-envelope-square"></span>
-                    <input type="text" required placeholder="email address" />
+                    <input 
+                      type="text" required placeholder="email address"
+                      onChange={(e) => setEmail(e.target.value)} 
+                    />
                 </div>
                 <br/>
                 <div class={styles.field}>
                     <span class="fa fa-lock"></span>
-                    <input type="password" placeholder="password"/>
+                    <input 
+                      type="password" placeholder="password"
+                      onChange={(e) => setPassword(e.target.value)} 
+                    />
                 </div>
                 <button onClick={joinClub}>Join now</button>
                 <Link href="/">

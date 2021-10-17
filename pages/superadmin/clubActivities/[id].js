@@ -8,7 +8,6 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SuperAdminLayout from '../../../components/superAdminLayout/layout'
 import { Button, TextField } from '@material-ui/core';
-// import { firestore} from '../../../utils/firebase'
 
 
 export default function clubActivities() {
@@ -49,12 +48,6 @@ const getSingleActivityDetails = async (id) => {
       console.log(err)
   })
 }
-
-// const getSingleActivityComments = async () => {
-//   const response = await firestore.collection("activitiesComments").get();
-//   response.docs.forEach(doc => console.log(doc.data()))
-
-// }
 
 useEffect (() => {
     getAllClubActivities();
@@ -108,62 +101,62 @@ useEffect (() => {
                 </Zoom>
               </div>
               <div className={styles.getSingleActivityCommentsContainer}>
-              <div className={styles.getSingleActivityCommentSectionContainer}>
-                
-                <div className={styles.ActivityCommetSection}>
-                    <div className={styles.commentUsersContainer}>
-                      <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
-                      <span>user name</span>
-                    </div>
-                    <div>
-                       <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
-                    </div>
+                <div className={styles.getSingleActivityCommentSectionContainer}>
+                  
+                  <div className={styles.ActivityCommetSection}>
+                      <div className={styles.commentUsersContainer}>
+                        <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
+                        <span>user name</span>
+                      </div>
+                      <div>
+                        <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
+                      </div>
+                  </div>
+                  <br/>
+
+                  <div className={styles.ActivityCommetSection}>
+                      <div className={styles.commentUsersContainer}>
+                        <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
+                        <span>user name</span>
+                      </div>
+                      <div>
+                        <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
+                      </div>
+                  </div>
+                  <br/>
+
+                  <div className={styles.ActivityCommetSection}>
+                      <div className={styles.commentUsersContainer}>
+                        <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
+                        <span>user name</span>
+                      </div>
+                      <div>
+                        <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
+                      </div>
+                  </div>
+                  <br/>
                 </div>
-                <br/>
 
-                <div className={styles.ActivityCommetSection}>
-                    <div className={styles.commentUsersContainer}>
-                      <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
-                      <span>user name</span>
-                    </div>
-                    <div>
-                       <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
-                    </div>
+
+                  
+                <div className={styles.commentFormContainer}>
+                  <TextField
+                    variant = "filled"
+                    id="comment"
+                    label="cemment"
+                    type="text"
+                    fullWidth
+                  />
+                  <br/>  <br/>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                  >
+                    send
+                  </Button>
                 </div>
-                <br/>
-
-                <div className={styles.ActivityCommetSection}>
-                    <div className={styles.commentUsersContainer}>
-                      <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" alt="user pic" />
-                      <span>user name</span>
-                    </div>
-                    <div>
-                       <p>lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor lorem lorem</p>
-                    </div>
                 </div>
-                <br/>
               </div>
-
-
-                
-              <div className={styles.commentFormContainer}>
-                <TextField
-                  variant = "filled"
-                  id="comment"
-                  label="cemment"
-                  type="text"
-                  fullWidth
-                />
-                <br/>  <br/>
-                <Button
-                  variant="contained"
-                  color="primary"
-                >
-                  send
-                </Button>
-              </div>
-              </div>
-            </div>
           }
 
 

@@ -25,13 +25,17 @@ const UserSchema = new mongoose.Schema({
   isLoggedIn: {
     type: Boolean
   },
-  club_id: [{
+  club_id: {
     type: mongoose.Types.ObjectId,
     ref: "club",
     required : true
-  }],
+  },
   activationCode : {
     type : String
+  },
+  isVerified : {
+    type : Boolean,
+    default : false
   },
   passwordResetToken : {
     type: String,

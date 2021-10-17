@@ -47,7 +47,7 @@ const updatePassword = async () => {
        <main className={styles.mainDiv}>
          <div className={styles.formContainer}>
            <h1>Reset Password</h1>
-           <p>please enter your new password, and make sure to remember it </p>
+           <p>Please enter your new password, and make sure to remember it </p>
            <TextField
              label="Password"
              type="password"

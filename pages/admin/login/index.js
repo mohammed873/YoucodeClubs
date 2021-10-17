@@ -26,8 +26,7 @@ export default function AdminLogin() {
       localStorage.setItem('adminToken', token )
 
       const isRessted = jwt(token).isRessted
-      console.log(isRessted)
-
+  
        if(isRessted) {
         router.push("/admin/dashboard");
        }else{

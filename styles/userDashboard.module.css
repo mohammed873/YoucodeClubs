@@ -1,0 +1,110 @@
+.attribution { 
+    font-size: 11px; text-align: center; 
+}
+.attribution a { 
+    color: hsl(228, 45%, 44%); 
+}
+
+.header h1:first-of-type {
+    font-weight: 200;
+    color: hsl(234, 12%, 34%);
+
+}
+
+.header h1:last-of-type {
+    color: hsl(234, 12%, 34%);
+}
+
+@media (max-width: 400px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+.header {
+    text-align: center;
+    line-height: 0.8;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+.header p {
+    margin: 0 auto;
+    line-height: 2;
+    color:hsl(229, 6%, 66%);
+}
+
+
+.box p {
+    color: hsl(229, 6%, 66%);
+}
+
+.box {
+    border-radius: 5px;
+    box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
+    padding: 30px;
+    margin: 20px;  
+    background-color: white;
+}
+
+.header img {
+    float: right;
+}
+
+@media (max-width: 450px) {
+    .box {
+        height: 200px;
+    }
+}
+
+@media (max-width: 950px) and (min-width: 450px) {
+    .box {
+        text-align: center;
+        height: 180px;
+    }
+}
+
+    #red {
+        border-top: 3px solid hsl(0, 78%, 62%);
+    }
+    #orange {
+        border-top: 3px solid hsl(34, 97%, 64%);
+    }
+
+.row1_container h2 {
+    color: hsl(234, 12%, 34%);
+    font-weight: 600;
+}
+
+
+@media (min-width: 950px) {
+    .row1_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .row2_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #box_down_Right {
+        position: relative;
+        top: 150px;
+        border-top: 3px solid hsl(212, 86%, 64%);
+    }
+    #box_down_Left {
+        position: relative;
+        top: 150px;
+        border-top: 3px solid hsl(180, 62%, 55%);
+    }
+    .box {
+        width: 20%;
+     
+    }
+    .header p {
+        width: 30%;
+    }
+    
+}

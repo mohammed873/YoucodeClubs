@@ -47,6 +47,16 @@ function randomPassword(length) {
   return result;
 }
 
+// function getCurrentDate() {
+//   var date = new Date();
+//   var currentDate = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+
+//   return currentDate;
+// }
 
 
-module.exports = { sendMail, randomPassword };
+
+
+
+
+module.exports = { sendMail, randomPassword  };

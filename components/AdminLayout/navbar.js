@@ -23,6 +23,8 @@ export default function navBar({children}) {
   const [responsive , setResponsive] = useState(false)
   const [shrink , setShrink] = useState(false)
   const [admin , setAdmin] = useState()
+
+  //intialize
   const router = useRouter()
 
   const [anchorEl, setAnchorEl] = React.useState(null);

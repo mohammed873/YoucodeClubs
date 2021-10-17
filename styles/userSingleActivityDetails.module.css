@@ -1,0 +1,79 @@
+.singleActivitycontainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.getSingleActivityDetailsContainer{
+    width: 51%;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
+    padding: 2%;
+    background: #dde1e7;
+}
+
+.getSingleActivityDetailsContainer img{
+    width: 100%;
+}
+
+.singleActivityCommentsContainer{
+    width: 40%;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
+    padding: 2%;
+    background: #dde1e7;
+}
+
+.ActivityCommetSection{
+    border: 1px solid;
+    padding: 1%;
+    width: 78%;
+    margin-top: 8px;
+    float: left;
+}
+.ActivityCommetSectionForCurrentUser{
+    border: 1px solid;
+    padding: 1%;
+    width: 78%;
+    margin-top: 8px;
+    float: right;
+}
+.commentUsersContainer{
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    padding: 2%;
+    background-color: darkblue;
+    color: white;
+}
+.commentUsersContainer img{
+    width: 12%;
+    border-radius: 50%;
+}
+.commentUsersContainer span{
+    margin-left: 5px;
+}
+
+.commentsContainer{
+    height: 54vh;
+    overflow-x: scroll;
+}
+.commentActionsContainer{
+    float: right;
+}
+.commentActionsContainer span{
+    margin-right: 12px;
+    cursor: pointer;
+}
+.editBtn{
+    color: white !important;
+    background-color: green !important;
+}
+
+
+@media only screen and (max-width: 920px) {
+    .singleActivitycontainer{
+        flex-direction: column;
+    }
+    .singleActivityCommentsContainer , .getSingleActivityDetailsContainer {
+        width: 100%;
+    }
+}

@@ -1,21 +1,20 @@
 import dbConnect from '../../../../utils/dbConnect';
-import Admin from '../../../../models/admin';
+import User from '../../../../models/user';
 
 
 dbConnect();
 
 export default async (req, res) => {
 
-    //Admin logout
+    //user logout
     if (req.method === 'POST') {
         const {
             query: { id },
-            method
         } = req;
     
        try {
            
-           const fetched_admin = await Admin.findByIdAndUpdate( 
+           const fetched_user = await User.findByIdAndUpdate( 
             { _id: id },
             { $set:
                {
@@ -29,7 +28,7 @@ export default async (req, res) => {
                 
             res.status(200).json({
             message: "you are loged out ",
-            fetched_admin,
+            fetched_user,
             });
        } catch (error) {
         res.json({

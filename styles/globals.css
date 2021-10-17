@@ -19,9 +19,6 @@ a {
   height: 15vh;
 }
 
-
-
-
 /*********************************************** Super admin style section ************************************************/
 .navContainer{
   display: flex;
@@ -374,4 +371,139 @@ a {
     -webkit-transition: 1s;
     -moz-transition: 1s;
     transition: 1s;
+}
+
+
+/************************************ user style section ******************************/
+
+
+.userIfoSection{
+  padding: 1%;
+  position: fixed;
+  z-index: 12;
+  width: 80%;
+  margin-left: 10%;
+  background: #dde1e7;
+}
+.userIfoSectionInnerDiv{
+  background: #dde1e7;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: -3px -3px 7px #ffffff73,
+              2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+.userIfoSectionInnerDiv img{
+  width: 90px;
+  float: right;
+  height: 90px;
+  margin-top: -28px;
+  cursor: pointer;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf, -8px -8px 15px #ffffff;
+  box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf, -8px -8px 15px #ffffff;
+}
+.userIfoSectionInnerDiv img:hover {
+  box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #06066f, 8px 8px 15px #a7aaaf, -8px -8px 15px #cdb7b7;
+}
+.userContentContainer{
+  width: 100%;
+  background-color: #dde1e7;
+  height: 100vh;
+  overflow-x: scroll;
+}
+.userRoutesContainer {
+  display: flex;
+}
+.userRoutesContainer button{
+  margin-left: 12px;
+    text-align: initial;
+    border-radius: 7px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #dde1e7;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: darkblue;
+    -webkit-box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+}
+
+.userRoutesContainer button:focus{
+  color: #3498db;
+  box-shadow: inset 2px 2px 5px #babecc,
+              inset -5px -5px 10px #ffffff73;
+}
+
+.userRouteIcon {
+  font-size: 28px;
+}
+.userRouteIcon span {
+  margin-left: 2px;
+  font-size: 16px;
+}
+
+.userRouteTitle {
+  margin-left: 8px;
+}
+
+.userContentBody{
+  width: 80%;
+  margin: auto;
+  margin-top: 46px;
+ 
+}
+.userLogoutBtn{
+  position: fixed;
+    font-size: 35px;
+    margin-top: 9px;
+    margin-right: 28px;
+    color: darkblue;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    cursor: pointer;
+    background: #dde1e7;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+    justify-content: center;
+    align-items: center;
+    z-index: 13;
+}
+.blankDivUser{
+  height: 15vh;
+  display: flex;
+  justify-content: flex-end;
+}
+@media only screen and (max-width: 584px) {
+   .userLogoutBtn{
+    position: fixed;
+    font-size: 35px;
+    margin-top: 2px;
+    margin-right: 28px;
+    color: darkblue;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: -moz-box;
+    display: flex;
+    cursor: pointer;
+    background: #dde1e7;
+   }
+   .userRouteIcon span{
+     display: none;
+   }
+}
+
+@media only screen and (max-width: 944px) {
+  .userLogoutBtn {
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 845px) {
+  .userLogoutBtn {
+    margin-right: 3px;
+  }
 }

@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-import dbConnect from '../../../utils/dbConnect';
-import SuperAdmin from '../../../models/superAdmin';
+import dbConnect from '../../../../utils/dbConnect';
+import User from '../../../../models/user';
 
 
 dbConnect();
@@ -16,6 +16,7 @@ export default async (req, res) => {
     try {
 
         const { password, newPassword } = req.body
+
         if(password === "" || password === undefined){
             return res.status(400).json({
                success: false , 
@@ -30,14 +31,14 @@ export default async (req, res) => {
         }
 
         
-        const super_Admin = await SuperAdmin.findOne({ _id: id })
-        if (super_Admin) {
+        const user = await User.findOne({ _id: id })
+        if (user) {
             
-            bcrypt.compare(password, super_Admin.password, async (err, result) => {
+            bcrypt.compare(password, user.password, async (err, result) => {
                 if (result) {
                 const hashedPassword = await bcrypt.hash(newPassword, 10)
-                super_Admin.password = hashedPassword
-                const newPass = await super_Admin.save()
+                user.password = hashedPassword
+                const newPass = await user.save()
                 res.status(200).json({ 
                     success: true, 
                     message : "password updated successfully",              
@@ -53,7 +54,7 @@ export default async (req, res) => {
         }else{
             return res.status(401).json({
                 success: false , 
-                message: 'Super Admin not found'
+                message: 'user not found'
             })
         }
 
@@ -62,7 +63,7 @@ export default async (req, res) => {
         console.log(error.message)
     }
 
-    // in case req method was not a PUT request
+    // in case req. method was not a PUT request
     } else {
        res.json({
            success: false , 

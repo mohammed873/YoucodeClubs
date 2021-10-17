@@ -12,7 +12,7 @@ dbConnect();
 export default async (req, res) => {
     const { method } = req;
 
-    if(method === "Post"){
+    if(method === "POST"){
         //adding new user
         const { error } = userValidations(req.body);
             if (error)
@@ -26,14 +26,11 @@ export default async (req, res) => {
             if (emailExists)
              return res.status(400).json({
                 success: false,  
-               message: "Email adress already exists",
+               message: "User exists , you only have the right to join one club , for more option check your profile",
             });
 
              //generate an activation code
              const activationCode = randomPassword(4);
-
-             //set a default picture
-             const defaultPictureUrl = "https://res.cloudinary.com/dtq13h9rg/image/upload/v1632073207/download_kkdbqt.png";
 
             //hash password before saving
             const salt = await bcrypt.genSalt(10);
@@ -43,13 +40,17 @@ export default async (req, res) => {
                 full_name: req.body.full_name,
                 email: req.body.email,
                 password: hashpassword,
-                picture: defaultPictureUrl ,
+                picture: req.body.picture ,
                 club_id : req.body.club_id,
                 isLoggedIn: false,
                 activationCode : activationCode
             });
 
+
+
              try {
+                
+
                 const newUser = await user.save();
 
                 //mail configations
@@ -57,6 +58,9 @@ export default async (req, res) => {
                 const subject = "User acount Creation"
                 const html = `congratulation ${req.body.full_name} your acount is successfully created 
                 this is you activation code :   ${activationCode}`
+
+                console.log(to)
+                console.log(html)
 
                 await sendMail(to ,subject, html)
 

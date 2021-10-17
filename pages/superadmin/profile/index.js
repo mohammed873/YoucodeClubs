@@ -93,7 +93,6 @@ const ressetPassword = async (req, res) => {
   const token = localStorage.getItem('token')
   const id = jwt(token)._id
 
-  console.log(password , newPassword);
    await axios.put('http://localhost:3000/api/superAdmin/resetPassword/' + id,{
      password,
      newPassword

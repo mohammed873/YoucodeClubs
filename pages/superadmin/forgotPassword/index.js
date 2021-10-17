@@ -34,7 +34,7 @@ export default function ForgotPassword() {
        <main className={styles.mainDiv}>
          <div className={styles.formContainer}>
            <h1>Fogot Password</h1>
-           <p>please enter your email address , and wait for an email to reset your password</p>
+           <p>Please enter your email address , and wait for an email to reset your password</p>
            <TextField
              label="email"
              type="email"

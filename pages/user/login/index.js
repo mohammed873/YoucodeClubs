@@ -1,9 +1,50 @@
 import Head from 'next/head';
-import React from 'react';
+import React , {useEffect , useState} from 'react';
 import styles from '../../../styles/userLogin.module.css'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import axios from 'axios'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import jwt from 'jwt-decode'
+
 
 export default function login() {
+  const [email , setEmail] = useState('')
+  const [password , setPassword] = useState('')
+
+  
+  // initial use router  
+  const router = useRouter()
+
+  const loginUser = async () => {
+    await axios.post('http://localhost:3000/api/user/login',{
+      email,
+      password
+    }).then(res =>{
+
+      const token = res.data.token
+      localStorage.setItem('userToken', token )
+
+      const isVerified = jwt(token).isVerified
+
+      console.log(isVerified)
+  
+       if(isVerified) {
+        router.push("/user/dashboard");
+        toast.configure()
+       }else{
+        router.push("/user/verifyAccount");
+        toast.configure()
+        toast.success("next rechek your email for a verification code")
+       }
+
+    }).catch(err => {
+      toast.configure()
+      toast.error(err.response.data.message)
+    })
+  }
+
   return (
     <>
        <Head>
@@ -19,18 +60,27 @@ export default function login() {
         <div className={styles.text}>Welcome to youcode clubs</div>
                <div className={styles.field}>
                     <span className="fa fa-envelope-square"></span>
-                    <input type="text" required placeholder="email address" />
+                    <input
+                      type="text" required placeholder="email address" 
+                      onChange={(e)=> setEmail(e.target.value)}
+                    />
                 </div>
                 <br/>
                 <div class={styles.field}>
                     <span class="fa fa-lock"></span>
-                    <input type="password" placeholder="password" />
+                    <input 
+                      type="password" placeholder="password" 
+                      onChange={(e)=> setPassword(e.target.value)}
+                    />
                 </div>
-                <button>Log in </button>
+                <button onClick={loginUser}> Log in </button>
                 <Link href="/">
                   <p  className={styles.goBackLink}>&larr; Back</p>
                 </Link>
+                <Link href="/user/forgetPassword">
                 <p className={styles.forgetPasswordLink}>Forgot password</p>
+                </Link>
+               
                 
         </div>
       </main>
