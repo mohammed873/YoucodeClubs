@@ -90,7 +90,7 @@ export default function Navbar({children}) {
                         </span>
                     </div>
                 </Link>
-                <Link href="/superadmin/profile">
+                <Link href="/superadmin/chat">
                     <div className='NavRouteContainer'>
                         <span className='NavIcons'>
                             <ChatIcon/>

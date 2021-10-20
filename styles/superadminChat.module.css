@@ -1,0 +1,153 @@
+.chatContainer{
+    width: 96%;
+    padding: 1%;
+    margin: auto;
+    margin-top: -100px;
+    box-shadow: 0px 0px 4px;
+}
+.chatClubsSection{
+    min-height: 6vh;
+    padding: 2%;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    display: flex;
+    overflow-x: auto;
+}
+.chatClubDiv{
+    min-width: 50px;
+    height: 50px;
+    margin-right: 12px;
+    border: 2px solid ;
+    cursor: pointer;
+}
+.chatClubDiv img {
+    height: 100%;
+    width: 100%;
+}
+.chatBodyContainer{
+    display: flex;
+    justify-content: space-between;
+    height: 67vh;
+}
+.chatContentContainer{
+    width: 70%;
+    background-color: #eeeeee;
+}
+.chatAdminsContainer{
+    width: 29%;
+    background-color: #eeeeee;
+    overflow-y: scroll;
+}
+.chatAdminDiv{
+    width: 90%;
+    padding: 2%;
+    margin: auto;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.adminInfo{
+    display: flex;
+    align-items: center
+}
+.adminInfo span {
+    width: 40%;
+    text-align: center;
+}
+.adminInfo span img {
+    width: 60%;
+}
+.chatAdminDiv p{
+    text-align:center;
+    line-height: 1px;
+    color: darkblue;
+    font-weight: bold;
+}
+.chatBodyContent{
+    background-color: white;
+    height: 54vh;
+    padding: 1%;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    overflow-y: scroll;
+    border-radius: 12px 12px 0px 0px;
+}
+.chatFormContainer{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    margin-top: 7px;
+}
+.chatFormContainer input {
+    width: 89%;
+    padding: 1%;
+    font-size: 16px;
+}
+.chatmessage{
+    float: left;
+    width: 60%;
+    padding: 1%;
+    background-color: black;
+    color: white;
+    margin: 8px 9px;
+    border-radius: 14px 14px 0px 14px;
+}
+.userPictureContainer{
+    float: left;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.userPictureContainer img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+.chatmessageForCurrentUser{
+    float: right;
+    width: 60%;
+    padding: 2%;
+    background-color: darkblue;
+    color: white;
+    margin: 8px 9px;
+    border-radius: 14px 14px 0px 14px;
+}
+.userMessage{
+    margin-top: 15px;
+    padding-left: 19%;
+}
+.infoMessage{
+    text-align: center;
+    font-family: fantasy;
+    color: darkblue;
+    font-size: 22px;
+    margin-top: 169px;
+}
+
+.timeForCurrentUser{
+    float: right;
+    line-height: 0;
+    margin-right: 6px;
+    margin-top: -8px;
+    display: flex;
+    align-items: center;
+}
+.timeForCurrentUser span {
+   cursor: pointer;
+}
+.timeForOtherUsers{
+    float: left;
+    margin-left: 12px;
+    margin-right: 11px;
+    display: flex;
+    align-items: center;
+    margin-top: -21px;
+}
+.hideAction{
+    display: none;
+}
+.showAction{
+    display: inline;
+}

@@ -85,7 +85,7 @@ const getSingleActivityDetails = async (id) => {
   })
 }
 
-//get superadmin 
+//get superadmin  info
 const getSuperAdminInfo = async () =>{
   const token = localStorage.getItem('token')
   const id = jwt(token)._id

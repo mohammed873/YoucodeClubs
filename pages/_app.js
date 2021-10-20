@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
   const { asPath  } = useRouter()
  
   const Layout = () => {
-    if (asPath === '/superadmin/dashboard' || asPath === '/superadmin/profile' || asPath === '/superadmin/admins' || asPath === '/superadmin/clubs'){
+    if (asPath === '/superadmin/dashboard' || asPath === '/superadmin/profile' || asPath === '/superadmin/admins' || asPath === '/superadmin/clubs' || asPath === '/superadmin/chat'){
       return (
         <SuperAdminLayout>
           <Component {...pageProps} />
