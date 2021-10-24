@@ -26,7 +26,7 @@ export default async (req, res) => {
                         as: "club"
                     }
                 }]);
-
+                
                 res.status(200).json({
                      success: true,  
                      admins 

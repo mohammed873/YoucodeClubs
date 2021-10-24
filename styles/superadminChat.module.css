@@ -27,7 +27,7 @@
 .chatBodyContainer{
     display: flex;
     justify-content: space-between;
-    height: 67vh;
+    height: 70vh;
 }
 .chatContentContainer{
     width: 70%;
@@ -37,6 +37,7 @@
     width: 29%;
     background-color: #eeeeee;
     overflow-y: scroll;
+    height: 70vh;
 }
 .chatAdminDiv{
     width: 90%;
@@ -136,6 +137,7 @@
 }
 .timeForCurrentUser span {
    cursor: pointer;
+   margin-right: 8px;
 }
 .timeForOtherUsers{
     float: left;
@@ -151,3 +153,98 @@
 .showAction{
     display: inline;
 }
+.Title{
+    text-align: center;
+    background-color: #8b7878;
+    color: white;
+    margin: auto;
+    margin-top: 6px;
+    padding: 2%;
+    width: 91%;
+    font-weight: 700;
+}
+.ClubTitle{
+    text-align: center;
+    background-color: #8b7878;
+    color: white;
+    margin: auto;
+    margin-top: 6px;
+    padding: 1%;
+    font-weight: 700;
+}
+.clubDynamicTitle{
+    text-align: center;
+    background-color: #8b7878;
+    color: white;
+    margin: auto;
+    margin-top: 6px;
+    padding: 1%;
+    width: 95%;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 860px) {
+    .chatBodyContainer{
+        flex-direction: column;
+    }
+    .chatContentContainer {
+        width: 100%;
+        order: 1;   
+        margin-top: 8px;
+    }
+    .chatAdminsContainer{
+        width: 100%;
+        order: 0;  
+        margin-top: -15px;
+        overflow: inherit;
+    }
+    .chatAdminDivInResponsiveMode{
+        min-height: 6vh;
+        padding: 2%;
+        background-color: #eeeeee;
+        border-radius: 10px;
+        display: -moz-box;
+        display: flex;
+        overflow-x: auto;
+    }
+    .chatAdminDiv{
+        margin-right: 10px;
+    }
+    .chatAdminDiv p {
+        line-height: 17px;
+    }
+    .adminInfo{
+        flex-direction: column;
+    }
+    .adminInfo span img {
+        width: 87%;
+    }
+    #fullName{
+        width: 100%;
+    }
+    .userMessage{
+        margin-top: 15px;
+        padding-left: 37%;
+    }
+    .chatmessageForCurrentUser{
+        width: 90%;
+    }
+    .chatmessage{
+        width: 96%;
+    }
+    .timeForCurrentUser{
+        flex-direction: column;
+        width: 96%;
+        justify-content: end;
+        align-items: end;
+        margin-right: 14px;
+        margin-top: -10px;
+    }
+    .spicer{
+        height: 34vh;
+    }
+    .chatContainer{
+        box-shadow: 0px 0px 0px;
+    }
+  }
+ 

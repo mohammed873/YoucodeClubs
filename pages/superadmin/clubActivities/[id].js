@@ -185,7 +185,7 @@ const createComment = async () => {
               document.querySelector('#comment').value= ''
               setComment(null)
               toast.configure()
-              toast.success("comment sent successfully")
+              toast.success("comment updated successfully")
    
               handleCloseUpdateComment()
               setUpdatedComment(null)

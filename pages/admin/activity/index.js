@@ -17,6 +17,7 @@ import styles from '../../../styles/adminActivity.module.css';
 import jwt from 'jwt-decode'
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import moment from 'moment'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -460,7 +461,7 @@ export default function Activity() {
                       <h1>{random ? randomActivity && randomActivity[0].name : singleActivity && singleActivity.name}</h1>
                       <p>{random ? randomActivity && randomActivity[0].description : singleActivity && singleActivity.description}</p>
                       <br/>
-                      <span>{random ? randomActivity && randomActivity[0].date : singleActivity && singleActivity.date}</span>
+                      <span>{random ? randomActivity && moment(randomActivity[0].date).format('MMMM Do YYYY, h:mm:ss a')  : singleActivity && moment(singleActivity.date).format('MMMM Do YYYY, h:mm:ss a')}</span>
                   </div>
                   <div className={styles.ActivityCommentsContainer}>
                       {comments && comments.map(comment =>{
