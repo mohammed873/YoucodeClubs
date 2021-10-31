@@ -139,7 +139,7 @@ export default function navBar({children}) {
                 </span>
               </div>
             </Link>
-            <Link href="/admin/activity">
+            <Link href="/admin/chat">
               <div className='adminNavRouteContainer'>
                 <span className='NavIcons'>
                   <ChatIcon/>

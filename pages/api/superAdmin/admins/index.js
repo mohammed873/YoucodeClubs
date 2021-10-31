@@ -44,6 +44,7 @@ export default async (req, res) => {
         case 'POST':
             const tempPassword = randomPassword(6);
             req.body.password = tempPassword;
+            console.log(tempPassword);
 
 
             const { error } = adminValidations(req.body);

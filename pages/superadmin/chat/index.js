@@ -183,13 +183,14 @@ export default function Chat() {
             }
     }
 
-    //create message for club groub chat
+    //create message betwenn admins and super admin
     const sendMessageBetweenAdminsAndSuperadmin = async () => {
         const date = new Date();
     
             const payload = {
-                senderID : superAdmin && superAdmin._id ,
-                recieverId: recieverId,
+                superAdminId : superAdmin && superAdmin._id ,
+                adminId: recieverId,
+                senderID : superAdmin && superAdmin._id,
                 message: message,
                 picture : superAdmin && superAdmin.picture,
                 userName : superAdmin && superAdmin.full_name,
@@ -219,7 +220,7 @@ export default function Chat() {
         setIsAdminChat(true)
         setRecieverId(id);
         try {
-            const q = query(collection(db, "Admins&SuberAdminChat"), where("recieverId", "==", id), orderBy("createdAt", "asc"));
+            const q = query(collection(db, "Admins&SuberAdminChat"), orderBy("createdAt", "asc"));
             onSnapshot(q, (querySnapshot) => {
             const data = querySnapshot.docs.map((doc) => ({
                 ...doc.data(),
@@ -227,6 +228,8 @@ export default function Chat() {
             }))
             setMessagesBetweenAdminsAndSuperAdmin(data)
             setDataFetched(true)
+            //smooth scrool 
+            messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
         });
         } catch (error) {
             console.log(error);
@@ -253,8 +256,9 @@ export default function Chat() {
         const docRef = doc(db , "Admins&SuberAdminChat" , selectedMessageTobeUpdated);
             const docSnap =   (await getDoc(docRef)).data();
             const payload = {
+                superAdminId : superAdmin && superAdmin._id ,
+                adminId: recieverId,
                 senderID : superAdmin && superAdmin._id ,
-                recieverId: recieverId,
                 message: updatedMessage,
                 picture : superAdmin && superAdmin.picture,
                 userName : superAdmin && superAdmin.full_name,
@@ -311,7 +315,7 @@ export default function Chat() {
                                 messagesBetweenAdminsAndSuperAdmin && messagesBetweenAdminsAndSuperAdmin.length > 0 ? 
                                     messagesBetweenAdminsAndSuperAdmin && messagesBetweenAdminsAndSuperAdmin.map(message => {
                                         return (
-                                        <div key={message.id}> 
+                                        <div key={message.id} className={message.superAdminId == currentUserId && message.adminId == recieverId ? styles.showMessages : styles.hideMessages}> 
                                             <div className={ message.senderID == currentUserId ? styles.chatmessageForCurrentUser : styles.chatmessage}>
                                                 <div className={styles.userPictureContainer}>
                                                     <img src={message.picture} alt="user picture" />
@@ -348,7 +352,7 @@ export default function Chat() {
                                             </div>
                                             <div className={ message.userID == currentUserId ? styles.timeForCurrentUser : styles.timeForOtherUsers}>
                                                 <p>{moment(message.createdAt.toDate()).format('MMMM Do YYYY, h:mm:ss a') }</p>
-                                                <div style={{width :"12px"}}></div>
+                                                <div style={{width :"40px"}}></div>
                                                 <div className={ message.userID == currentUserId ? styles.showAction : styles.hideAction } >
                                                     <span onClick={() => handleClickOpenUpdateMessage(message.id , message.message)}>
                                                         <EditIcon/>
