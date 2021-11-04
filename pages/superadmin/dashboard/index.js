@@ -54,7 +54,6 @@ export default function dashboard() {
     axios.get('http://localhost:3000/api/user')
          .then(res =>{
           setUsers(res.data.users)
-          console.log(res.data.users)
          }).catch(err =>{
            console.log(err)
          })
@@ -140,7 +139,7 @@ export default function dashboard() {
                 actions={[
                     {
                       icon: 'delete',
-                      tooltip: 'delete admin',
+                      tooltip: 'delete user',
                       onClick: (event, rowData) => {
                         deleteUser(rowData._id)
                       }

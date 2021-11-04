@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </AdminLayout>
       )
-    }else if(asPath === '/user/dashboard'|| asPath === '/user/profile' || asPath === '/user/userClub'){
+    }else if(asPath === '/user/dashboard'|| asPath === '/user/profile' || asPath === '/user/userClub' || asPath === '/user/chat'){
       return(
         <UserLayout>
           <Component {...pageProps} />

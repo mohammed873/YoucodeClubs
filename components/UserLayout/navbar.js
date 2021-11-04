@@ -83,6 +83,7 @@ const [user , setUser] = useState([]);
                     </button>
                   </Link>
 
+                  <Link href="/user/chat">
                     <button>
                       <span className="userRouteIcon">
                       <i class="fa fa-comment"></i>
@@ -91,6 +92,7 @@ const [user , setUser] = useState([]);
                        </span>
                       </span>
                     </button>
+                  </Link>
                 </div>
                <img 
                  src={user && user.picture} 

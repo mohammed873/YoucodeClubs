@@ -2,8 +2,7 @@
     width: 96%;
     padding: 1%;
     margin: auto;
-    margin-top: -18px;
-    box-shadow: 0px 0px 4px;
+    margin-top: 65px;
 }
 .chatClubsSection{
     min-height: 6vh;
@@ -30,16 +29,16 @@
 .chatBodyContainer{
     display: flex;
     justify-content: space-between;
-    height: 82vh;
+    height: 71vh;
 }
 .chatContentContainer{
     width: 70%;
-    background-color: #eeeeee;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
 }
 .chatAdminsContainer{
     width: 29%;
-    background-color: #eeeeee;
-    height: 82vh;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgb(94 104 121 / 29%);
+    height: 71vh;
     overflow-y: scroll;
 }
 .clubName{
@@ -98,7 +97,7 @@
 } 
 .chatBodyContent{
     background-color: white;
-    height: 63vh;
+    height: 52vh;
     padding: 1%;
     width: 95%;
     margin: auto;
@@ -225,6 +224,8 @@
     overflow-x: scroll;
     width: 100%;
     margin: auto;
+    height: 18vh;
+    
 }
 .chatAdminDiv{
     min-width: 138px;

@@ -145,7 +145,7 @@ a {
   -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
   box-shadow: 0px 3px 9px #5d3d3d61;
   border-radius: 2px;
-  background-color: darkgrey;
+  background-color: #757575;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -207,7 +207,7 @@ a {
   -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
   box-shadow: 0px 3px 9px #5d3d3d61;
   border-radius: 2px;
-  background-color: darkgrey;
+  background-color: #757575;
   display: -moz-box;
   display: flex;
   -moz-box-orient: vertical;
@@ -359,7 +359,7 @@ a {
     position: fixed;
     -webkit-box-shadow: 0px 3px 9px #5d3d3d61;
     box-shadow: 0px 3px 9px #5d3d3d61;
-    background-color: darkgrey;
+    background-color: #757575;
     display: -moz-box;
     display: flex;
     -moz-box-orient: vertical;

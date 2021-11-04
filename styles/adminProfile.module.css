@@ -7,6 +7,7 @@
 }
 .profileImageContainer img{
     width: 100%;
+    border-radius: 27px 27px 0px 0px;
 }
 .adminInfo{
     width: 90%;
@@ -17,9 +18,12 @@
     background-color: white;
     top: -105px;
     padding: 4%;
+    border-radius: 15px;
 }
 .adminInfo span{
     color: black;
+    font-size: 18px;
+    font-weight: 700;
 } 
 .adminInfo h3{
     color: darkblue;
@@ -51,6 +55,7 @@
     background-color: green;
     color: white;
     padding: 2%;
+    font-size: 20px;
 }
 .resetAdminPasswordBtn{
     background: green !important;

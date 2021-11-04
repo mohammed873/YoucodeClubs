@@ -9,15 +9,18 @@ import axios from 'axios';
 import MaterialTable from 'material-table'
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
+import BurstModeIcon from '@material-ui/icons/BurstMode';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import jwt from 'jwt-decode'
 
 export default function dashboard() {
   const [usersCount , setUsersCount] = useState(0)
-  const [clubsCount , setClubsCount] = useState(0)
+  const [activitiesCount , setActivitiesAcount] = useState(0)
   const [adminsCount , setAdminsCount] = useState(0)
   const [users , setUsers] = useState([])
+  const [currentAdminClubUsersCount,setCurrentAdminClubUsersCount]= useState(0)
+  const [clubName ,setClubName] = useState("")
 
   //get the users count
   const fetchUsersCount = async () => {
@@ -30,10 +33,10 @@ export default function dashboard() {
   }
 
   //get the clubs count
-  const fetchClubsCount = async () => {
-    axios.get('http://localhost:3000/api/superAdmin/clubsCount')
+  const fetchActivitiesCount = async () => {
+    axios.get('http://localhost:3000/api/admin/activitiesCount')
          .then(res =>{
-          setClubsCount(res.data.clubsCount)
+          setActivitiesAcount(res.data.activitiesCount)
          }).catch(err =>{
            console.log(err)
          })
@@ -51,10 +54,17 @@ export default function dashboard() {
 
   //fetch all users list
   const fetchUersList = async () => {
+    const token = localStorage.getItem('adminToken')
+    const club_id = jwt(token).club_id
+
     axios.get('http://localhost:3000/api/user')
          .then(res =>{
           setUsers(res.data.users)
-          console.log(res.data.users)
+          const Data = res.data.users
+          const CurrentAdminClubUsers =  Data.filter(user => user.club_id === club_id )
+          setUsers(CurrentAdminClubUsers)
+          setClubName(CurrentAdminClubUsers[0].club[0].name + " Members Number");
+          setCurrentAdminClubUsersCount(CurrentAdminClubUsers.length);
          }).catch(err =>{
            console.log(err)
          })
@@ -76,7 +86,7 @@ export default function dashboard() {
   useEffect (() => {
     fetchUsersCount()
     fetchAdminsCount()
-    fetchClubsCount()
+    fetchActivitiesCount()
     fetchUersList()
   }, [])
 
@@ -91,7 +101,7 @@ export default function dashboard() {
         />
       </Head>
 
-      <main>
+      <main style={{width: '98%', margin : "auto"}}>
          <div className={styles.statsContainer}>
            <div className={styles.stats}>
               <EmojiPeopleIcon/>
@@ -101,18 +111,18 @@ export default function dashboard() {
               </Roll>
            </div>
            <div  className={styles.stats}>
-                <CategoryIcon/>
-                <h2>{clubsCount}</h2>
+                <BurstModeIcon/>
+                <h2>{activitiesCount}</h2>
                 <Roll left>
-                  <p> Clubs </p>
+                  <p> Activities Number </p>
                 </Roll>
               
            </div>
            <div  className={styles.stats}>
               <SupervisorAccountIcon/>
-              <h2>{adminsCount}</h2>
+              <h2>{currentAdminClubUsersCount}</h2>
               <Roll left>
-                <p>Admins</p>
+                <p>{clubName}</p>
               </Roll>
            
            </div>
@@ -140,7 +150,7 @@ export default function dashboard() {
                 actions={[
                     {
                       icon: 'delete',
-                      tooltip: 'delete admin',
+                      tooltip: 'delete user',
                       onClick: (event, rowData) => {
                         deleteUser(rowData._id)
                       }
@@ -156,7 +166,8 @@ export default function dashboard() {
                     actionsColumnIndex: -1,
                 }}    
             />
-        </div>        
+        </div>       
+        <br/> 
       </main>
     </div>
   )

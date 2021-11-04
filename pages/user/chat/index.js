@@ -1,5 +1,5 @@
 import React , {useState , useEffect, useRef} from 'react';
-import styles from '../../../styles/adminChat.module.css'
+import styles from '../../../styles/userChat.module.css'
 import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ export default function Chat() {
    const[clubs , setClubs] = useState(null)
    const [message , setMessage] = useState(null)
    const[selectedClubId , setSelectedClubId]= useState(null)
-   const[admin , setAdmin] = useState(null)
+   const[user , setUser] = useState(null)
    const[superAdmins , setSuperAdmins] = useState(null)
    const[clubGroubMessages , setClubGroubMessages] = useState(null)
    const[currentUserId , setCurrentUserId] = useState(null)
@@ -31,37 +31,26 @@ export default function Chat() {
    const[messagesBetweenAdminsAndSuperAdmin,setMessagesBetweenAdminsAndSuperAdmin] = useState(null)
    const[messagesBetweenAdmins,setMessagesBetweenAdmins] = useState(null)
    const[messagesBetweenAdminsAndUsers , setMessagesBetweenAdminsAndUsers] = useState(null)
-   const[users,setUsers] = useState(null)
    const[title ,setTitle] = useState(null)
 
    //For Responsive style
    const[showClub , setShowClub] = useState(true)
    const[showAdmins , setShowAdmins] = useState(false)
    const[showSuperAdmin , setShowSuperAdmin] = useState(false)
-   const[showUsers , setShowUsers] = useState(false)
 
    const handleShowClubs = () => {
         setShowAdmins(false)
         setShowSuperAdmin(false)
-        setShowUsers(false)
         setShowClub(true)
-   }
-   const handleShowUsers = () => {
-        setShowAdmins(false)
-        setShowSuperAdmin(false)
-        setShowUsers(true)
-        setShowClub(false)
    }
    const handleShowAdmins = () => {
         setShowAdmins(true)
         setShowSuperAdmin(false)
-        setShowUsers(false)
         setShowClub(false)
    }
    const handleShowSuperAdmins = () => {
         setShowAdmins(false)
         setShowSuperAdmin(true)
-        setShowUsers(false)
         setShowClub(false)
    }
 
@@ -95,10 +84,14 @@ export default function Chat() {
 
    //get all clubs 
    const getAllClubs = async () => {
+        const token = localStorage.getItem('userToken')
+        const club_id = jwt(token).club_id
         await axios.get("http://localhost:3000/api/superAdmin/clubs")
         .then( res => {
-            setClubs(res.data.clubs)
-            setSelectedClubId(res.data.clubs[1]._id)
+            const Data = res.data.clubs
+            const CurrentUserClub =  Data.filter(club => club._id === club_id )
+            setClubs(CurrentUserClub)
+            setSelectedClubId(CurrentUserClub[0]._id)
         }).catch(err =>{
             console.log(err);
         })
@@ -106,37 +99,27 @@ export default function Chat() {
 
     //get all admins
     const getAllAdmins = async () => {
+        const token = localStorage.getItem('userToken')
+        const club_id = jwt(token).club_id
         await axios.get("http://localhost:3000/api/superAdmin/admins")
         .then( res => {
-            setAdmins(res.data.admins)
+            const Data = res.data.admins
+            const CurrentUserAdmin =  Data.filter(admin => admin.club_id === club_id )
+            console.log(CurrentUserAdmin)
+            setAdmins(CurrentUserAdmin)
         }).catch(err =>{
             console.log(err);
         })
     }
 
-    //get all users
-    const getAllUsers = async () => {
-        const token = localStorage.getItem('adminToken')
-        const club_id = jwt(token).club_id
-        await axios.get("http://localhost:3000/api/user/")
-        .then( res => {
-            const Data = res.data.users
-            const CurrentAdminClubUsers =  Data.filter(user => user.club_id === club_id )
-            setUsers(CurrentAdminClubUsers)
-        }).catch(err =>{
-            console.log(err);
-        })
-    }
-
-    //get admin  info
-    const getAdminInfo = async () =>{
-        const token = localStorage.getItem('adminToken')
+    //get user  info
+    const getUserInfo = async () =>{
+        const token = localStorage.getItem('userToken')
         const id = jwt(token)._id
-        await axios.get('http://localhost:3000/api/admin/profile/'+ id)
+        await axios.get('http://localhost:3000/api/user/profile/'+ id)
         .then(res => {
-        setAdmin(res.data.admin)
-
-        setCurrentUserId(id)
+            setUser(res.data.fetched_user)
+            setCurrentUserId(id)
         }).catch(err => {
         console.log(err)
         })
@@ -160,12 +143,12 @@ export default function Chat() {
         const date = new Date();
     
             const payload = {
-                userID : admin && admin[0]._id ,
+                userID : user && user._id ,
                 clubId: selectedClubId,
                 message: message,
-                picture : admin && admin[0].picture,
-                userName : admin && admin[0].full_name,
-                role : admin && admin[0].role,
+                picture : user && user.picture,
+                userName : user && user.full_name,
+                role : user && user.role,
                 createdAt: date,
                 updatedAt: date
             }
@@ -227,12 +210,12 @@ export default function Chat() {
         const docRef = doc(db , "ClubsGroubChat" , selectedMessageTobeUpdated);
             const docSnap =   (await getDoc(docRef)).data();
             const payload = {
-                userID : admin && admin[0]._id ,
+                userID : user && user._id ,
                 clubId: selectedClubId ,
                 message: updatedMessage,
-                picture : admin && admin[0].picture,
-                userName : admin && admin[0].full_name,
-                role : admin && admin[0].role,
+                picture : user && user.picture,
+                userName : user && user.full_name,
+                role : user && user.role,
                 createdAt: docSnap.createdAt,
                 updatedAt: date
             }
@@ -261,12 +244,12 @@ export default function Chat() {
     
             const payload = {
                 superAdminId : recieverId ,
-                adminId: admin && admin[0]._id,
-                senderID : admin && admin[0]._id,
+                adminId: user && user[0]._id,
+                senderID : user && user[0]._id,
                 message: message,
-                picture : admin && admin[0].picture,
-                userName : admin && admin[0].full_name,
-                role : admin && admin[0].role,
+                picture : user && user[0].picture,
+                userName : user && user[0].full_name,
+                role : user && user[0].role,
                 createdAt: date,
                 updatedAt: date
             }
@@ -329,113 +312,12 @@ export default function Chat() {
             const docSnap =   (await getDoc(docRef)).data();
             const payload = {
                 superAdminId : recieverId ,
-                adminId: admin && admin[0]._id,
-                senderID : admin && admin[0]._id ,
+                adminId: user && user[0]._id,
+                senderID : user && user[0]._id ,
                 message: updatedMessage,
-                picture : admin && admin[0].picture,
-                userName : admin && admin[0].full_name,
-                role : admin && admin[0].role,
-                createdAt: docSnap.createdAt,
-                updatedAt: date
-            }
-
-            if(updatedMessage === null || updatedMessage === "" ){
-                toast.configure()
-                toast.error("message must not be empty")
-            }else{
-                await setDoc(docRef , payload)
-                document.querySelector('#updatedMessageForClubChat').value= ''
-                setUpdatedMessage(null)
-                toast.configure()
-                toast.success("message updated successfully")
-    
-                handleCloseUpdateMessage()
-                setUpdatedMessage(null)
-            }
-    }
-
-
-
-
-    //get messages between admins 
-    const getMessagesBetweenAdmins = async (id , title) => {
-        setTarget("adminsChat")
-        setRecieverId(id);
-        setTitle(title)
-        try {
-            const q = query(collection(db, "AdminsChat"), orderBy("createdAt", "asc"));
-            onSnapshot(q, (querySnapshot) => {
-            const data = querySnapshot.docs.map((doc) => ({
-                ...doc.data(),
-                id: doc.id
-            }))
-            setMessagesBetweenAdmins(data)
-            setDataFetched(true)
-            //smooth scrool 
-            messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
-        });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // create messages between admins
-    const sendMessageBtweenAdmin = async () => {
-        const date = new Date();
-    
-        const payload = {
-            recieverAdminId : recieverId ,
-            senderAdminId: admin && admin[0]._id,
-            senderID : admin && admin[0]._id,
-            message: message,
-            picture : admin && admin[0].picture,
-            userName : admin && admin[0].full_name,
-            role : admin && admin[0].role,
-            createdAt: date,
-            updatedAt: date
-        }
-    
-        if(message === null || message === "" ){
-            toast.configure()
-            toast.error("message must not be empty")
-        }else{
-            await addDoc(adminsChatRef , payload)
-            document.querySelector('#message').value= ''
-            setMessage(null)
-            toast.configure()
-            toast.success("message sent successfully")
-
-            //smooth scrool 
-            messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
-        }
-    }
-
-    //delete message between admins
-    const deleteMessageBetweenadmins = async (docId) => {
-        try {
-            const docRef = doc(db , "AdminsChat" , docId);
-            await deleteDoc(docRef);
-            toast.configure()
-            toast.success("message deleted successfully")
-        } catch (error) {
-            toast.configure()
-            toast.error("something went wrong , try again later")
-        }
-    }
-
-    //update document by id between admins
-    const updateMessageBetweenAdmins = async () => {
-        const date = new Date();
-        const docRef = doc(db , "AdminsChat" , selectedMessageTobeUpdated);
-            const docSnap =   (await getDoc(docRef)).data();
-            const payload = {
-                recieverAdminId : recieverId ,
-                senderAdminId: admin && admin[0]._id,
-                senderID : admin && admin[0]._id,
-                message: updatedMessage,
-                picture : admin && admin[0].picture,
-                userName : admin && admin[0].full_name,
-                role : admin && admin[0].role,
+                picture : user && user[0].picture,
+                userName : user && user[0].full_name,
+                role : user && user[0].role,
                 createdAt: docSnap.createdAt,
                 updatedAt: date
             }
@@ -486,12 +368,12 @@ export default function Chat() {
     
         const payload = {
             userId : recieverId ,
-            AdminId: admin && admin[0]._id,
-            senderID : admin && admin[0]._id,
+            AdminId: user && user._id,
+            senderID : user && user._id,
             message: message,
-            picture : admin && admin[0].picture,
-            userName : admin && admin[0].full_name,
-            role : admin && admin[0].role,
+            picture : user && user.picture,
+            userName : user && user.full_name,
+            role : user && user.role,
             createdAt: date,
             updatedAt: date
         }
@@ -531,12 +413,12 @@ export default function Chat() {
             const docSnap =   (await getDoc(docRef)).data();
             const payload = {
                 userId : recieverId ,
-                AdminId: admin && admin[0]._id,
-                senderID : admin && admin[0]._id,
+                AdminId: user && user._id,
+                senderID : user && user._id,
                 message: updatedMessage,
-                picture : admin && admin[0].picture,
-                userName : admin && admin[0].full_name,
-                role : admin && admin[0].role,
+                picture : user && user.picture,
+                userName : user && user.full_name,
+                role : user && user.role,
                 createdAt: docSnap.createdAt,
                 updatedAt: date
             }
@@ -559,9 +441,8 @@ export default function Chat() {
     useEffect(() => {
         getAllAdmins()
         getAllClubs()
-        getAdminInfo()
+        getUserInfo()
         getSuperAdminsInfo()
-        getAllUsers()
     },[])
   return (
     <>
@@ -569,7 +450,7 @@ export default function Chat() {
            <div className={styles.chatContainer}>
                <div className={styles.chatBodyContainer}>
                    <div className={styles.chatContentContainer}>
-                   <div className={dataFetched ? styles.clubDynamicTitle : styles.noChatTargetSelected}>{title && title}</div>
+                   <div className={dataFetched ? styles.clubDynamicTitle : null}>{title && title}</div>
                        <div className={styles.chatBodyContent}>
                            
                            {
@@ -740,7 +621,6 @@ export default function Chat() {
                            <span className={styles.showClubsBtn} onClick={handleShowClubs}>Clubs</span>
                            <span className={styles.showSuperAdminsBtn} onClick={handleShowSuperAdmins}>Super Admin</span>
                            <span className={styles.showAdminsBtn} onClick={handleShowAdmins}>Admins</span>
-                           <span className={styles.showUsersBtn} onClick={handleShowUsers}>Users</span>
                        </div>
                        <div className={styles.spaceAfterBtns}></div>
                         <div className={showClub ? styles.adminListContainer : styles.Hidden}>
@@ -788,7 +668,7 @@ export default function Chat() {
                                                 <div 
                                                     className={currentUserId === admin._id ? styles.chatAdminDivForCurrentUser : styles.chatAdminDiv} 
                                                     key={admin._id} 
-                                                    onClick={() => getMessagesBetweenAdmins(admin._id , admin.full_name)}
+                                                    onClick={() => getMessagesBetweenAdminAndUsers(admin._id , admin.full_name)}
                                                 >
                                                     <div className={styles.adminInfo}>
                                                             <span>
@@ -798,28 +678,6 @@ export default function Chat() {
                                                     </div>
                                                     <hr />
                                                     <p>{admin.club[0].name}</p>
-                                                </div>
-                                            )
-                                        })}
-                            </div>
-                        </div>
-
-                        <div className={showUsers ? styles.superAdminsContainer : styles.Hidden}>
-                            <div className={styles.Title}>Users List</div>
-                            <div className={styles.chatAdminDivInResponsiveMode}>
-                                    {users && users.map(user =>{
-                                            return (
-                                                <div 
-                                                    className={styles.chatSuperAdminDiv}
-                                                    key={user._id} 
-                                                    onClick={() => getMessagesBetweenAdminAndUsers(user._id , user.full_name)}
-                                                >
-                                                    <div className={styles.adminInfo}>
-                                                            <span>
-                                                                <img src={user.picture} alt="admin picture" />
-                                                            </span>
-                                                            <span id={styles.fullName}>{user.full_name}</span>
-                                                    </div>
                                                 </div>
                                             )
                                         })}
