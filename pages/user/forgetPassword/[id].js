@@ -10,10 +10,37 @@ import jwt from 'jwt-decode'
 
 
 export default function forgetPassword() {
-  const [email , setEmail] = useState('')
+  const [password , setPassword] = useState('')
 
   // initial use router  
   const router = useRouter()
+
+  //get the reset token from the url parameters
+  const {id} = router.query
+
+  //update password
+  const updatePassword = async () => {
+    const resetToken = id
+  
+    await axios.put('http://localhost:3000/api/user/forgetPassword/' + resetToken,{
+      password
+    }).then(res =>{
+      //empty password field
+      document.querySelector('#password').value = '';
+
+      //send success message
+      toast.configure()
+      toast.success(res.data.message)
+
+      //redirect to login home 
+      setTimeout(() =>{
+        router.push("/user/login");
+      }, 1500)
+    }).catch(err =>{
+      toast.configure()
+      toast.error("err.response.data.message")
+    })
+  }
 
 
   return (
@@ -34,12 +61,15 @@ export default function forgetPassword() {
             <div className={styles.field}>
                 <span className="fa fa-lock"></span>
                 <input
-                    type="password" required placeholder="new password" 
-                    onChange={(e)=> setEmail(e.target.value)}
+                    type="password" 
+                    required
+                    id="password" 
+                    placeholder="new password" 
+                    onChange={(e)=> setPassword(e.target.value)}
                 />
             </div>
            
-            <button>Reset Password</button>
+            <button onClick={updatePassword}>Reset Password</button>
             <Link href="/">
                 <p  className={styles.goBackLink}>&larr; Back</p>
             </Link>    

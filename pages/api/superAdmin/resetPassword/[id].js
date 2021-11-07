@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-import dbConnect from '../../../utils/dbConnect';
-import SuperAdmin from '../../../models/superAdmin';
+import dbConnect from '../../../../utils/dbConnect';
+import SuperAdmin from '../../../../models/superAdmin';
 
 
 dbConnect();

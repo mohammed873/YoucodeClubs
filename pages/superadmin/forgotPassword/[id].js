@@ -11,7 +11,7 @@ export default function ResetPassword() {
 // initial use router  
 const router = useRouter()
 
-//grt the reset token from the url parameters
+//get the reset token from the url parameters
 const {id} = router.query
 
 //password state   

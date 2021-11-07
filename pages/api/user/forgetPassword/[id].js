@@ -1,5 +1,5 @@
 import dbConnect from '../../../../utils/dbConnect';
-import SuperAdmin from '../../../../models/superadmin';   
+import User from '../../../../models/user';   
 import crypto from 'crypto';
 const bcrypt = require("bcryptjs");
 
@@ -11,10 +11,11 @@ export default async (req, res) => {
         method
     } = req;
 
-     //superadmin reset password in case it is forgetten
+     //user update password in case it  is forgetten
      if (method === 'PUT') {
     
         try {
+
             //hash the token param 
             const hashedToken = crypto.createHash('sha256').update(id).digest('hex');
 
@@ -29,23 +30,23 @@ export default async (req, res) => {
              }
 
 
-            const super_admin = await SuperAdmin.findOne({ 
+            const fetched_user = await User.findOne({ 
                 passwordResetToken: hashedToken ,
                 passwordResetExpiresIn : {$gt : new Date()}
             });
 
-            if (!super_admin) return  res.status(400).json({
+            if (!fetched_user) return  res.status(400).json({
                  success: false , 
                  message : "Token is invalid or has expired"
             })
      
             //update the password and reset the token & the expiration sate to undefiend
-            super_admin.password = hashedPassword;
-            super_admin.passwordResetToken = undefined;
-            super_admin.passwordResetExpiresIn = undefined;
+            fetched_user.password = hashedPassword;
+            fetched_user.passwordResetToken = undefined;
+            fetched_user.passwordResetExpiresIn = undefined;
 
             //save the new password
-            await super_admin.save()
+            await fetched_user.save()
 
             //send success message
             return res.status(200).json({
