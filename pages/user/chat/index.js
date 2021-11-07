@@ -28,7 +28,7 @@ export default function Chat() {
    const [selectedMessageTobeUpdated , setSelectedMessageTobeUpdated] = useState(null)
    const[recieverId , setRecieverId] = useState(null)
    const[target , setTarget] = useState(false)
-   const[messagesBetweenAdminsAndSuperAdmin,setMessagesBetweenAdminsAndSuperAdmin] = useState(null)
+   const[messagesBetweenUsersAndSuperAdmin,setMessagesBetweenUsersAndSuperAdmin] = useState(null)
    const[messagesBetweenAdmins,setMessagesBetweenAdmins] = useState(null)
    const[messagesBetweenAdminsAndUsers , setMessagesBetweenAdminsAndUsers] = useState(null)
    const[title ,setTitle] = useState(null)
@@ -57,8 +57,8 @@ export default function Chat() {
    //create a ref for comment collection to use in post method
     const clubsGroubChatRef = collection(db , 'ClubsGroubChat');
 
-    //create a ref for chat between admins and superadmin collection to use in post method
-    const adminsAndSuperAdminChatRef = collection(db , 'Admins&SuberAdminChat');
+    //create a ref for chat between Users and superadmin collection to use in post method
+    const usersAndSuperAdminChatRef = collection(db , 'Users&SuberAdminChat');
 
     //create a ref for chat between admins collection to use in post method
     const adminsChatRef = collection(db , 'AdminsChat');
@@ -105,7 +105,6 @@ export default function Chat() {
         .then( res => {
             const Data = res.data.admins
             const CurrentUserAdmin =  Data.filter(admin => admin.club_id === club_id )
-            console.log(CurrentUserAdmin)
             setAdmins(CurrentUserAdmin)
         }).catch(err =>{
             console.log(err);
@@ -238,18 +237,18 @@ export default function Chat() {
 
 
 
-    //create message between admins and superadmin
-    const sendMessageBetweenAdminsAndSuperAdmin = async () => {
+    //create message between users and superadmin
+    const sendMessageBetweenUsersAndSuperAdmin = async () => {
         const date = new Date();
     
             const payload = {
                 superAdminId : recieverId ,
-                adminId: user && user[0]._id,
-                senderID : user && user[0]._id,
+                userId: user && user._id,
+                senderID : user && user._id,
                 message: message,
-                picture : user && user[0].picture,
-                userName : user && user[0].full_name,
-                role : user && user[0].role,
+                picture : user && user.picture,
+                userName : user && user.full_name,
+                role : user && user.role,
                 createdAt: date,
                 updatedAt: date
             }
@@ -258,7 +257,7 @@ export default function Chat() {
                 toast.configure()
                 toast.error("message must not be empty")
             }else{
-                await addDoc(adminsAndSuperAdminChatRef , payload)
+                await addDoc(usersAndSuperAdminChatRef , payload)
                 document.querySelector('#message').value= ''
                 setMessage(null)
                 toast.configure()
@@ -266,22 +265,22 @@ export default function Chat() {
     
                 //smooth scrool 
                 messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
-            }
+        }
     }
 
-    //get all groub chat message by recieverId between admins and super admin on real time
-    const getMessagesBetweenAdminsAndSuperAdmin = async (id , title) => {
+    //get all groub chat message by recieverId between users and super admin on real time
+    const getMessagesBetweenUsersAndSuperAdmin = async (id , title) => {
         setTitle(title)
-        setTarget("messagesBetweenAdminsAndSuperadmin")
+        setTarget("messagesBetweenUsersAndSuperadmin")
         setRecieverId(id);
         try {
-            const q = query(collection(db, "Admins&SuberAdminChat"), orderBy("createdAt", "asc"));
+            const q = query(collection(db, "Users&SuberAdminChat"), orderBy("createdAt", "asc"));
             onSnapshot(q, (querySnapshot) => {
             const data = querySnapshot.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id
             }))
-            setMessagesBetweenAdminsAndSuperAdmin(data)
+            setMessagesBetweenUsersAndSuperAdmin(data)
             setDataFetched(true)
             //smooth scrool 
             messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
@@ -292,10 +291,10 @@ export default function Chat() {
     
     }
 
-    //delete document by id from the chat between admins and admin
-    const deleteMessageBetweenadminAndSuperAdmin = async (docId) => {
+    //delete document by id from the chat between users and super admin
+    const deleteMessageBetweenUsersAndSuperAdmin = async (docId) => {
         try {
-            const docRef = doc(db , "Admins&SuberAdminChat" , docId);
+            const docRef = doc(db , "Users&SuberAdminChat" , docId);
             await deleteDoc(docRef);
             toast.configure()
             toast.success("message deleted successfully")
@@ -305,19 +304,19 @@ export default function Chat() {
         }
     }
 
-    //update document by id between admins and super admin
-    const updateMessageBetweenAdminsAndSuperAdmin = async () => {
+    //update document by id between users and super admin
+    const updateMessageBetweenUsersAndSuperAdmin = async () => {
         const date = new Date();
-        const docRef = doc(db , "Admins&SuberAdminChat" , selectedMessageTobeUpdated);
+        const docRef = doc(db , "Users&SuberAdminChat" , selectedMessageTobeUpdated);
             const docSnap =   (await getDoc(docRef)).data();
             const payload = {
                 superAdminId : recieverId ,
-                adminId: user && user[0]._id,
-                senderID : user && user[0]._id ,
+                userId: user && user._id,
+                senderID : user && user._id ,
                 message: updatedMessage,
-                picture : user && user[0].picture,
-                userName : user && user[0].full_name,
-                role : user && user[0].role,
+                picture : user && user.picture,
+                userName : user && user.full_name,
+                role : user && user.role,
                 createdAt: docSnap.createdAt,
                 updatedAt: date
             }
@@ -352,7 +351,6 @@ export default function Chat() {
                 id: doc.id
             }))
             setMessagesBetweenAdminsAndUsers(data)
-            console.log(data);
             setDataFetched(true)
             //smooth scrool 
             messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
@@ -457,11 +455,14 @@ export default function Chat() {
                             dataFetched ?  
                            
                            
-                               target === "messagesBetweenAdminsAndSuperadmin" ? 
-                                    messagesBetweenAdminsAndSuperAdmin && messagesBetweenAdminsAndSuperAdmin.length > 0 ? 
-                                        messagesBetweenAdminsAndSuperAdmin && messagesBetweenAdminsAndSuperAdmin.map(message => {
+                               target === "messagesBetweenUsersAndSuperadmin" ? 
+                                    messagesBetweenUsersAndSuperAdmin && messagesBetweenUsersAndSuperAdmin.length > 0 ? 
+                                        messagesBetweenUsersAndSuperAdmin && messagesBetweenUsersAndSuperAdmin.map(message => {
                                             return (
-                                            <div key={message.id} className={message.adminId == currentUserId && message.superAdminId == recieverId ? styles.showMessages : styles.hideMessages}> 
+                                            <div 
+                                               key={message.id} 
+                                               className={message.userId == currentUserId && message.superAdminId == recieverId ? styles.showMessages : styles.hideMessages}
+                                            > 
                                                 <div className={ message.senderID == currentUserId ? styles.chatmessageForCurrentUser : styles.chatmessage}>
                                                     <div className={styles.userPictureContainer}>
                                                         <img src={message.picture} alt="user picture" />
@@ -475,7 +476,7 @@ export default function Chat() {
                                                         <span onClick={() => handleClickOpenUpdateMessage(message.id , message.message)}>
                                                             <EditIcon/>
                                                         </span>
-                                                        <span onClick={() => deleteMessageBetweenadminAndSuperAdmin(message.id)}>
+                                                        <span onClick={() => deleteMessageBetweenUsersAndSuperAdmin(message.id)}>
                                                             <DeleteIcon/>
                                                         </span>
                                                     </div>
@@ -598,14 +599,12 @@ export default function Chat() {
                                         id="message"
                                         onChange={(e)=> setMessage(e.target.value)}
                                     />
-                                    {target === "messagesBetweenAdminsAndSuperadmin" ? 
-                                        <button onClick={sendMessageBetweenAdminsAndSuperAdmin}>SEND superAdmin</button>
+                                    {target === "messagesBetweenUsersAndSuperadmin" ? 
+                                        <button onClick={sendMessageBetweenUsersAndSuperAdmin}>SEND</button>
                                     : target === "groubMessages" ?
-                                        <button onClick={sendMessage}>SEND Club</button>
-                                    : target === "adminsChat" ?
-                                        <button onClick={sendMessageBtweenAdmin}>SEND ADMIN</button>
+                                        <button onClick={sendMessage}>SEND</button>
                                     : target === "admin&users" ?
-                                        <button onClick={sendMessageBetweenAdminAndUsers}>SEND ADMIN , users</button>
+                                        <button onClick={sendMessageBetweenAdminAndUsers}>SEND</button>
                                     : null
                                     }
                                 </div>
@@ -646,7 +645,7 @@ export default function Chat() {
                                                 <div 
                                                     className={styles.chatSuperAdminDiv}
                                                     key={superAdmin._id} 
-                                                    onClick={() => getMessagesBetweenAdminsAndSuperAdmin(superAdmin._id , superAdmin.full_name)}
+                                                    onClick={() => getMessagesBetweenUsersAndSuperAdmin(superAdmin._id , superAdmin.full_name)}
                                                 >
                                                     <div className={styles.adminInfo}>
                                                             <span>
@@ -660,13 +659,13 @@ export default function Chat() {
                             </div>
                         </div>
 
-                        <div className={showAdmins ? styles.adminListContainer : styles.Hidden}>
+                        <div className={showAdmins ? styles.superAdminsContainer : styles.Hidden}>
                             <div className={styles.Title}>Admins List</div>
                             <div className={styles.chatAdminDivInResponsiveMode}>
                                     {admins && admins.map(admin =>{
                                             return (
                                                 <div 
-                                                    className={currentUserId === admin._id ? styles.chatAdminDivForCurrentUser : styles.chatAdminDiv} 
+                                                    className={styles.adminsContainer} 
                                                     key={admin._id} 
                                                     onClick={() => getMessagesBetweenAdminAndUsers(admin._id , admin.full_name)}
                                                 >
@@ -706,15 +705,15 @@ export default function Chat() {
                         onChange={(e)=>{setUpdatedMessage(e.target.value)}}
                     />
                     <br/> <br/>
-                    {target === "messagesBetweenAdminsAndSuperadmin" ?
+                    {target === "messagesBetweenUsersAndSuperadmin" ?
                      <Button
                      className={styles.editBtn}
                      variant="contained"
                      color="primary"
                      size="small"
-                     onClick={updateMessageBetweenAdminsAndSuperAdmin}
+                     onClick={updateMessageBetweenUsersAndSuperAdmin}
                     >
-                        Update sa
+                        Update
                     </Button>
                     : target === "groubMessages" ?
                     <Button
@@ -724,19 +723,8 @@ export default function Chat() {
                         size="small"
                         onClick={updateMessageFromClubGroubMessage}
                     >
-                        Update cl
+                        Update
                     </Button>
-                    : target === "adminsChat" ?
-                    <Button
-                        className={styles.editBtn}
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        onClick={updateMessageBetweenAdmins}
-                    >
-                        Update ad
-                    </Button>
-
                     : target === "admin&users" ?
                     <Button
                         className={styles.editBtn}
@@ -745,7 +733,7 @@ export default function Chat() {
                         size="small"
                         onClick={updateMessageBetweenAdminsAndUsers}
                     >
-                        Update a u
+                        Update
                     </Button>
                     : null
                     }

@@ -66,9 +66,11 @@
 
     #red {
         border-top: 3px solid hsl(0, 78%, 62%);
+        text-align: center;
     }
     #orange {
         border-top: 3px solid hsl(34, 97%, 64%);
+        text-align: center;
     }
 
 .row1_container h2 {
@@ -93,11 +95,13 @@
         position: relative;
         top: 150px;
         border-top: 3px solid hsl(212, 86%, 64%);
+        text-align: center;
     }
     #box_down_Left {
         position: relative;
         top: 150px;
         border-top: 3px solid hsl(180, 62%, 55%);
+        text-align: center;
     }
     .box {
         width: 20%;
@@ -107,4 +111,16 @@
         width: 30%;
     }
     
+}
+.row1_container img{
+    height: 100px;
+    width: 100px;
+}
+.row1_container p{
+    margin: 0px;
+    font-size: 30px;
+    font-weight: 600;
+}
+.row1_container h2{
+    margin: 0px;
 }

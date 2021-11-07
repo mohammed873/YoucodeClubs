@@ -195,9 +195,6 @@ export default function singleEventDetails() {
                      <img src={singleEventDetails && singleEventDetails.picture} alt="activity picture" />
                      <h1>{singleEventDetails && singleEventDetails.name}</h1>
                      <p>{singleEventDetails && singleEventDetails.description}</p>
-                     <div>
-                         like
-                     </div>
                   </div>
                   <br/>
                   <div className={styles.singleActivityCommentsContainer}>

@@ -470,7 +470,6 @@ export default function Chat() {
                 id: doc.id
             }))
             setMessagesBetweenAdminsAndUsers(data)
-            console.log(data);
             setDataFetched(true)
             //smooth scrool 
             messageDownSection.current.scrollIntoView({ behavior: 'smooth' })
@@ -718,13 +717,13 @@ export default function Chat() {
                                         onChange={(e)=> setMessage(e.target.value)}
                                     />
                                     {target === "messagesBetweenAdminsAndSuperadmin" ? 
-                                        <button onClick={sendMessageBetweenAdminsAndSuperAdmin}>SEND superAdmin</button>
+                                        <button onClick={sendMessageBetweenAdminsAndSuperAdmin}>SEND</button>
                                     : target === "groubMessages" ?
-                                        <button onClick={sendMessage}>SEND Club</button>
+                                        <button onClick={sendMessage}>SEND</button>
                                     : target === "adminsChat" ?
-                                        <button onClick={sendMessageBtweenAdmin}>SEND ADMIN</button>
+                                        <button onClick={sendMessageBtweenAdmin}>SEND</button>
                                     : target === "admin&users" ?
-                                        <button onClick={sendMessageBetweenAdminAndUsers}>SEND ADMIN , users</button>
+                                        <button onClick={sendMessageBetweenAdminAndUsers}>SEND</button>
                                     : null
                                     }
                                 </div>
@@ -856,7 +855,7 @@ export default function Chat() {
                      size="small"
                      onClick={updateMessageBetweenAdminsAndSuperAdmin}
                     >
-                        Update sa
+                        Update
                     </Button>
                     : target === "groubMessages" ?
                     <Button
@@ -866,7 +865,7 @@ export default function Chat() {
                         size="small"
                         onClick={updateMessageFromClubGroubMessage}
                     >
-                        Update cl
+                        Update
                     </Button>
                     : target === "adminsChat" ?
                     <Button
@@ -876,7 +875,7 @@ export default function Chat() {
                         size="small"
                         onClick={updateMessageBetweenAdmins}
                     >
-                        Update ad
+                        Update
                     </Button>
 
                     : target === "admin&users" ?
@@ -887,7 +886,7 @@ export default function Chat() {
                         size="small"
                         onClick={updateMessageBetweenAdminsAndUsers}
                     >
-                        Update a u
+                        Update
                     </Button>
                     : null
                     }

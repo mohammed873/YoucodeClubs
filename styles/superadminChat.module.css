@@ -2,7 +2,7 @@
     width: 96%;
     padding: 1%;
     margin: auto;
-    margin-top: -100px;
+    margin-top: -18px;
     box-shadow: 0px 0px 4px;
 }
 .chatClubsSection{
@@ -14,20 +14,23 @@
     overflow-x: auto;
 }
 .chatClubDiv{
-    min-width: 50px;
-    height: 50px;
+    min-width: 98px;
+    height: 87px;
+    position: relative;
     margin-right: 12px;
-    border: 2px solid ;
+    border: 2px solid;
     cursor: pointer;
+    margin-top: 4px;
+    margin-left: 15px;
 }
 .chatClubDiv img {
-    height: 100%;
-    width: 100%;
+    height: 87px;
+    width: 97px;
 }
 .chatBodyContainer{
     display: flex;
     justify-content: space-between;
-    height: 70vh;
+    height: 82vh;
 }
 .chatContentContainer{
     width: 70%;
@@ -36,8 +39,17 @@
 .chatAdminsContainer{
     width: 29%;
     background-color: #eeeeee;
+    height: 82vh;
     overflow-y: scroll;
-    height: 70vh;
+}
+.clubName{
+    position: absolute;
+    z-index: 2;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #12174ba8;
 }
 .chatAdminDiv{
     width: 90%;
@@ -48,16 +60,29 @@
     border-radius: 8px;
     cursor: pointer;
 }
+.chatUserDiv{
+    width: 90%;
+    padding: 2%;
+    margin: auto;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 .adminInfo{
     display: flex;
-    align-items: center
+    align-items: center;
+    justify-content: center;
+    padding: 3%;
 }
 .adminInfo span {
-    width: 40%;
+    width: 62%;
     text-align: center;
 }
 .adminInfo span img {
-    width: 60%;
+    height: 42px;
+    width: 42px;
 }
 .chatAdminDiv p{
     text-align:center;
@@ -65,9 +90,16 @@
     color: darkblue;
     font-weight: bold;
 }
+.chatUserDiv p {
+    text-align:center;
+    line-height: 1px;
+    color: darkblue;
+    font-weight: bold;
+
+} 
 .chatBodyContent{
     background-color: white;
-    height: 54vh;
+    height: 63vh;
     padding: 1%;
     width: 95%;
     margin: auto;
@@ -141,11 +173,18 @@
 }
 .timeForOtherUsers{
     float: left;
-    margin-left: 12px;
-    margin-right: 11px;
+    margin-left: 15px;
+    display: -moz-box;
     display: flex;
+    -moz-box-align: center;
     align-items: center;
-    margin-top: -21px;
+    margin-top: -17px;
+}
+.timeExtraSpcaeForCurrentUser{
+    width: 12px;
+}
+.timeExtraSpcaeForOtherUsers{
+    width: 200px;
 }
 .hideAction{
     display: none;
@@ -155,7 +194,7 @@
 }
 .Title{
     text-align: center;
-    background-color: #8b7878;
+    background-color: #12174b;
     color: white;
     margin: auto;
     margin-top: 6px;
@@ -165,7 +204,7 @@
 }
 .ClubTitle{
     text-align: center;
-    background-color: #8b7878;
+    background-color: #12174b;
     color: white;
     margin: auto;
     margin-top: 6px;
@@ -174,7 +213,7 @@
 }
 .clubDynamicTitle{
     text-align: center;
-    background-color: #8b7878;
+    background-color: #12174b;
     color: white;
     margin: auto;
     margin-top: 6px;
@@ -182,15 +221,68 @@
     width: 95%;
     font-weight: 700;
 }
+.chatAdminDivInResponsiveMode{
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+    margin: auto;
+    height: 21vh;
+}
+.chatAdminDiv{
+    min-width: 138px;
+    margin-left: 11px;
+    cursor: pointer;
+}
+ .chatUserDiv{
+       max-width: 138px;
+    height: 82px;
+    margin-left: 11px;
+    cursor: pointer;
+} 
+.chatSuperAdminDiv{
+    min-width: 149px;
+    height: 82px;
+    margin-left: 11px;
+    cursor: pointer;
+    background-color: white;
+    margin-top: 9px;
+    border-radius: 8px;
+    display: flex;
+}
 
 @media only screen and (max-width: 860px) {
+    .Hidden{
+        display: none;
+    }
     .chatBodyContainer{
         flex-direction: column;
     }
+    .chatAdminDiv{
+        min-width: 138px;
+        height: 14vh;
+        margin-left: 11px;
+        cursor: pointer;
+        overflow-y: scroll;
+    }
+    .chatSuperAdminDiv{
+        min-width: 149px;
+        height: 17vh;
+        margin-left: 11px;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 8px;
+        display: -moz-box;
+        display: flex;
+        justify-content: center;
+    }
     .chatContentContainer {
-        width: 100%;
+        width: 98%;
         order: 1;   
         margin-top: 8px;
+        padding: 1%;
+    }
+    .Title{
+        width: 96%;
     }
     .chatAdminsContainer{
         width: 100%;
@@ -205,10 +297,8 @@
         border-radius: 10px;
         display: -moz-box;
         display: flex;
+        width: 96%;
         overflow-x: auto;
-    }
-    .chatAdminDiv{
-        margin-right: 10px;
     }
     .chatAdminDiv p {
         line-height: 17px;
@@ -217,10 +307,11 @@
         flex-direction: column;
     }
     .adminInfo span img {
-        width: 87%;
+        width: 54px;
+        height: 52px;
     }
     #fullName{
-        width: 100%;
+        width: 99%;
     }
     .userMessage{
         margin-top: 15px;
@@ -246,9 +337,43 @@
     .chatContainer{
         box-shadow: 0px 0px 0px;
     }
-  }
+    .showChatTargetsContainer{
+        display: inline-block !important;
+        padding: 1%;
+        width: 100%;
+    }
+    .spaceBeforeBtns{
+        height: 2vh;
+    }
+    .spaceAfterBtns{
+        height: 1vh;
+    }
+}
+ 
 
-  
+.showChatTargetsContainer{
+    display: none;
+}
+.chatAdminDivForCurrentUser {
+      display: none;
+}
 .hideMessages{
-    display:none;
+      display:none;
+}        
+.noChatTargetSelected{
+    height: 7vh;
+}
+
+.showClubsBtn{
+    padding: 1%;
+    background-color: white;
+    box-shadow: 0px 0px 1px;
+    cursor: pointer;
+}
+.showAdminsBtn , .showSuperAdminsBtn , .showUsersBtn{
+    padding: 1%;
+    background-color: white;
+    box-shadow: 0px 0px 1px;
+    cursor: pointer;
+    margin-left: 12px;
 }
