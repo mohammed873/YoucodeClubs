@@ -1,7 +1,7 @@
 import React , {useState, useEffect} from 'react';
 import Link from 'next/link'
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '../helpers/superadminMinidash'
+import Menu from './helpers/superadminMinidash'
 import CancelIcon from '@material-ui/icons/Cancel';
 import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
@@ -15,6 +15,7 @@ import axios from 'axios'
 
 export default function Navbar({children}) {
     const [responsive, setResponsive] = useState(false)
+    const [isLoggedIn , setIsloggedIn] = useState(false)
 
     const router = useRouter()
 
@@ -22,18 +23,18 @@ export default function Navbar({children}) {
     const checkLogging = () => {
       try{
         if(!localStorage.getItem('token')){
+            setIsloggedIn(false)
             router.push('/superadmin/login')
           }else{
-          
-            // const token = localStorage.getItem('token')
-            // const isLoggedIn = jwt(token).isLoggedIn
-            // const role = jwt(token).role
-            // console.log(role, isLoggedIn)  
-            // if(role === 'superAdmin' && isLoggedIn === true ) {
-            //     // all is goood
-            //   }else{
-            //     router.push('/superadmin/login')
-            // }
+            const token = localStorage.getItem('token')
+            const isLoggedIn = jwt(token).isLoggedIn
+            const role = jwt(token).role
+            console.log(role, isLoggedIn)  
+            if(role === 'superAdmin' && isLoggedIn === true ) {
+                setIsloggedIn(true)
+              }else{
+                router.push('/superadmin/login')
+            }
           }
       }
       catch (err){
@@ -47,7 +48,9 @@ export default function Navbar({children}) {
     }, [])
   return (
     <>
-       <div className="navContainer">
+       { isLoggedIn
+         ?
+         <div className="navContainer">
            <div className={responsive ? 'superAdminSlideSectionResponsive' : 'superAdminSlideSection'}>
              <div  className='iconsContainer'>
                  <span>
@@ -119,6 +122,10 @@ export default function Navbar({children}) {
               <br/>
            </div>
        </div>
+       : 
+       null
+
+       }
     </>
   );
 }
