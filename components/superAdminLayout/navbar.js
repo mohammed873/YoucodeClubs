@@ -7,7 +7,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import ChatIcon from '@material-ui/icons/Chat';
 import CategoryIcon from '@material-ui/icons/Category';
-import Image from 'next/Image'
+import Image from 'next/image'
 import jwt from 'jwt-decode'
 import { useRouter } from 'next/router'
 import axios from 'axios'
