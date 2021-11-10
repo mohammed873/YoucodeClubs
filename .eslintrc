@@ -2,7 +2,9 @@
   "extends": ["next", "next/core-web-vitals"],
   "rules": { 
     "react/no-unescaped-entities": "off" ,
-    "@next/next/no-img-element": "off",
-    "eslintrc" : "off"
+    "@next/next/no-img-element": "off"
+  },
+  "eslint": {
+    "ignoreDuringBuilds": true
   }
 }
