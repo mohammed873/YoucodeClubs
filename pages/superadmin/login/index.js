@@ -19,7 +19,7 @@ export default function Admin_login() {
   function Login(){
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-    axios.post('http://localhost:3000/api/superAdmin/login',{
+    axios.post('https://youcode-clubs.vercel.app/api/superAdmin/login',{
        email:email,
        password:password
     }).then(res=> {
