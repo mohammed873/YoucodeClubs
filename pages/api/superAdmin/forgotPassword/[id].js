@@ -1,5 +1,5 @@
 import dbConnect from '../../../../utils/dbConnect';
-import SuperAdmin from '../../../../models/superadmin';   
+import SuperAdmin from '../../../../models/superAdmin';   
 import crypto from 'crypto';
 const bcrypt = require("bcryptjs");
 

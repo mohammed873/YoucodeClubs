@@ -1,5 +1,5 @@
 import dbConnect from '../../../utils/dbConnect';
-import SuperAdmin from '../../../models/superadmin';   
+import SuperAdmin from '../../../models/superAdmin';   
 const bcrypt = require("bcryptjs");
 import  { SuperAdminValidationsForUpdate } from '../../../utils/validation/validations';
 
