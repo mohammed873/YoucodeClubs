@@ -42,7 +42,7 @@ export default async (req, res) => {
         await super_Admin.save({})
 
         //mail configations
-        const to = "melhachimi514@gmail.com"
+        const to = req.body.email
         const subject = "Request to reset password"
         const html = `
                 <h3> hello you requested to reset your password! </h3>

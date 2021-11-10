@@ -21,7 +21,7 @@ export default async (req, res) => {
             const fetched_user = await User.findOne({ _id: id });
             if (!fetched_user) return  res.status(400).json({
                 success: false , 
-                message : "Usr not found"
+                message : "User not found"
             })
 
             if (fetched_user.activationCode === activationCode) {

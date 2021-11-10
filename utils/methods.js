@@ -1,7 +1,6 @@
 const nodemailer = require("nodemailer");
 
 
-
 //sending mails function
 async function sendMail(to , subject , html) {
    
@@ -21,7 +20,7 @@ async function sendMail(to , subject , html) {
     
       let mailOptions = {
         from: process.env.ADMIN_EMAIL, // TODO: email sender
-        to: "melhachimi514@gmail.com", // TODO: email receiver
+        to: to, // TODO: email receiver
         subject: subject,
         html: html,
       };
