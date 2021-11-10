@@ -117,13 +117,9 @@ export default function Chat() {
 
     //get all users
     const getAllUsers = async () => {
-        const token = localStorage.getItem('adminToken')
-        const club_id = jwt(token).club_id
         await axios.get("https://youcode-clubs.vercel.app/api/user/")
         .then( res => {
-            const Data = res.data.users
-            const CurrentAdminClubUsers =  Data.filter(user => user.club_id === club_id )
-            setUsers(CurrentAdminClubUsers)
+            setUsers(res.data.users)
         }).catch(err =>{
             console.log(err);
         })
