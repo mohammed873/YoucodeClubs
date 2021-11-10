@@ -8,7 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router'
-import Link from 'next/Link'
+import Link from 'next/link'
 
 
 const useStyles = makeStyles((theme) => ({

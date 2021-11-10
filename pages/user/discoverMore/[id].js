@@ -8,7 +8,7 @@ import {
 } from '@merc/react-timeline';
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import Link from 'next/Link'
+import Link from 'next/link'
  
 export default function discoverClubActivities() {
     const [ activities , setActivities] = useState(null)  

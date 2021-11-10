@@ -3,7 +3,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Link from 'next/Link';
+import Link from 'next/link';
 import jwt from 'jwt-decode'
 import { useRouter } from 'next/router'
 import axios from 'axios'
