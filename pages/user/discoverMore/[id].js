@@ -21,7 +21,7 @@ export default function discoverClubActivities() {
     const getAllClubActivities = async () => {
         //get the club _id  from the url parameters
         const {id} = router.query
-        await axios.get('http://localhost:3000/api/admin/clubActivity/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + id)
         .then( res =>{
             setActivities(res.data.club_activity);
 

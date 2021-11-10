@@ -28,7 +28,7 @@ const [newPassword , setNewPassword] = useState()
   const getSuperAdminInfo = async () =>{
     const token = localStorage.getItem('token')
     const id = jwt(token)._id
-    await axios.get('http://localhost:3000/api/superAdmin/'+ id)
+    await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/'+ id)
     .then(res => {
       setSuperAdmin(res.data.super_admin)
  
@@ -50,7 +50,7 @@ const updateSuperAdmin = async () => {
 
   const token = localStorage.getItem('token')
   const id = jwt(token)._id
-  await axios.put('http://localhost:3000/api/superAdmin/'+ id,{
+  await axios.put('https://youcode-clubs.vercel.app/api/superAdmin/'+ id,{
     full_name,
     email,
     picture,
@@ -91,7 +91,7 @@ const ressetPassword = async (req, res) => {
   const token = localStorage.getItem('token')
   const id = jwt(token)._id
 
-   await axios.put('http://localhost:3000/api/superAdmin/resetPassword/' + id,{
+   await axios.put('https://youcode-clubs.vercel.app/api/superAdmin/resetPassword/' + id,{
      password,
      newPassword
    })

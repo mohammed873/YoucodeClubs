@@ -42,7 +42,7 @@ export default function Club() {
         const adminToken = localStorage.getItem('adminToken')
         const club_id = jwt(adminToken).club_id
        
-        await axios.get('http://localhost:3000/api/admin/club/' + club_id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/club/' + club_id)
         .then(res =>{
             setClub(res.data.club);
         }).catch(err =>{
@@ -55,7 +55,7 @@ export default function Club() {
  
         const picture =  await pictureUpload()
 
-        await axios.put('http://localhost:3000/api/superAdmin/clubs/' + id,{
+        await axios.put('https://youcode-clubs.vercel.app/api/superAdmin/clubs/' + id,{
         name ,
         description ,
         picture ,

@@ -83,7 +83,7 @@ export default function Chat() {
 
    //get all clubs 
    const getAllClubs = async () => {
-        await axios.get("http://localhost:3000/api/superAdmin/clubs")
+        await axios.get("https://youcode-clubs.vercel.app/api/superAdmin/clubs")
         .then( res => {
             setClubs(res.data.clubs)
             setSelectedClubId(res.data.clubs[1]._id)
@@ -94,7 +94,7 @@ export default function Chat() {
 
     //get all admins
     const getAllAdmins = async () => {
-        await axios.get("http://localhost:3000/api/superAdmin/admins")
+        await axios.get("https://youcode-clubs.vercel.app/api/superAdmin/admins")
         .then( res => {
             setAdmins(res.data.admins)
         }).catch(err =>{
@@ -106,7 +106,7 @@ export default function Chat() {
     const getSuperAdminInfo = async () =>{
         const token = localStorage.getItem('token')
         const id = jwt(token)._id
-        await axios.get('http://localhost:3000/api/superAdmin/'+ id)
+        await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/'+ id)
         .then(res => {
         setSuperAdmin(res.data.super_admin)
         setCurrentUserId(id)
@@ -119,7 +119,7 @@ export default function Chat() {
     const getAllUsers = async () => {
         const token = localStorage.getItem('adminToken')
         const club_id = jwt(token).club_id
-        await axios.get("http://localhost:3000/api/user/")
+        await axios.get("https://youcode-clubs.vercel.app/api/user/")
         .then( res => {
             const Data = res.data.users
             const CurrentAdminClubUsers =  Data.filter(user => user.club_id === club_id )
@@ -131,7 +131,7 @@ export default function Chat() {
 
     //get all superadmins
     const getSuperAdminsInfo = async () => {
-        axios.get('http://localhost:3000/api/superAdmin')
+        axios.get('https://youcode-clubs.vercel.app/api/superAdmin')
             .then(res => {
                 setSuperAdmins(res.data.superAdmins)
             }).catch(err => {

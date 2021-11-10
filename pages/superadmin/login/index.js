@@ -79,7 +79,7 @@ export default function Admin_login() {
                     log in
                 </Button>
                 <br/>
-                 <Link href="http://localhost:3000/superadmin/forgotPassword">
+                 <Link href="https://youcode-clubs.vercel.app/superadmin/forgotPassword">
                    <p className={styles.forgotPasswordLink}>I forgot my password</p>
                  </Link>
                 </form>

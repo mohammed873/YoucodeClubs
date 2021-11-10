@@ -12,7 +12,7 @@ export default function ForgotPassword() {
 
   //send an a reset link in mail
   const SendResetToken = async () => {
-    await axios.post ('http://localhost:3000/api/superAdmin/forgotPassword',{
+    await axios.post ('https://youcode-clubs.vercel.app/api/superAdmin/forgotPassword',{
       email
     }).then(res =>{
       //empty input

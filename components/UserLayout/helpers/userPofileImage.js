@@ -17,7 +17,7 @@ export default function userProfileImage() {
         const token = localStorage.getItem('userToken')
         const id = jwt(token)._id
 
-        await axios.get('http://localhost:3000/api/user/profile/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/user/profile/' + id)
             .then (res => {
             setUser(res.data.fetched_user);
             }).catch(err => {

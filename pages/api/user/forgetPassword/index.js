@@ -46,7 +46,7 @@ export default async (req, res) => {
         const subject = "Request to reset password"
         const html = `
                 <h3> hello you requested to reset your password! </h3>
-                <P> click the following link to reset your password <a href="http://localhost:3000/user/forgetPassword/${resetToken}">RESET MY PASSWORD</a> </P>
+                <P> click the following link to reset your password <a href="https://youcode-clubs.vercel.app/user/forgetPassword/${resetToken}">RESET MY PASSWORD</a> </P>
                 <h4>Note: This link will expire in 10 min</h4>
             `
         //send an email with the reset link 

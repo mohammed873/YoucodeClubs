@@ -51,7 +51,7 @@ export default function Pofile() {
     const token = localStorage.getItem('userToken')
     const id = jwt(token)._id
 
-    await axios.get('http://localhost:3000/api/user/profile/' + id)
+    await axios.get('https://youcode-clubs.vercel.app/api/user/profile/' + id)
          .then (res => {
            setUser(res.data.fetched_user);
          }).catch(err => {
@@ -67,7 +67,7 @@ export default function Pofile() {
    const email = document.getElementById('email').value;
    const picture = await pictureUpload();
 
-     await axios.put('http://localhost:3000/api/user/profile/' + id,{
+     await axios.put('https://youcode-clubs.vercel.app/api/user/profile/' + id,{
        full_name,
        email,
        picture
@@ -87,7 +87,7 @@ export default function Pofile() {
      const token = localStorage.getItem('userToken')
      const id = jwt(token).club_id
 
-     await axios.get('http://localhost:3000/api/superAdmin/clubs/' + id)
+     await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/clubs/' + id)
           .then(res =>{
             setClub(res.data.club)
           }).catch(err => {
@@ -123,7 +123,7 @@ const emptyInputs = () => {
 const ressetPassword = async (req, res) => {
   const token = localStorage.getItem('userToken')
   const id = jwt(token)._id
-   await axios.put('http://localhost:3000/api/user/resetPassword/' + id,{
+   await axios.put('https://youcode-clubs.vercel.app/api/user/resetPassword/' + id,{
      password,
      newPassword
    })
@@ -139,7 +139,7 @@ const ressetPassword = async (req, res) => {
 }
 
  const fetchAllClubs = async() => {
-     await axios.get('http://localhost:3000/api/superAdmin/clubs')
+     await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/clubs')
      .then(res =>{
        setClubs(res.data.clubs)
      }).catch(err => {
@@ -150,7 +150,7 @@ const ressetPassword = async (req, res) => {
  const changeClub = async () => {
     const token = localStorage.getItem('userToken')
     const id = jwt(token)._id
-    await axios.put('http://localhost:3000/api/user/changeClub/' + id,{
+    await axios.put('https://youcode-clubs.vercel.app/api/user/changeClub/' + id,{
       club_id,
     }).then(res => {
       toast.configure()

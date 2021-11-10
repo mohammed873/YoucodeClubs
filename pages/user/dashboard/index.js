@@ -11,7 +11,7 @@ export default function UserDashboard() {
 
   //get the clubs count
    const fetchClubsCount = async () => {
-    axios.get('http://localhost:3000/api/superAdmin/clubsCount')
+    axios.get('https://youcode-clubs.vercel.app/api/superAdmin/clubsCount')
          .then(res =>{
           setClubsCount(res.data.clubsCount)
          }).catch(err =>{
@@ -24,7 +24,7 @@ export default function UserDashboard() {
     const token = localStorage.getItem('userToken')
     const club_id = jwt(token).club_id
 
-    axios.get('http://localhost:3000/api/user')
+    axios.get('https://youcode-clubs.vercel.app/api/user')
          .then(res =>{
           const Data = res.data.users
           const CurrentAdminClubUsers =  Data.filter(user => user.club_id === club_id )
@@ -39,7 +39,7 @@ export default function UserDashboard() {
   const fetchActivitiesByClubId = async () => {
     const token = localStorage.getItem('userToken')
     const id = jwt(token).club_id
-    await axios.get('http://localhost:3000/api/admin/clubActivity/' + id)
+    await axios.get('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + id)
             .then(res =>{
                    console.log(res.data);
                    setActivitiesCount(res.data.club_activity.length)

@@ -59,7 +59,7 @@ export default function singleEventDetails() {
     //get single activity details
     const getSingleActivityDetails = async () => {
         const {id} = router.query
-        await axios.get(' http://localhost:3000/api/admin/getSingleActivity/' + id)
+        await axios.get(' https://youcode-clubs.vercel.app/api/admin/getSingleActivity/' + id)
         .then(res =>{
             setSingleEventDetails(res.data.singleActivity)
         }).catch(err => {
@@ -73,7 +73,7 @@ export default function singleEventDetails() {
         const token = localStorage.getItem('userToken')
         const id = jwt(token)._id
 
-        await axios.get('http://localhost:3000/api/user/profile/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/user/profile/' + id)
             .then (res => {
             setUser(res.data.fetched_user);
             }).catch(err => {

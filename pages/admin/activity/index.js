@@ -104,7 +104,7 @@ export default function Activity() {
     //get a random club activity
     const getRandomActivity = async () => {
 
-        await axios.get('http://localhost:3000/api/admin/getRandomActivity')
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/getRandomActivity')
         .then( res =>{
             setRandomActivity(res.data.randomClubActivty)
             getComments(res.data.randomClubActivty[0]._id)
@@ -120,7 +120,7 @@ export default function Activity() {
         const adminToken = localStorage.getItem('adminToken')
         const club_id = jwt(adminToken).club_id
         
-        await axios.get('http://localhost:3000/api/admin/clubActivity/' + club_id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + club_id)
         .then( res =>{
             setActivities(res.data.club_activity);
         }).catch( err =>{
@@ -135,7 +135,7 @@ export default function Activity() {
         const adminToken = localStorage.getItem('adminToken')
         const club_id = jwt(adminToken).club_id
 
-        await axios.post('http://localhost:3000/api/admin/clubActivity',{
+        await axios.post('https://youcode-clubs.vercel.app/api/admin/clubActivity',{
             name,
             description,
             date ,
@@ -168,7 +168,7 @@ export default function Activity() {
         const adminToken = localStorage.getItem('adminToken')
         const club_id = jwt(adminToken).club_id
 
-        await axios.put('http://localhost:3000/api/admin/clubActivity/' + id , {
+        await axios.put('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + id , {
             name,
             club_id,
             description,
@@ -195,7 +195,7 @@ export default function Activity() {
 
     //get single activity by id 
     const getSingleActivity = async (id) => {
-       await axios.get(' http://localhost:3000/api/admin/getSingleActivity/' + id)
+       await axios.get(' https://youcode-clubs.vercel.app/api/admin/getSingleActivity/' + id)
        .then(res =>{
         setSingleActivity(res.data.singleActivity)
         console.log(res.data.singleActivity._id);
@@ -239,7 +239,7 @@ export default function Activity() {
 
     //deleting an activity by id
     const deletedClubActivity = async (id) => {
-        await axios.delete('http://localhost:3000/api/admin/clubActivity/' + id)
+        await axios.delete('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + id)
         .then(res =>{
             toast.configure()
             toast.success(res.data.message)
@@ -279,7 +279,7 @@ export default function Activity() {
         const id = jwt(admin_token)._id
         console.log(id , "admin id");
 
-        await axios.get('http://localhost:3000/api/admin/profile/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/profile/' + id)
         .then(res => {
             setAdmin(res.data.admin)
             setCurrentUserId(res.data.admin[0]._id)

@@ -14,7 +14,7 @@ export default function userClub() {
     const fetchActivitiesByClubId = async () => {
         const token = localStorage.getItem('userToken')
         const id = jwt(token).club_id
-        await axios.get('http://localhost:3000/api/admin/clubActivity/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + id)
                 .then(res =>{
                        console.log(res.data);
                        setActivities(res.data.club_activity)

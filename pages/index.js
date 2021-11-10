@@ -37,7 +37,7 @@ const redirectToClubActivityPage = (id) => {
 
 //get all clubs 
 const getAllClubs = async () => {
-  await axios.get("http://localhost:3000/api/superAdmin/clubs")
+  await axios.get("https://youcode-clubs.vercel.app/api/superAdmin/clubs")
   .then( res => {
       setClubs(res.data.clubs)
       
@@ -48,7 +48,7 @@ const getAllClubs = async () => {
 
 const getSingleClub = async ( id) => {
   console.log(id)
-  await axios.get('http://localhost:3000/api/admin/club/' + id)
+  await axios.get('https://youcode-clubs.vercel.app/api/admin/club/' + id)
   .then( res => {
       setClub(res.data.club)
       setDataReady(true)

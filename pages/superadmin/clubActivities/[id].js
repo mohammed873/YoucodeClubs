@@ -59,7 +59,7 @@ const handleCloseUpdateComment = () => {
 const getAllClubActivities = async () => {
     //get the club _id  from the url parameters
     const {id} = router.query
-    await axios.get('http://localhost:3000/api/admin/clubActivity/' + id)
+    await axios.get('https://youcode-clubs.vercel.app/api/admin/clubActivity/' + id)
     .then( res =>{
         setActivities(res.data.club_activity);
 
@@ -76,7 +76,7 @@ const getAllClubActivities = async () => {
 
 //get single activity details
 const getSingleActivityDetails = async (id) => {
-  await axios.get(' http://localhost:3000/api/admin/getSingleActivity/' + id)
+  await axios.get(' https://youcode-clubs.vercel.app/api/admin/getSingleActivity/' + id)
   .then(res =>{
    setSingleActivity(res.data.singleActivity)
    getComments(res.data.singleActivity._id)
@@ -89,7 +89,7 @@ const getSingleActivityDetails = async (id) => {
 const getSuperAdminInfo = async () =>{
   const token = localStorage.getItem('token')
   const id = jwt(token)._id
-  await axios.get('http://localhost:3000/api/superAdmin/'+ id)
+  await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/'+ id)
   .then(res => {
     setSuperAdmin(res.data.super_admin)
     setCurrentUserId(id)

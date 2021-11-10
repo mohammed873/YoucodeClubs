@@ -18,7 +18,7 @@ export default function login() {
   const router = useRouter()
 
   const loginUser = async () => {
-    await axios.post('http://localhost:3000/api/user/login',{
+    await axios.post('https://youcode-clubs.vercel.app/api/user/login',{
       email,
       password
     }).then(res =>{

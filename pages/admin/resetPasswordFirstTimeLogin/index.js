@@ -21,7 +21,7 @@ const ressetPassword = async (req, res) => {
     const id = jwt(token)._id
   
     console.log(defaultPassword , newPassword , id);
-     await axios.put('http://localhost:3000/api/admin/resetPassword/' + id,{
+     await axios.put('https://youcode-clubs.vercel.app/api/admin/resetPassword/' + id,{
        defaultPassword,
        newPassword
      })

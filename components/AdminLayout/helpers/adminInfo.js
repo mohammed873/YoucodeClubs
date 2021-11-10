@@ -40,7 +40,7 @@ export default function AdminInfo() {
     const admin_token = localStorage.getItem('adminToken')
     const id = jwt(admin_token)._id
 
-    await axios.get('http://localhost:3000/api/admin/profile/' + id)
+    await axios.get('https://youcode-clubs.vercel.app/api/admin/profile/' + id)
      .then(res => {
        setAdmin(res.data.admin)
      }).catch(err => {
@@ -53,7 +53,7 @@ export default function AdminInfo() {
     const token = localStorage.getItem('adminToken')
     const id = jwt(token)._id
     console.log(id)
-    await axios.post('http://localhost:3000/api/admin/logout/' + id)
+    await axios.post('https://youcode-clubs.vercel.app/api/admin/logout/' + id)
     .then(res => {
       localStorage.removeItem('adminToken')
       router.push('/admin/login')

@@ -19,7 +19,7 @@ export default function verifyAcount() {
       const token = localStorage.getItem('userToken')
       const id = jwt(token)._id
 
-      await axios.post(' http://localhost:3000/api/user/checkVerificationCode',{
+      await axios.post(' https://youcode-clubs.vercel.app/api/user/checkVerificationCode',{
         id,
         activationCode,
       }).then(res =>{

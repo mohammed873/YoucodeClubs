@@ -14,7 +14,7 @@ export default function logOutBtn() {
     const token = localStorage.getItem('userToken')
     const id = jwt(token)._id
     console.log(id)
-    await axios.post('http://localhost:3000/api/user/logout/' + id)
+    await axios.post('https://youcode-clubs.vercel.app/api/user/logout/' + id)
     .then(res => {
       localStorage.removeItem('userToken')
       router.push('/')

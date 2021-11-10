@@ -15,7 +15,7 @@ export default function forgetPassword() {
 
   //send an a reset link in mail
   const SendResetToken = async () => {
-    await axios.post ('http://localhost:3000/api/user/forgetPassword',{
+    await axios.post ('https://youcode-clubs.vercel.app/api/user/forgetPassword',{
       email
     }).then(res =>{
       //empty input

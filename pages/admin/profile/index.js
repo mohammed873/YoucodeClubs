@@ -33,7 +33,7 @@ export default function Profile() {
         const admin_token = localStorage.getItem('adminToken')
         const id = jwt(admin_token)._id
 
-        await axios.get('http://localhost:3000/api/admin/profile/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/profile/' + id)
         .then(res => {
         setAdmin(res.data.admin)
         }).catch(err => {
@@ -46,7 +46,7 @@ export default function Profile() {
         const admin_token = localStorage.getItem('adminToken')
         const id = jwt(admin_token)._id
     
-        await axios.put('http://localhost:3000/api/admin/resetPassword/' + id,{
+        await axios.put('https://youcode-clubs.vercel.app/api/admin/resetPassword/' + id,{
         defaultPassword,
         newPassword
         })
@@ -92,7 +92,7 @@ export default function Profile() {
 
         const picture =  await pictureUpload()
 
-        await axios.put('http://localhost:3000/api/admin/profile/' + id ,{
+        await axios.put('https://youcode-clubs.vercel.app/api/admin/profile/' + id ,{
             full_name,
             email,
             club_id,

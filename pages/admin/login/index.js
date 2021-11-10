@@ -17,7 +17,7 @@ export default function AdminLogin() {
   function Login(){
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-    axios.post('http://localhost:3000/api/admin/login',{
+    axios.post('https://youcode-clubs.vercel.app/api/admin/login',{
        email:email,
        password:password
     }).then(res=> {
@@ -81,7 +81,7 @@ export default function AdminLogin() {
                         >
                         log in
                     </Button>
-                    <Link href="http://localhost:3000/admin/forgotPassword">
+                    <Link href="https://youcode-clubs.vercel.app/admin/forgotPassword">
                       <p className={styles.forgotPasswordLink}>I forgot my password</p>
                     </Link>
                  </div>

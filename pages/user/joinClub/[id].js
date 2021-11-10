@@ -21,7 +21,7 @@ export default function joinClub() {
     const getClubInfo = async () => {
 
         const {id} = await router.query
-        await axios.get('http://localhost:3000/api/admin/club/' + id)
+        await axios.get('https://youcode-clubs.vercel.app/api/admin/club/' + id)
         .then(res =>{
             setClub(res.data.club);
         }).catch(err =>{
@@ -33,7 +33,7 @@ export default function joinClub() {
   //join club 
   const joinClub = async () => {
     const {id} = await router.query
-    await axios.post('http://localhost:3000/api/user/joinClub',{
+    await axios.post('https://youcode-clubs.vercel.app/api/user/joinClub',{
       club_id : id,
       full_name ,
       email,

@@ -72,7 +72,7 @@ const emptyInputs = () => {
 const addAdmin = async () => {
     const picture =  await pictureUpload()
 
-    await axios.post('http://localhost:3000/api/superAdmin/admins',{
+    await axios.post('https://youcode-clubs.vercel.app/api/superAdmin/admins',{
      full_name,
      email ,
      club_id ,
@@ -97,7 +97,7 @@ const addAdmin = async () => {
 
 //get all clubs 
 const getAllClubs = async () => {
-    await axios.get("http://localhost:3000/api/superAdmin/clubs")
+    await axios.get("https://youcode-clubs.vercel.app/api/superAdmin/clubs")
     .then( res => {
         setClubs(res.data.clubs)
     }).catch(err =>{
@@ -107,7 +107,7 @@ const getAllClubs = async () => {
 
 //get all admins
 const getAllAdmins = async () => {
-    await axios.get("http://localhost:3000/api/superAdmin/admins")
+    await axios.get("https://youcode-clubs.vercel.app/api/superAdmin/admins")
     .then( res => {
         setAdmins(res.data.admins)
     }).catch(err =>{
@@ -125,7 +125,7 @@ const handleCloseUpdate = () => {
 
 //show update model and fetch data 
 const handleClickOpenUpdate = async (id) => {
-   await axios.get('http://localhost:3000/api/superAdmin/admins/'+id)
+   await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/admins/'+id)
    .then((res) =>{
 
        //set the state with the admin to be edited
@@ -151,7 +151,7 @@ const updateAdminInfo = async (id) => {
 
    const picture =  await pictureUpload()
 
-   await axios.put("http://localhost:3000/api/superAdmin/admins/" + id,{
+   await axios.put("https://youcode-clubs.vercel.app/api/superAdmin/admins/" + id,{
     full_name,
     email,
     club_id,
@@ -180,7 +180,7 @@ const updateAdminInfo = async (id) => {
 
 //delete Admin by id
 const deleteAdmin = async (id) => {
-    await axios.delete('http://localhost:3000/api/superAdmin/admins/'+id)
+    await axios.delete('https://youcode-clubs.vercel.app/api/superAdmin/admins/'+id)
     .then(res => {
         getAllAdmins()
         toast.configure()

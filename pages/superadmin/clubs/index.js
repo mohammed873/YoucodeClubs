@@ -58,7 +58,7 @@ const handleCloseUpdate = () => {
 
 //show update model and fetch data 
 const handleClickOpenUpdate = async (id) => {
-   await axios.get('http://localhost:3000/api/superAdmin/clubs/'+id)
+   await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/clubs/'+id)
    .then((res) =>{
     setEdditedClub(res.data.club)
      setOpenUpdate(true);
@@ -78,7 +78,7 @@ const handleClickOpenUpdate = async (id) => {
 const editClub = async (id ) => {
   const picture =  await pictureUpload()
   
-  await axios.put('http://localhost:3000/api/superAdmin/clubs/' + id,{
+  await axios.put('https://youcode-clubs.vercel.app/api/superAdmin/clubs/' + id,{
     name ,
     description ,
     picture ,
@@ -115,7 +115,7 @@ const emptyInputs = () => {
 
 //get all clubs 
 const getAllClubs = async () => {
-  await axios.get("http://localhost:3000/api/superAdmin/clubs")
+  await axios.get("https://youcode-clubs.vercel.app/api/superAdmin/clubs")
   .then( res => {
       setClubs(res.data.clubs)
   }).catch(err =>{
@@ -125,7 +125,7 @@ const getAllClubs = async () => {
 
 //delete on club by id 
 const deleteClub = async ( id) => {
-  await axios.delete("http://localhost:3000/api/superAdmin/clubs/" + id)
+  await axios.delete("https://youcode-clubs.vercel.app/api/superAdmin/clubs/" + id)
   .then( res => {
     toast.configure()
     toast.success(res.data.message)
@@ -138,7 +138,7 @@ const deleteClub = async ( id) => {
 //adding new club
 const addClub = async () => {
   const picture =  await pictureUpload()
-  await axios.post('http://localhost:3000/api/superAdmin/clubs',{
+  await axios.post('https://youcode-clubs.vercel.app/api/superAdmin/clubs',{
    name,
    description ,
    picture 

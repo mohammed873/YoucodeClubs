@@ -21,7 +21,7 @@ const [password , setPassword] = useState()
 const updatePassword = async () => {
   const resetToken = id
  
-  await axios.put('http://localhost:3000/api/superAdmin/forgotPassword/' + resetToken,{
+  await axios.put('https://youcode-clubs.vercel.app/api/superAdmin/forgotPassword/' + resetToken,{
     password
   }).then(res =>{
     //empty password field

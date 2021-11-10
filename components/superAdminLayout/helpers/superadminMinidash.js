@@ -44,7 +44,7 @@ export default function SimpleMenu() {
   const getSuperAdminPhoto = async() =>{
     const token = localStorage.getItem('token')
     const id = jwt(token)._id
-    await axios.get('http://localhost:3000/api/superAdmin/'+ id)
+    await axios.get('https://youcode-clubs.vercel.app/api/superAdmin/'+ id)
     .then(res => {
      setPicture(res.data.super_admin.picture)
     }).catch(err => {
@@ -59,7 +59,7 @@ export default function SimpleMenu() {
     const token = localStorage.getItem('token')
     const id = jwt(token)._id
     console.log(id)
-    await axios.post('http://localhost:3000/api/superAdmin/logout/' + id)
+    await axios.post('https://youcode-clubs.vercel.app/api/superAdmin/logout/' + id)
     .then(res => {
       handleClose()
       localStorage.removeItem('token')

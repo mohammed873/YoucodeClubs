@@ -22,7 +22,7 @@ export default function forgetPassword() {
   const updatePassword = async () => {
     const resetToken = id
   
-    await axios.put('http://localhost:3000/api/user/forgetPassword/' + resetToken,{
+    await axios.put('https://youcode-clubs.vercel.app/api/user/forgetPassword/' + resetToken,{
       password
     }).then(res =>{
       //empty password field

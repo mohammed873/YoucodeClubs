@@ -24,7 +24,7 @@ export default function dashboard() {
 
   //get the users count
   const fetchUsersCount = async () => {
-      axios.get('http://localhost:3000/api/superAdmin/usersCount')
+      axios.get('https://youcode-clubs.vercel.app/api/superAdmin/usersCount')
            .then(res =>{
             setUsersCount(res.data.usersCount)
            }).catch(err =>{
@@ -34,7 +34,7 @@ export default function dashboard() {
 
   //get the clubs count
   const fetchActivitiesCount = async () => {
-    axios.get('http://localhost:3000/api/admin/activitiesCount')
+    axios.get('https://youcode-clubs.vercel.app/api/admin/activitiesCount')
          .then(res =>{
           setActivitiesAcount(res.data.activitiesCount)
          }).catch(err =>{
@@ -44,7 +44,7 @@ export default function dashboard() {
 
   //get the admins count
   const fetchAdminsCount = async () => {
-    axios.get('http://localhost:3000/api/superAdmin/adminsCount')
+    axios.get('https://youcode-clubs.vercel.app/api/superAdmin/adminsCount')
          .then(res =>{
           setAdminsCount(res.data.adminsCount)
          }).catch(err =>{
@@ -57,7 +57,7 @@ export default function dashboard() {
     const token = localStorage.getItem('adminToken')
     const club_id = jwt(token).club_id
 
-    axios.get('http://localhost:3000/api/user')
+    axios.get('https://youcode-clubs.vercel.app/api/user')
          .then(res =>{
           setUsers(res.data.users)
           const Data = res.data.users
@@ -72,7 +72,7 @@ export default function dashboard() {
 
   //delete user by id
   const deleteUser = async (id) => {
-    await axios.delete('http://localhost:3000/api/user/profile/'+id)
+    await axios.delete('https://youcode-clubs.vercel.app/api/user/profile/'+id)
     .then(res => {
         fetchUersList()
         fetchUsersCount()
