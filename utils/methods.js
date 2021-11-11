@@ -7,7 +7,7 @@ async function sendMail(to , subject , html) {
       let transporter = nodemailer.createTransport({
         service: "gmail",
         host: "https://youcode-clubs.vercel.app/",
-        port: 465,
+        port: 587,
         secure: true,
         auth: {
           user: process.env.ADMIN_EMAIL , // TODO: your gmail account
