@@ -34,7 +34,7 @@ export default function login() {
         router.push("/user/dashboard");
         toast.configure()
        }else{
-        router.push("/user/verifyAccount");
+        router.push("/user/login");
         toast.configure()
         toast.success("next rechek your email for a verification code")
        }
