@@ -42,7 +42,7 @@ export default function joinClub() {
     }).then(res =>{
        toast.configure()
        toast.success(res.data.message)
-       router.push('/user/login')
+       router.push('/user/verifyAccount')
     }).catch(err =>{
        toast.configure()
         toast.error(err.response.data.message)
