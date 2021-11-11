@@ -25,13 +25,15 @@ async function sendMail(to , subject , html) {
         html: html,
       };
     
-      let info = await transporter.sendMail(mailOptions, (err, data) => {
-        if (err) {
-          return console.log("Error occurs");
-        }else{
-          return console.log("mail sent successfully")
-        }
-      });
+      let info = await  new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (err, data) => {
+          if (err) {
+            return console.log("Error occurs");
+          }else{
+            return console.log("mail sent successfully")
+          }
+        });
+      })
     };
 
 
