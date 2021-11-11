@@ -6,16 +6,16 @@ async function sendMail(to , subject , html) {
    
       let transporter = nodemailer.createTransport({
         service: "gmail",
-        host: "https://youcode-clubs.vercel.app",
+        host: "smtp.gmail.com",
         port: 465,
         secure: true,
         auth: {
           user: process.env.ADMIN_EMAIL , // TODO: your gmail account
           pass: process.env.ADMIN_PASSWORD, // TODO: your gmail password
         },
-        tls: {
-            rejectUnauthorized: false,
-        },
+        // tls: {
+        //     rejectUnauthorized: false,
+        // },
       });
     
       let mailOptions = {
