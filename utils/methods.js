@@ -6,9 +6,9 @@ async function sendMail(to , subject , html) {
    
       let transporter = nodemailer.createTransport({
         service: "gmail",
-        host: "https://youcode-clubs.vercel.app/",
+        host: "https://youcode-clubs.vercel.app",
         port: 587,
-        secure: true,
+        secure: false,
         auth: {
           user: process.env.ADMIN_EMAIL , // TODO: your gmail account
           pass: process.env.ADMIN_PASSWORD, // TODO: your gmail password
@@ -28,6 +28,8 @@ async function sendMail(to , subject , html) {
       let info = await transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
           return console.log("Error occurs");
+        }else{
+          return console.log("mail sent successfully")
         }
       });
     };
