@@ -17,6 +17,19 @@ async function sendMail(to , subject , html) {
         //     rejectUnauthorized: false,
         // },
       });
+
+      await new Promise((resolve, reject) => {
+        // verify connection configuration
+        transporter.verify(function (error, success) {
+            if (error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log("Server is ready to take our messages");
+                resolve(success);
+            }
+        });
+      });
     
       let mailOptions = {
         from: process.env.ADMIN_EMAIL, // TODO: email sender
@@ -25,15 +38,28 @@ async function sendMail(to , subject , html) {
         html: html,
       };
     
-      let info = await  new Promise((resolve, reject) => {
-        transporter.sendMail(mailOptions, (err, data) => {
-          if (err) {
-            return console.log("Error occurs");
-          }else{
-            return console.log("mail sent successfully")
-          }
+      await new Promise((resolve, reject) => {
+        // send mail
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                console.log(info);
+                resolve(info);
+            }
         });
-      })
+      });
+
+      // let info = await  new Promise((resolve, reject) => {
+      //   transporter.sendMail(mailOptions, (err, data) => {
+      //     if (err) {
+      //       return console.log("Error occurs");
+      //     }else{
+      //       return console.log("mail sent successfully")
+      //     }
+      //   });
+      // })
     };
 
 
